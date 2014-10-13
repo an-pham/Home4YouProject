@@ -1,0 +1,96 @@
+﻿@model HomeForYou.NhanVien
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách nhân viên", "DanhSach", "NhanVien") <span class="divider">/</span>
+    </li>
+    <li class="active">Cập nhật <span class="divider">/</span> </li>
+    <li class="active"></li>
+</ul>
+<legend>Cập nhật nhân viên: </legend>
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">
+            ×</button>
+        <h4>
+            Chúc mừng!</h4>
+        @ViewBag.Message
+    </div>
+}
+@if (@ViewBag.Error != null)
+{
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">x</button>   
+    <h4>Lỗi!</h4>
+    @ViewBag.Message
+    </div>
+}
+<form class="form-horizontal" method="post" enctype="multipart/form-data">
+<div class="control-group">
+    <div class="controls">
+        <input type="hidden" name="MaNV" value="@Model.MaNV"/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Tên tài khoản</label>
+    <div class="controls">
+        <input type="text"  disabled value="@Model.Username"/>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Họ và tên</label>
+    <div class="controls">
+        <input type="text" name="hoten" value="@Model.HoTenNV"/>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        CMND</label>
+    <div class="controls">
+        <input type="text" name="cmnd" value="@Model.CMND"/>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Role</label>
+    <div class="controls">
+        <select name="chucvu">
+            <option value="manager" @if (@Model.ChucVu == "manager") { ViewContext.Writer.Write("selected"); }>
+                Manager</option>
+            <option value="admin" @if (@Model.ChucVu == "admin") { ViewContext.Writer.Write("selected"); }>Admin</option>
+            <option value="staff" @if (@Model.ChucVu == "staff") { ViewContext.Writer.Write("selected"); }>Staff</option>
+        </select>
+    </div>
+</div>
+<legend>Status</legend>
+<div class="control-group">
+    <div class="controls">
+        <select name="tinhtrang">
+            <option value="Enabled"  @if (@Model.TinhTrang == "Enabled") { ViewContext.Writer.Write("selected"); }>
+                Enabled</option>
+            <option value="Disabled" @if (@Model.TinhTrang == "Disabled") { ViewContext.Writer.Write("selected"); }>
+                Disabled</option>
+            <option value="Deleted" @if (@Model.TinhTrang == "Deleted") { ViewContext.Writer.Write("selected"); }>
+                Deleted</option>
+        </select>
+    </div>
+</div>
+<legend></legend>
+<p><strong style="color: Red;"> (*) </strong>
+    <strong style="font-style:italic;">: Thông tin không được để trống</strong>
+</p>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary">
+        Cập nhật</button>
+    @Html.ActionLink("Thoát", "DanhSach", "NhanVien", new { @class = "btn btn-inverse" })
+</div>
+</form>

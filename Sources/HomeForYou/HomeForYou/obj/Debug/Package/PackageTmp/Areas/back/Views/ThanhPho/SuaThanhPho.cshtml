@@ -1,0 +1,76 @@
+﻿@model HomeForYou.ThanhPho
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách Thành phố", "DanhSachThanhPho", "ThanhPho") <span class="divider">/</span>
+    </li>
+    <li class="active">Cập nhật <span class="divider">/</span> </li>
+    <li class="active"></li>
+</ul>
+<legend>Cập nhật thành phố: </legend>
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">
+            ×</button>
+        <h4>Chúc mừng!</h4>
+        @ViewBag.Message
+    </div>
+}
+@if (@ViewBag.Error != null)
+{
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">x</button>   
+    <h4>Lỗi!</h4>
+    @ViewBag.Message
+    </div>
+}
+<form class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="control-group">
+        <label class="control-label">
+            Mã Thành Phố</label>
+        <div class="controls">
+            <input type="text" name="matp" value="@Model.MaTP">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Tên thành phố</label>
+        <div class="controls">
+            <input type="text" name="tenthanhpho" value="@Model.TenTP">
+            <span class="help-inline" style="color: red;">(*)</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Quốc Gia</label>
+        <div class="controls">
+            @Html.DropDownList("QuocGia",@Model.QuocGia1.TenQG)
+        </div>
+    </div>
+    <legend>Tình trạng</legend>
+    <div class="control-group">
+        <div class="controls">
+            <select name="tinhtrang">
+            <option value="Enabled"  @if (@Model.TinhTrang == "Enabled") { ViewContext.Writer.Write("selected"); }>
+                Enabled</option>
+            <option value="Disabled" @if (@Model.TinhTrang == "Disabled") { ViewContext.Writer.Write("selected"); }>
+                Disabled</option>
+            <option value="Deleted" @if (@Model.TinhTrang == "Deleted") { ViewContext.Writer.Write("selected"); }>
+                Deleted</option>
+        </select>
+        </div>
+    </div> <legend></legend>
+<p><strong style="color: Red;"> (*) </strong>
+    <strong style="font-style:italic;">: Thông tin không được để trống</strong>
+</p>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            Cập nhật</button>
+        @Html.ActionLink("Thoát", "DanhSachThanhPho", "ThanhPho", new { @class = "btn btn-inverse" })
+    </div>
+</form>

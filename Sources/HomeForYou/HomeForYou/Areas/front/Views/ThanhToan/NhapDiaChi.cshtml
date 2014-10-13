@@ -1,0 +1,457 @@
+﻿@using System;
+@{
+    Layout = "~/Areas/front/Views/Shared/thanhtoan.cshtml";
+}
+@using HomeForYou.Areas.front.Controllers
+@section scripts
+{
+    <script type="text/javascript">
+        function SubmitForm() {
+            if ($("#thanhtoan").val() == "0") {
+                $("#pt_loi").show();
+            }
+            else {
+                if ($("#thanhtoan").val() == "2" && ($("#_sothe").val() == "" || $("#_macvc").val() == "")){
+                    if ($("#_sothe").val() == "") {
+                        $("#thetd_loi").show();
+                    }
+                    else $("#thetd_loi").hide();
+                    if ($("#_macvc").val() == "") {
+                        $("#cvc_loi").show();
+                    }
+                    else $("#cvc_loi").hide();
+                }
+                else {
+                    if ($("#_sothe").val().length != 16 && $("#thanhtoan").val() == "2")
+                        alert("Thẻ tín dụng không hợp lệ. Thẻ tín dụng hợp lệ gồm 16 chữ số.");
+                    else $("#frm_thanhtoan").submit();
+                }
+            }
+        }
+    </script>
+}
+<div class="breadcrumb">
+    <a href="/">Trang chủ</a> > 
+    <li class="active">Nhập địa chỉ</li>
+</div>
+<div id="fullwidth">
+    &nbsp;
+    <div id="bookStageNavInc" class="stage bp-choice-led-breadcrumbs">
+        <table cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="off">1.Lựa chọn phòng
+                    </td>
+                    <td class="off">2.Gửi thông tin 
+                    </td>
+                    <td class="on">3.Nhập địa chỉ
+                    </td>
+                    <td class="off">4.Hoàn tất!
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- start of bp_inline_icons_bookStage2.inc -->
+    <table id="bookOverviewTop">
+        <tbody>
+            <tr>
+                <td class="yourdetailsblock">Phòng của bạn
+                </td>
+            </tr>
+            <tr>
+                <td id="yourdetails_content">
+                    <div id="booking_details" class="new_hoteldetails_table">
+                        <img class="bp_hotel_image jq_tooltippex round8" src="../../../../Content/img/@ViewBag.CTDatDeal.hinhAnh" alt="hình" height="90" width="90">
+                        <table id="hoteldetails">
+                            <tbody>
+                                <tr>
+                                    <td class="content" colspan="2">
+                                        <span id="hotelname">
+                                            <strong>@ViewBag.CTDatDeal.tenKS
+                                            </strong>
+                                            @*<span class="nowrap">
+                                                <span class="use_sprites stars4 stars4i5" title="khách sạn 5 sao">&nbsp;</span>
+                                                <span rel="300" class="jq_tooltip use_sprites icon_thumbyellow ">&nbsp;</span>
+                                            </span>*@
+
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Địa điểm: @ViewBag.CTDatDeal.diaDiem</td>
+                                </tr>
+                                <tr>
+                                    <td class="title" style="width: auto;">Nhận phòng:
+                                    </td>
+                                    <td class="content">
+                                        <strong style="text-align:center;">@ViewBag.CTDatDeal.ngayNhan</strong>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="title">Trả phòng:
+                                    </td>
+                                    <td class="content">
+                                        <strong style="text-align:center;">@ViewBag.CTDatDeal.ngayTra</strong>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="3"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- close hoteldetails -->
+
+                    </div>
+                    <!-- start of pricedetails.inc -->
+                    <div id="pricedetails" class="hide_price_value">
+                        <ul>
+                            <li class="charge included rooms ovTotalCost">
+                                <div class="key">
+                                    @ViewBag.CTDatDeal.soPhong phòng
+                                </div>
+                            </li>
+                            <li class="charge included vat">
+                                <div class="key">Bao gồm Thuế GTGT (10%) </div>
+                            </li>
+                            <li class="charge included service_charge">
+                                <div class="key">Bao gồm (5%) phí dịch vụ</div>
+                            </li>
+							 <li class="charge included service_charge">
+                                <div class="key">Giảm giá @ViewBag.CTDatDeal.giamGia</div>
+                            </li>
+                            <li class="total">
+                                <div style="display: none">
+                                     @{ string giatongcong = String.Format("{0:n0}",Double.Parse(@ViewBag.CTDatDeal.tongGiaPhong));}
+                                    <span id="selected_currency_symbol"></span><span id="s_total_cost">@giatongcong VNĐ</span>
+                                </div>
+                                <div class="key">
+                                    Tổng giá phòng: 
+                                </div>
+                                <div class="value alignright largetotaltext">
+                                    <!-- rack-rate-savings -->
+                                    <!-- /rack-rate-savings -->
+
+                                     <span id="s_cost_with_addons">@giatongcong VNĐ</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div id="disclaimer">
+                            <p id="book_conditions">
+                                <a href="" target="_blank" onclick="popup_cancel_bigish(this.href); return false;" id="bookconditions">Các điều kiện đặt phòng</a>
+
+                            </p>
+                            <!-- start new_currency_disclaimer_msg.inc -->
+                            <!-- end new_currency_disclaimer_msg.inc -->
+                            <p id="localcurr_dis">
+                                <span style="color: #6792CA;" rel="400" class="jq_tooltip ">Bạn sẽ thanh toán bằng đồng bản địa của khách sạn...
+                                </span>
+                            </p>
+                        </div>
+                        <!-- end of pricedetails.inc -->
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="yourdetails_content">
+                    <div id="booking_details" class="new_hoteldetails_table">
+                        <table id="hoteldetails">
+                            <tbody>
+
+                                <tr>
+                                    <td class="content" colspan="2">
+                                        <span id="hotelname">
+                                            <strong>• @ViewBag.CTDatDeal.soPhong phòng loại  @ViewBag.CTDatDeal.tenLoaiPhong
+                                            </strong>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- close hoteldetails -->
+                    </div>
+                    <!-- start of pricedetails.inc -->
+                    <div id="pricedetails" class="hide_price_value">
+                        <ul>
+                            <li class="total">
+                                <div class="key">
+                                    Giá phòng: 
+                                </div>
+                                <div class="value alignright largetotaltext">
+                                    <!-- rack-rate-savings -->
+                                    <!-- /rack-rate-savings -->
+                                    <span class="nowrap">
+                                     @{ string giaphong = String.Format("{0:n0}", Double.Parse(@ViewBag.CTDatDeal.donGia));}
+                                        <span id="s_cost_with_addons">@giaphong VNĐ</span>
+                                        <!-- rack-rate-savings -->
+                                        <!-- /rack-rate-savings -->
+                                    </span>
+                                    <!-- rack-rate-savings -->
+                                    <!-- /rack-rate-savings -->
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- end of pricedetails.inc -->
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table id="bookwrapper" class="bp_inline_icons">
+        <tbody>
+            <tr>
+                <td id="bookwrapper_cell">
+                    <div id="bookStage3Inc" class="expBS3CC">
+                        <div class="contact verywide auth_user_info">
+                            <div class="title">
+                                Địa chỉ của bạn
+                            </div>
+                            <div class="content">
+                                <table id="book_personal_details" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            <!-- ClickTaleExcludeBlock -->
+                                            <td colspan="2" style="padding-top: 10px;">
+                                                    <b>• Mã thẻ khách hàng: </b>@ViewBag.khachhang.SoTheKH
+                                            </td>
+                                            <!-- EndClickTaleExcludeBlock <td></td> -->
+                                        </tr>
+                                        <tr>
+                                            <!-- ClickTaleExcludeBlock -->
+                                            <td colspan="2" style="padding-top: 10px; padding-left: 0px;">
+                                                    <b>• Họ và tên khách hàng: </b>@ViewBag.khachhang.Ho @ViewBag.khachhang.Ten
+                                            </td>
+                                            <!-- EndClickTaleExcludeBlock <td></td> -->
+                                        </tr>
+                                        <tr>
+                                            <!-- ClickTaleExcludeBlock -->
+                                            <td colspan="2" style="padding-top: 10px; padding-left: 0px;">
+                                                    <b>• Email: </b>@ViewBag.khachhang.Email
+                                            </td>
+                                            <!-- EndClickTaleExcludeBlock <td></td> -->
+                                        </tr>
+
+                                        <tr>
+                                            <th colspan="2" style="height: 0; padding-top: 10px; padding-left: 0px;">
+                                                <p id="error_phone" class="errorSimpleMsg">
+                                                </p>
+                                            </th>
+                                        </tr>
+                                        <input id="bstage_render_timestamp" name="bstage_render_timestamp" value="1353574902" type="hidden"/>
+                                        <input id="upgrade_to" name="upgrade_to" value="0" type="hidden"/>
+                                    </tbody>
+                                </table>
+                                <div class="bp_address">
+                                    <table id="book_personal_details" cellspacing="0">
+                                        <tbody>
+                                            <tr>
+                                                <!-- ClickTaleExcludeBlock -->
+                                                <td colspan="2" style="padding-top: 10px; padding-left: 0px;">
+                                                        <b>• Địa Chỉ: </b>@ViewBag.khachhang.DiaChi
+                                                </td>
+                                                <!-- EndClickTaleExcludeBlock <td></td> -->
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2" style="height: 0; padding-top: 10px; padding-left: 0px;">
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <p>
+                                                        <b>• Số điện thoại: </b>@ViewBag.khachhang.SoDT
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <input id="bstage_render_timestamp" name="bstage_render_timestamp" value="1353574902" type="hidden"/>
+                                            <input id="upgrade_to" name="upgrade_to" value="0" type="hidden"/>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                         
+                        <!-- Start Lựa chọn phương thực thanh toán -->
+                        <form class="form-horizontal" method="post" action="../../front/ThanhToan/EndStep3" id="frm_thanhtoan">
+                            <div id="bs3_cc_form" class="contact verywide auth_user_info ">
+                                <div class="title">
+                                    Đảm bảo đặt phòng của bạn
+                                    <input type="hidden" value="@ViewBag.khachhang.Ho" name="buyerLastName" />
+                                    <input type="hidden" value="@ViewBag.khachhang.Ten" name="buyerFirstName" />
+                                    <input type="hidden" value="@ViewBag.khachhang.DiaChi" name="buyerAddress" />
+                                    <input type="hidden" value="@ViewBag.khachhang.SoTheKH" name="clientcode" />
+                                    <input type="hidden" value="@ViewBag.khachhang.Email" name="email" />
+                                </div>
+                                <div class="content">
+                                    <div class="cc pp_info" style="border-bottom-width: 0;">
+                                        <div class="ccwhy">
+                                            Chọn hình thức thanh toán để đảm bảo cho việc đặt phòng của bạn.<br>
+                                            @ViewBag.CTDatDeal.tenKS có thể trừ phí từ thẻ tín dụng của bạn một khi bạn hoàn tất các thao tác đặt phòng.
+                                            <input name="_tongtien" value="@ViewBag.CTDatDeal.tongGiaPhong" type="hidden"/>
+                                            <input name="_maCT" value="@ViewBag.maCT" type="hidden"/>
+                                        </div>
+                                       @*<fieldset id="book_credit_card" class="control-group exp_layout">*@
+                                            @if (ViewBag.Error != null)
+                                            {
+                                                <div class="alert alert-error">
+                                                    <button type="button" class="close" data-dismiss="alert">x</button>
+                                                    <h4>Lỗi!</h4>
+                                                    @ViewBag.Error
+                                                </div>
+                                            }
+                                            <div class="control-group">
+                                                <label class="control-label">Phương thức thanh toán</label>
+                                                <div class="controls" id="exp_layout">
+                                                    <select name="phuongthuc" id="thanhtoan" style="width: 130px; padding:5px; text-align:center;">
+                                                        <option value="0">-- Chọn --</option>
+                                                        @foreach (var s in @ViewBag.listPT)
+                                                        {
+                                                            <option value="@s.MaPT">@s.TenPT</option>
+                                                        }
+                                                    </select>
+                                                    <span class="help-inline" style="color: red; display:none;width: auto; font-style: italic;" id="pt_loi">
+                                                        <img src="/Content/img/symbol-error.png" alt="" style="width: 20px; height: 20px;" />
+                                                            [Chọn phương thức thanh toán]</span>
+                                                </div>
+                                            </div>
+                                            <div id="tienmat" style="display: none;">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <strong>Hình thức thanh toán tiền mặt</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="ATM" style="display: none;">
+                                                <div class="control-group">
+                                                    <div class="controls">
+                                                        <strong>Hình thức thanh toán qua thẻ ATM</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="tindung" style="display: none;">
+                                                <fieldset id="exp_layout">
+                                                <div class="control-group">
+                                                    <label class="control-label">Card type</label>
+                                                        <div class="controls">
+                                                    <select name="typeofcard" style="width:235px;">
+                                                    <option value="MasterCard"> Master Card </option>
+                                                    <option value="Visa"> Visa </option>
+                                                    </select>
+                                                    </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="_sothe">Số thẻ tín dụng</label>
+                                                        <div class="controls">
+                                                            <input name="_sothe" id="_sothe" class="ClickTaleSensitive cb_confidential " size="16" maxlength="16" autocomplete="off" type="text"/>
+                                                            <span class="help-inline" style="color: red; width: 30px;">(*)</span>
+                                                            <span class="help-inline" style="color: red; display:none;width: auto; font-style: italic;" id="thetd_loi">
+                                                                <img src="/Content/img/symbol-error.png" alt="" style="width: 20px; height: 20px;" />
+                                                                    [Thông tin bắt buộc]</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label">Ngày hết hạn</label>
+                                                        <div class="controls">
+                                                            <select name="expMonth" id="" class="ClickTaleSensitive" style="width:50px;">
+                                                                <option selected="selected">01</option>
+                                                                <option>02</option>
+                                                                <option>03</option>
+                                                                <option>04</option>
+                                                                <option>05</option>
+                                                                <option>06</option>
+                                                                <option>07</option>
+                                                                <option>08</option>
+                                                                <option>09</option>
+                                                                <option>10</option>
+                                                                <option>11</option>
+                                                                <option>12</option>
+                                                            </select>
+                                                            <select name="expYear" id="" class="ClickTaleSensitive" style="width:80px;">
+                                                                <option selected="selected">2012</option>
+                                                                <option>2014</option>
+                                                                <option>2015</option>
+                                                                <option>2016</option>
+                                                                <option>2017</option>
+                                                                <option>2018</option>
+                                                                <option>2019</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+                                                    <p id="error_cc_month" class="errorSimpleMsg">
+                                                    </p>
+                                                    <div id="cc_cvc_error">
+                                                        <p id="error_cc_cvc" class="errorSimpleMsg">
+                                                        </p>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="_macvc">Mã số CVC</label>
+                                                        <div class="controls">
+                                                            <input name="_macvc" id="_macvc" class="ClickTaleSensitive cb_confidential" size="3" maxlength="3" autocomplete="off" type="text"/>
+                                                            <span class="help-inline" style="color: red; width: 30px;">(*)</span>
+                                                             <span class="help-inline" style="color: red; display:none;width: auto; font-style: italic;" id="cvc_loi">
+                                                                <img src="/Content/img/symbol-error.png" alt="" style="width: 20px; height: 20px;" />
+                                                                    [Thông tin bắt buộc]</span>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                   @*     </fieldset>*@
+                                    </div>
+
+                                    <table id="newsletter" class="bs1" style="margin-top: 1em;" cellpadding="0" cellspacing="0">
+                                        <tbody>
+                                            <tr>
+                                                <th colpsan="2">
+                                                    <h3>Đừng bỏ lỡ các tiết kiệm tuyệt vời được gửi thẳng đến hộp thư của bạn!</h3>
+                                                </th>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" style="padding-top: 0.5em;" class="checkbox">
+                                                    <label for="mailinglist">
+                                                        <input id="" name="" value="" checked="checked" type="checkbox">
+                                                        Gửi cho tôi các giao dịch
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p style="padding-top: 10px;" class="cf">
+                                        Tôi đồng ý với 
+                                        <a href="#" target="_blank" onclick="popup_cancel(this.href); return false;">điều kiện đặt phòng</a>
+                                        và 
+                                        <a href="#" target="_blank" onclick="popup_cancel_big(this.href); return false;">các điều khoản chung</a>
+                                        bằng việc đặt phòng này.
+                                    </p>
+                                    <div class="submit bp-prevent-overlay-from-special-requests">
+                                        
+                                        @{string datphong = "Đặt phòng này với giá " + giatongcong + " VNĐ ";}
+
+                                        <button id="new_book_button" class="submit" type="button" name="submit_nhapdiachi" onclick="SubmitForm();">
+                                            <em style="padding: 0; margin: 2px 10px 0 0; text-align: right; display: block; font-style: normal;">@datphong </em>
+                                        </button>
+                                    </div>
+                                    <div class="confirmsubmit" style="margin-top: 5px; padding: 0;">
+                                        <em style="padding: 10px; width: auto; text-align: right; display: block; font-size: large;" class="label label-success pull-right">Không mất phí đặt phòng! </em>
+                                    </div> 
+                                    <legend></legend>
+                                        <p><strong style="color: Red;"> (*) </strong><strong style="font-style:italic;">: Thông tin bắt buộc</strong></p>
+                                </div>
+                            </div>
+                        </form>
+
+   
+                        <!-- End Lựa chọn phương thực thanh toán -->
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        booking.env.b_prompt_text = "Tên, Họ";
+        booking.env.b_prompt_text_email = "Địa chỉ email";
+    </script>
+    <!-- end of bp_inline_icons_bookStage2.inc -->
+</div>
+

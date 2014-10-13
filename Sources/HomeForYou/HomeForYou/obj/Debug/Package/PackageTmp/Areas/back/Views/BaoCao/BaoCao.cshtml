@@ -1,0 +1,212 @@
+﻿@using HomeForYou.Areas.back.Controllers;
+@{
+    ViewBag.Title = "ThongKeDoanhThu";
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách khách sạn", "DanhSach", "KhachSan") <span class="divider"></span>
+    </li>
+</ul>
+<h2>Báo cáo doanh thu</h2>
+@if (@ViewBag.FailMessage != null)
+{
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">
+            ×</button>
+        <h4>
+            Không thành công!</h4>
+        @ViewBag.FailMessage
+    </div>
+}
+<p class="clearfix">
+    <div class="clearfix container">
+    <blockquote>
+        <form class="form-horizontal" method="get" enctype="multipart/form-data">
+            <div class="control-group">
+                <label class="control-label">
+                    Khách sạn: </label>
+                <div class="controls">
+					<select id = "khachsan" name="khachsan">
+                    <option value=0> Tất cả </option>
+                    @foreach (var item in ViewBag.khachsan)
+                    {
+                        if (item.MaKS == ViewBag.pre_khachsan)
+                        {
+                            <option value="@item.MaKS" selected="selected"> @item.TenKS </option>
+                        }
+                        else
+                        {
+                            <option value="@item.MaKS"> @item.TenKS </option>
+                        }
+                    }
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    Từ tháng: </label>
+                <div class="controls">
+					 @if (ViewBag.pre_batdau != null)
+                {
+                    <input type="text" id = "_batdau" value = "@ViewBag.pre_batdau" name="_batdau" class="monthPicker" />
+                }
+                else
+                {
+                    <input type="text" id = "_batdau" name="_batdau" class="monthPicker" />
+                }
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    Đến tháng: </label>
+                <div class="controls">
+					 @if (ViewBag.pre_ketthuc != null)
+                {
+                    <input type="text" id = "_ketthuc" value="@ViewBag.pre_ketthuc" name="_ketthuc" class="monthPicker" />
+                }
+                else
+                {
+                    <input type="text" id = "_ketthuc" name="_ketthuc" class="monthPicker" />
+                }
+                </div>
+            </div>
+            <div class="control-group">
+                
+                <div class="controls">
+                    <button type="submit" class="btn btn-primary">
+                    <strong>Tìm</strong></button>
+                </div>
+            </div>
+        </form>
+    </blockquote>
+    </div>
+</p>
+    @if (ViewBag.total_rows > 1)
+    {
+        // Vẽ biểu đồ hình tròn cho nhiều khách sạn
+    <!--Load the AJAX API-->
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            $.post('@Url.Action("layDuLieu")', function (result) {
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Khách Sạn');
+                data.addColumn('number', 'Doanh Thu');
+
+                for (var i = 0; i < result.length; i++) {
+                    data.addRows([[result[i].tenks, result[i].doanhthu]]);
+                }
+
+                // Set chart options
+                var options = {
+                    title: 'Doanh Thu',
+                    hAxis: { title: 'Khách sạn', titleTextStyle: { color: 'red'} }
+                };
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+                chart.draw(data, options);
+            });
+        }
+</script>
+    }
+    @if (ViewBag.total_rows == 1)
+    {
+        // Vẽ biểu đồ hình cột cho một khách sạn
+    <!--Load the AJAX API-->
+    <script type="text/javascript">
+        google.load("visualization", "1", { packages: ["corechart"] });
+        google.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            var _url = '@Url.Action("layDuLieuMotKhachSan")';
+            var _batdau = document.getElementById("_batdau").value;
+            var _ketthuc = document.getElementById("_ketthuc").value;
+            var _khachsan = document.getElementById("khachsan").value;
+            $.post(_url, { _batdau: _batdau, _ketthuc: _ketthuc, khachsan: _khachsan }, function (result) {
+                // Create the data table.
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Tháng');
+                data.addColumn('number', 'Doanh Thu');
+
+                for (var i = 0; i < result.length; i++) {
+                    data.addRows([[result[i].thang, result[i].doanhthu]]);
+                }
+
+                // Set chart options
+                var options = {
+                    title: 'Doanh Thu',
+                    hAxis: { title: 'Tháng', titleTextStyle: { color: 'red'} }
+                };
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+
+                chart.draw(data, options);
+            });
+        }
+</script>
+    }
+
+    
+    <div id="chart_div" class="clearfix" style="position: relative; border: 2px solid blue; margin-bottom: 20px;">
+    </div>
+    <table class="table table-bordered table-striped table-center clearfix">
+        <thead>
+            <tr>  
+                 <th width="30%">
+                    Tên Khách Sạn
+                </th>
+                <th width="20%">
+                    DoanhThu (VNĐ)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@ViewBag.total_rows == 0)
+            {
+                <tr>
+                    <td colspan="5" class="align-center">
+                        Không có kết quả phù hợp
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var s in @ViewBag.result as List<DoanhThu>)
+                { 
+                
+                    <tr>
+                        <td>
+                            @s.tenks
+                        </td>
+                        <td>
+                            @{ string dthu = String.Format("{0:n0}", s.doanhthu);}
+                            @dthu
+                        </td>
+                   </tr>
+                }
+            }
+        </tbody>
+    </table>
+   
+@*    <div class="pagination clearfix">
+        @if ((string)ViewData["pageLinks"] != "")
+        {
+            <ul>
+                @Html.Raw(ViewBag.pageLinks)
+            </ul>
+            <br />
+            <br />
+        }
+    </div>*@
+
+

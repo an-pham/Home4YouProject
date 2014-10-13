@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HomeForYou.NhanVien>
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+        <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách khuyến mại", "DanhSach", "KhuyenMai") <span class="divider">/</span>
+    </li>
+    <li class="active">Thêm mới</li>
+</ul>
+<legend>Thêm khuyến mãi:</legend>
+@if (@ViewBag.Message != null && @ViewBag.Success ==1)
+{
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4> Chúc mừng!</h4>
+    @ViewBag.Message
+</div>
+}
+@if (@ViewBag.Message != null && @ViewBag.Success ==0)
+{
+<div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4> Không thành công!</h4>
+    @ViewBag.Message
+</div>
+}
+<form class="form-horizontal" action="Them" method="post" enctype="multipart/form-data">
+<div class="control-group">
+    <label class="control-label">Tên khuyến mãi</label>
+    <div class="controls">
+        <input type="text" name="TenKM" value="">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">Ghi chú</label>
+    <div class="controls">
+        <input type="text" name="GhiChu" value="">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Trạng thái</label>
+    <div class="controls">
+        <select name="tinhtrang">
+            <option value="Enabled" selected>Enabled</option>
+            <option value="Disabled">Disabled</option>
+            <option value="Deleted">Deleted</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary">
+        Thêm
+    </button>
+    @Html.ActionLink("Thoát", "DanhSach", "KhuyenMai", new { @class = "btn btn-inverse" })
+</div>
+</form>

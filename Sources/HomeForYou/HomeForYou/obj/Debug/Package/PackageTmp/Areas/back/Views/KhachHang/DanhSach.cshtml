@@ -1,0 +1,156 @@
+﻿@model IEnumerable<HomeForYou.KhachHang>
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách khách hàng", "DanhSach", "KhachHang") <span class="divider"></span>
+    </li>
+</ul>
+<p class="clearfix">
+    <div class="pull-left">
+        <form class="form-search" method="get">
+        <div class="container">
+            <input type="hidden" id="controller_name" value="KhachHang" />
+        <input type="text" class="input-medium search-query" name="title" placeholder="Từ khóa"
+            value="" />
+        <button type="submit" class="btn btn-success">
+            Tìm</button>
+        </form>
+         <div class="alert undelete" style="display:none;" >
+                <button type="button" class="close" data-dismiss="alert">
+                    ×</button>
+                <h4>
+                    Lỗi!</h4>
+                Không thể xóa
+            </div>
+    </div>
+    <table class="table table-bordered table-striped table-center class">
+        <thead>
+            <tr>
+                <th width="30%">
+                    Số thẻ KH
+                </th>
+                <th width="12%">
+                    Họ
+                </th>
+                <th width="12%">
+                    Tên
+                </th>
+                <th width="12%">
+                    Địa chỉ
+                </th>
+                <th width="12%">
+                    CMND
+                </th>
+                <th width="12%">
+                    Số ĐT
+                </th>
+                <th width="12%">
+                    Email
+                </th>
+                <th width="12%">
+                    Tình trạng
+                </th>
+                <th width="10%">
+                </th>
+                <th width="10%">
+                </th>
+                <th width="10%">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@ViewBag.total_rows == 0)
+            {
+                <tr>
+                    <td colspan="5" class="align-center">
+                        Không có kết quả phù hợp
+                    </td>
+                </tr>
+            }
+            @foreach (var s in Model)
+            { 
+                <tr>
+                    <td style="text-align: center;">
+                        <a href="">@s.SoTheKH</a>
+                    </td>
+                    <td style="text-align: center;">
+                        @s.Ho
+                    </td>
+                    <td style="text-align: center;">
+                        @s.Ten
+                    </td>
+                    <td style="text-align: center;">
+                        @s.DiaChi
+                    </td>
+                    <td style="text-align: center;">
+                        @s.CMND
+                    </td>
+                    <td style="text-align: center;">
+                        @s.SoDT
+                    </td>
+                    <td style="text-align: center;">
+                        @s.Email
+                    </td>
+                    @switch (s.TinhTrang)
+                    {
+                        case "Disabled":
+                        <td>
+                            <span class="label btn-warning">Disabled</span>&nbsp;
+                        </td>
+                            break;
+                        case "Deleted":
+                        <td>
+                            <span class="label btn-danger">Deleted</span>&nbsp;
+                        </td>
+                            break;
+                        default:
+                        <td>
+                            <span class="label btn-primary">Enabled</span>&nbsp;
+                        </td>
+                            break;
+                    }
+                    <td>
+                        @if (s.Sua == true)
+                        {
+                            @Html.ActionLink("Sửa", "Sua", "KhachHang", new { ID = s.ID}, new { @class = "btn btn-small" })
+                        }
+                        else
+                        {
+                            <button class="btn btn-small" disabled="disabled">
+                                Sửa</button>
+                        }
+                    </td>
+                    <td>
+                        @if (s.Xoa == true && s.TinhTrang != "Deleted")
+                        {
+                            @Html.ActionLink("Xóa", "Xoa", "KhachHang", new { ID = s.ID }, new { @class = "btn btn-small btn-danger delete-row" })
+                        }
+                        else
+                        {
+                            <button class="btn btn-small btn-danger delete-row" disabled="disabled">
+                                Xóa</button>
+                        }
+                    </td>
+                    <td>
+                       @Html.ActionLink("Lịch sử", "LichSu", "KhachHang", new { ID = s.ID }, new { @class = "btn btn-small btn-info" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="pagination clearfix">
+        <label>Tổng số dòng: @ViewBag.total_rows
+        @if ((string)ViewData["pageLinks"] != "")
+        {
+            <ul>
+                @Html.Raw(ViewBag.pageLinks)
+            </ul>
+            <br />
+            <br />
+        }
+        </label>
+    </div>
+

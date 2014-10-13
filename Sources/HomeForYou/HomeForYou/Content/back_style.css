@@ -1,0 +1,33 @@
+﻿.navbar .brand{color:#fff}
+
+#login-panel {}    
+    #login-panel input[type="text"], #login-panel input[type="password"] {font-size: 18px;height: auto;padding: 10px;width: 95%;}
+    
+.align-center{text-align: center!important}
+.align-left{text-align: left!important}
+.align-right{text-align: right!important}
+
+.alert h4{font-size: 14px;}
+
+
+.row-action{width:14%}
+.row-id{width:5%}
+.row-edit{width: 3%;}
+
+.table-center{}
+.table-center th,.table-center td{vertical-align: middle;text-align: center}
+.total-records{margin-right: 10px;margin-top: 9px}
+
+.form-search{margin-top: 4px}
+
+
+table.category th.row-img{width: 60px;}
+
+.table-center .dropdown-menu{min-width: 100px}
+
+.bs-docs-sidebar { width:170px}
+.bs-docs-sidebar ul li .manage-tour-items { list-style: none ; margin-left: 0}
+.form-login{ margin: 100px 0 0 410px;}
+.navbar .brand a {color: #FFFFFF;}
+.form-search input, .form-inline input, .form-horizontal input, .form-search textarea, .form-inline textarea, .form-horizontal textarea, .form-search select, .form-inline select, .form-horizontal select, .form-search .help-inline, .form-inline .help-inline, .form-horizontal .help-inline, .form-search .uneditable-input, .form-inline .uneditable-input, .form-horizontal .uneditable-input, .form-search .input-prepend, .form-inline .input-prepend, .form-horizontal .input-prepend, .form-search .input-append, .form-inline .input-append, .form-horizontal .input-append{height:27px;}
+.danhmuc-items, .khuyenmai-items { list-style: none;} { list-style: none;}

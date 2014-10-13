@@ -1,0 +1,25 @@
+﻿<div id="sidebar" class="span3 bs-docs-sidebar">
+    <ul class="nav nav-list bs-docs-sidenav well">
+        <li class="nav-header"></i>Business</li>
+        <li>@Html.ActionLink("Nhà cung cấp", "DanhSach", "NhaCungCap")</li>
+        <li>@Html.ActionLink("Khách hàng", "DanhSach", "KhachHang")</li>
+        <li>@Html.ActionLink("Khách sạn", "xxx", "xxx", new { @class = "thongke" })
+		<ul class="thongke-items" style="display: none;">
+			<li>@Html.ActionLink("Danh sách", "DanhSach", "KhachSan")</li>
+			<li>@Html.ActionLink("Thống kê doanh thu", "ThongKeDoanhThu", "KhachSan")</li>
+			<li>@Html.ActionLink("Thống kê đặt deal", "ThongKeLichSuDatDeal", "KhachSan")</li>
+		</ul>
+        </li>
+        <li>@Html.ActionLink("Deal", "DanhSach", "DealKS")</li>
+        <li>@Html.ActionLink("Khuyến mãi", "DanhSach", "KhuyenMai")</li>
+        <li>@Html.ActionLink("Danh mục", "xxx", "xxx", new { @class = "danhmuc" })
+            <ul class="danhmuc-items" style="display: none;">
+                <li>@Html.ActionLink("Quốc gia", "DanhSachQuocGia", "QuocGia")</li>
+                <li>@Html.ActionLink("Thành phố", "DanhSachThanhPho", "ThanhPho")</li>
+                <li>@Html.ActionLink("Vùng", "DanhSachVung", "Vung")</li>
+            </ul>
+        </li>
+        <li>@Html.ActionLink("Báo cáo", "BaoCao", "BaoCao")</li>
+        <li>@Html.ActionLink("Thông tin cá nhân", "ThongTinCaNhan", "NhanVien")</li>
+    </ul>
+</div>

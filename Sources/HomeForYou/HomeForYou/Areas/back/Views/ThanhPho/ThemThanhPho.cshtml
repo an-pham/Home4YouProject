@@ -1,0 +1,53 @@
+﻿@model HomeForYou.ThanhPho
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+        <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách thành phố", "DanhSachThanhPho", "ThanhPho") <span class="divider">/</span>
+    </li>
+    <li class="active">Thêm mới</li>
+</ul>
+<legend>Thêm thành phố</legend>
+@if (@ViewBag.Message != null && ViewBag.Success==1)
+{
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4> Chúc mừng!</h4>
+    @ViewBag.Message
+</div>
+}
+@if (@ViewBag.Message != null && ViewBag.Success == 0)
+{
+<div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4> Không thành công!</h4>
+    @ViewBag.Message
+</div>
+}
+<form class="form-horizontal" action="ThemThanhPho" method="post" enctype="multipart/form-data">
+    <div class="control-group">
+        <label class="control-label">
+            Quốc Gia</label>
+        <div class="controls">
+            @Html.DropDownList("QuocGia")<span class="help-inline" style="color: red;">(*)</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Tên thành phố</label>
+        <div class="controls">
+            <input type="text" name="tenthanhpho" value=""><span class="help-inline" style="color: red;">(*)</span>
+        </div>
+    </div>
+    
+    <legend></legend>
+    <p><strong style="color: Red;"> (*) </strong><strong style="font-style:italic;">: Thông tin bắt buộc</strong></p>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            Thêm
+        </button>
+        @Html.ActionLink("Thoát", "DanhSachThanhPho", "ThanhPho", new { @class = "btn btn-inverse" })
+    </div>
+</form>

@@ -1,0 +1,410 @@
+﻿@{
+    Layout = "~/Areas/front/Views/Shared/thanhtoan.cshtml";
+}
+@using HomeForYou.Areas.front.Controllers
+@section scripts
+{
+    <script type="text/javascript">
+        function DatPhong1() {
+            var c_code = document.getElementById("client_code").value;
+            if (c_code == "") {
+                $("#mathe_loi").hide();
+                $("#mathe_rong").show();
+            }
+            else {
+                $("#mathe_rong").hide();
+                $.ajax({
+                    url: '/front/ThanhToan/Test',
+                    type: 'POST',
+                    data: { code: c_code },
+                    dataType: "json",
+                    success: function (isValid) {
+                        if (isValid) {
+                            $("#mathe_loi").hide();
+                            $("#bookForm").submit();
+                            return true;
+                        }
+                        else {
+                            $("#mathe_loi").show();
+                            return false;
+                        }
+                    }
+                });
+            }
+        };
+        function DatPhong2() {
+            var fn = document.getElementById("firstname").value;
+            var ln = document.getElementById("lastname").value;
+            var e = document.getElementById("email").value;
+            var ec = document.getElementById("email_confirm").value;
+            var cmnd = document.getElementById("cmnd").value;
+            //var cc = document.getElementById("credit_card").value;
+            var ad = document.getElementById("address").value;
+            if (fn == "" || ln == "" || e == "" || ec == "" || cmnd == "" || ad == "") {
+                alert("Vui lòng nhập đầy đủ thông tin bắt buộc");
+            }
+            else {
+                $.ajax({
+                    url: '/front/ThanhToan/Valid_Email',
+                    type: 'POST',
+                    data: { email: e },
+                    dataType: "json",
+                    success: function (isValid) {
+                        if (!isValid) {
+                            $("#mail_error").show();
+                            return true;
+                        }
+                        else {
+                            $("#mail_error").hide();
+                            return false;
+                        }
+                    }
+                });
+                if (e != ec) {
+                    alert("Email xác nhận không đúng.");
+                }
+                else
+                    $("#bookForm").submit();
+            }
+        };
+
+        function MailValidation() {
+            var e = document.getElementById("email").value;
+            $.ajax({
+                url: '/front/ThanhToan/Valid_Email',
+                type: 'POST',
+                data: { email: e },
+                dataType: "json",
+                success: function (isValid) {
+                    if (!isValid) {
+                        $("#mail_error").show();
+                        $("#mail_valid").hide();
+                        return true;
+                    }
+                    else {
+                        $("#mail_error").hide();
+                        $("#mail_valid").show();
+                        return false;
+                    }
+                }
+            });
+        }
+    </script>
+}
+<div class="breadcrumb">
+    <a href="/">Trang chủ</a> >
+    <li class="active">Gửi thông tin</li>
+</div>
+<div id="fullwidth">
+    &nbsp;
+    <div id="bookStageNavInc" class="stage bp-choice-led-breadcrumbs">
+        <table cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="off">
+                        1.Lựa chọn phòng
+                    </td>
+                    <td class="on">
+                        2.Gửi thông tin
+                    </td>
+                    <td class="off">
+                        3.Nhập địa chỉ
+                    </td>
+                    <td class="off">
+                        4.Hoàn tất!
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- start of bp_inline_icons_bookStage2.inc -->
+    <table id="bookOverviewTop">
+        <tbody>
+            <tr>
+                <td class="yourdetailsblock">
+                    Phòng của bạn
+                </td>
+            </tr>
+            <tr>
+                <td id="yourdetails_content">
+                    <div id="booking_details" class="new_hoteldetails_table">
+                        <img class="bp_hotel_image jq_tooltippex round8" src="../../../../Content/img/@ViewBag.CTDatDeal.hinhAnh" alt="hình" height="90" width="90">
+                        <table id="hoteldetails">
+                            <tbody>
+                                <tr>
+                                    <td class="content" colspan="2">
+                                        <span id="hotelname"><strong>@ViewBag.CTDatDeal.tenKS
+                                        </strong></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="title">
+                                        Địa điểm: @ViewBag.CTDatDeal.diaDiem
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="title">
+                                        Ngày nhận:
+                                    </td>
+                                    <td class="content">@ViewBag.CTDatDeal.ngayNhan
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="title">
+                                        Ngày trả:
+                                    </td>
+                                    <td class="content">@ViewBag.CTDatDeal.ngayTra
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- close hoteldetails -->
+                    </div>
+                    <!-- start of pricedetails.inc -->
+                    <div id="pricedetails" class="hide_price_value">
+                        <ul>
+                            <li class="charge included vat">
+                                <div class="key">
+                                    Bao gồm Thuế GTGT (10%)
+                                </div>
+                            </li>
+                            <li class="charge included service_charge">
+                                <div class="key">
+                                    Bao gồm (5%) phí dịch vụ</div>
+                            </li>
+                            <li class="total">
+                                @{ string giatongcong = String.Format("{0:n0}", Double.Parse(@ViewBag.CTDatDeal.tongGiaPhong));}
+                                <div style="display: none">
+                                    <span id="selected_currency_symbol">VND</span><span id="s_total_cost">@giatongcong VNĐ</span>
+                                </div>
+                                <div class="key">
+                                    Tổng giá phòng:
+                                </div>
+                                <div class="value alignright largetotaltext">
+                                    <span>@giatongcong VNĐ</span>
+                                </div>
+                            </li>
+                        </ul>
+                        <div id="disclaimer">
+                            <p id="book_conditions">
+                                <a href="" target="_blank" onclick="popup_cancel_bigish(this.href); return false;"
+                                    id="bookconditions">Các điều kiện đặt phòng</a>
+                            </p>
+                            <!-- start new_currency_disclaimer_msg.inc -->
+                            <!-- end new_currency_disclaimer_msg.inc -->
+                            <p id="localcurr_dis">
+                                <span style="color: #6792CA;" rel="400" class="jq_tooltip ">Bạn sẽ thanh toán bằng đồng
+                                    bản địa của khách sạn... </span>
+                            </p>
+                        </div>
+                        <!-- end of pricedetails.inc -->
+                    </div>
+                </td>
+            </tr>
+            <!-- Start Thông tin phòng đặt -->
+            <tr>
+                <td id="yourdetails_content">
+                    <div id="booking_details" class="new_hoteldetails_table">
+                        <table id="hoteldetails">
+                            <tbody>
+                                <tr>
+                                    <td class="content" colspan="2">
+                                        <span id="hotelname"><strong>@ViewBag.CTDatDeal.soPhong phòng loại @ViewBag.CTDatDeal.tenLoaiPhong
+                                        </strong></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- close hoteldetails -->
+                    </div>
+                    <!-- start of pricedetails.inc -->
+                    <div id="pricedetails" class="hide_price_value">
+                        <ul>
+                            <li class="total">
+                                <div class="key">
+                                    Giá phòng:
+                                </div>
+                                <div class="value alignright largetotaltext">
+                                    <!-- rack-rate-savings -->
+                                    <!-- /rack-rate-savings -->
+                                    @{ string gia = String.Format("{0:n0}", Double.Parse(@ViewBag.CTDatDeal.donGia));}
+                                    <span class="nowrap"><span id="selected_currency_symbol"></span><span id="s_total_cost">@gia
+                                        VNĐ</span>
+                                        <!-- rack-rate-savings -->
+                                        <!-- /rack-rate-savings -->
+                                    </span>
+                                    <!-- rack-rate-savings -->
+                                    <!-- /rack-rate-savings -->
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- end of pricedetails.inc -->
+                    </div>
+                </td>
+            </tr>
+            <!-- End Thông tin phòng đặt -->
+        </tbody>
+    </table>
+    <table id="bookwrapper" class="bp_inline_icons  bp-bs2">
+        <tbody>
+            <tr>
+                <td id="bookwrapper_cell">
+                    <div id="bookStage2Inc" class="yourdetails verywide" style="background: #E6EDF6;">
+                        <div class="title" style="padding: .85em;">
+                            Các thông tin của bạn
+                        </div>
+                        <form id="bookForm" name="bookForm" action="../EndStep2" method="post" class="form-horizontal">
+                        <div style="display: none">
+                            <input name="_madeal" value="@ViewBag.CTDatDeal.maDeal"/>
+                            <input name="_sophong" value="@ViewBag.CTDatDeal.soPhong"/>
+                            <input name="_ngaynhan" value="@ViewBag.CTDatDeal.ngayNhan"/>
+                            <input name="_ngaytra" value="@ViewBag.CTDatDeal.ngayTra"/>
+                        </div>
+                        @if (ViewBag.Error != "")
+                        {
+                            <div class="alert alert-error">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    x</button>
+                                <h4>
+                                    Lỗi!</h4>
+                                @ViewBag.Error
+                            </div>
+                        }
+                        <div>
+                            <input  type="radio" name="optionRadios_tt" id="option1" value="option1" 
+                                    @if (@HttpContext.Current.Request["optionRadios"] == "option1") { ViewContext.Writer.Write("checked"); }
+                                                   style="margin-left: 10px; margin-bottom: 10px;"/>
+                            <b>Đã có thẻ khách hàng</b>
+                            <div class="control-group" id="div_group1" style="display: none">
+                                <label class="control-label" style="padding-left: 30px; padding-bottom: 3px;" for="client_code">
+                                    Mã thẻ:
+                                </label>
+                                <div class="controls">
+                                    <input name="client_code" id="client_code" size="20" placeholder="Nhập vào mã số thẻ"
+                                        type="text" style="margin-left: 10px;" />
+                                    <span class="help-inline" style="color: red; width: 30px;">(*)</span> <span class="help-inline"
+                                        style="color: red; display: none; font-style: italic;" id="mathe_loi">
+                                        <img src="/Content/img/symbol-error.png" alt="" style="width: 20px; height: 20px;" />
+                                        [Thẻ khách hàng không tồn tại]</span> <span class="help-inline" style="color: red;
+                                            display: none; font-style: italic;" id="mathe_rong">
+                                            <img src="/Content/img/symbol-error.png" alt="" style="width: 20px; height: 20px;" />[Nhập
+                                            thẻ khách hàng]</span>
+                                </div>
+                                <div class="submit bp-prevent-overlay-from-special-requests">
+                                    <button id="new_book_button" name="new_book_button1" type="button" onclick="return DatPhong1();">
+                                        <em style="padding: 0; margin: 2px 10px 0 0; text-align: right; display: block; font-style: normal;">
+                                            Không mất phí đặt phòng! </em>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        @*End Option 1 - Đã có mã thẻ*@ @*Start Option 2 - Chưa có mã thẻ*@
+                        <input type="radio" name="optionRadios_tt" id="option2" value="option2" 
+                                    @if (@HttpContext.Current.Request["optionRadios"] == "option2") { ViewContext.Writer.Write("checked"); }
+                                    style="margin-left: 10px; margin-bottom: 10px;" />
+                        <b>Khách hàng mới</b>
+                        <div id="div_group2" style="display: none; padding-left: 30px;">
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Tên</label>
+                                <div class="controls">
+                                    <input name="firstname" id="firstname" size="20" type="text" />
+                                    <span class="help-inline" style="color: red;">(*)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Họ
+                                </label>
+                                <div class="controls">
+                                    <input name="lastname" id="lastname" size="20" type="text" />
+                                    <span class="help-inline" style="color: red;">(*)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Địa chỉ email
+                                </label>
+                                <div class="controls">
+                                    <input name="email" id="email" size="20" type="text" onkeyup="return MailValidation();" />
+                                    <span class="help-inline" style="color: red;">(*)</span> <span class="help-inline"
+                                        id="mail_error" style="color: red; display: none; font-style: italic; padding: 8px;
+                                        background-color: aliceblue; font-size: 15px; border-radius: 1em; margin-left: 10px;">
+                                        <img src="/Content/img/invalid.png" alt="" style="width: 20px; height: 20px;" />
+                                        Email không hợp lệ!</span> <span class="help-inline" id="mail_valid" style="color: green;
+                                            display: none; font-style: italic; padding: 8px; background-color: aliceblue;
+                                            font-size: 15px; border-radius: 1em; margin-left: 10px;">
+                                            <img src="/Content/img/valid.png" alt="" style="width: 20px; height: 20px;" />
+                                            Email hợp lệ.</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Xác nhận địa chỉ email
+                                </label>
+                                <div class="controls">
+                                    <input name="email_confirm" id="email_confirm" size="20" type="text" />
+                                    <span class="help-inline" style="color: red;">(*)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    CMND
+                                </label>
+                                <div class="controls">
+                                    <input name="cmnd" id="cmnd" size="20" type="text" />
+                                    <span class="help-inline" style="color: red;">(*)</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Số điện thoại
+                                </label>
+                                <div class="controls">
+                                    <input name="phone_number" id="phone_number" size="20" type="text" />
+                                </div>
+                            </div>
+                            @*<div class="control-group">
+                                        <label class="control-label">Mã thẻ tín dụng </label>
+                                        <div class="controls">
+                                            <input name="credit_card" id="credit_card" size="20" type="text" />
+                                            <span class="help-inline" style="color: red;">(*)</span>
+                                        </div>
+                                    </div>*@
+                            <div class="control-group">
+                                <label class="control-label">
+                                    Địa chỉ
+                                </label>
+                                <div class="controls">
+                                    <input name="address" id="address" size="20" type="text" />
+                                    <span class="help-inline" style="color: red;">(*)</span>
+                                </div>
+                            </div>
+                            <div class="submit bp-prevent-overlay-from-special-requests">
+                                <button id="new_book_button" name="new_book_button2" type="button" onclick="return DatPhong2();">
+                                    <em style="padding: 0; margin: 2px 10px 0 0; text-align: right; display: block; font-style: normal;">
+                                        Không mất phí đặt phòng! </em>
+                                </button>
+                            </div>
+                        </div>
+                        @*End Option 2 - Chưa có mã thẻ*@
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <legend></legend>
+    <p>
+        <strong style="color: Red;">(*) </strong><strong style="font-style: italic;">: Thông
+            tin bắt buộc</strong></p>
+    <script type="text/javascript">
+        booking.env.b_prompt_text = "Tên, Họ";
+        booking.env.b_prompt_text_email = "Địa chỉ email";
+    </script>
+    <!-- end of bp_inline_icons_bookStage2.inc -->
+</div>

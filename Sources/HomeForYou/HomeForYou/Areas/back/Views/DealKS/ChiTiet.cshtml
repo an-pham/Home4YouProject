@@ -1,0 +1,153 @@
+﻿@model  HomeForYou.Deal
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách deal", "DanhSach", "DealKS") <span class="divider">/</span>
+    </li>
+    <li class="active">Chi tiết<span class="divider">/</span> </li>
+    <li class="active"></li>
+</ul>
+<legend>Chi tiết deal: </legend>
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">
+            ×</button>
+        <h4>
+            Chúc mừng!</h4>
+        @ViewBag.Message
+    </div>
+}
+<dl class="dl-horizontal">
+    <dt>Mã deal</dt>
+    <dd>@Model.MaDeal</dd>
+    <dt>Giá</dt>
+    <dd>@Model.Gia</dd>
+    <dt>Tiền cộng thêm</dt>
+    <dd>@Model.TienCongThem</dd>
+    <dt>Khách sạn</dt>
+    <dd>@Model.KhachSan1.TenKS</dd>
+    <dt>Phòng</dt>
+    <dd>@Model.Phong1.LoaiPhong</dd>
+    <dt>Ngày bắt đầu</dt>
+    <dd>@Model.NgayBatDau</dd>
+    <dt>Ngày kết thúc</dt>
+    <dd>@Model.NgayKetThuc</dd>
+    <dt>Nhân viên tạo deal</dt>
+    <dd>@Model.NhanVien.HoTenNV</dd>
+    <dt>Khuyến mãi</dt>
+    <dd>@Model.KhuyenMai1.TenKhuyenMai</dd>
+    <dt>Tình trạng</dt>
+    <dd>@Model.TinhTrang</dd>
+</dl>
+<legend>Lịch sử đặt Deal</legend>
+<table class="table table-bordered table-striped table-center class">
+    <thead>
+        <tr>
+            <th width="10%">
+                Số thẻ KH
+            </th>
+            <th width="5%">
+                Họ
+            </th>
+            <th width="5%">
+                Tên
+            </th>
+            <th width="5%">
+                Số phòng
+            </th>
+            <th width="10%">
+                Ngày nhận
+            </th>
+            <th width="10%">
+                Ngày trả
+            </th>
+            <th width="10%">
+                Tình trạng
+            </th>
+            <th width="15%">
+            </th>
+            <th width="10%">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (@ViewBag.total_rows == 0)
+        {
+            <tr>
+                <td colspan="10" class="align-center">
+                    Không có kết quả phù hợp
+                </td>
+            </tr>
+        }
+        @foreach (var d in @ViewBag.LichSuDatDeal)
+        { 
+            <tr>
+                <td style="text-align: center;">
+                    @d.ct_deal.MaKH
+                </td>
+                <td style="text-align: center;">
+                    @d.khachhang.Ho
+                </td>
+                <td style="text-align: center;">
+                    @d.khachhang.Ten
+                </td>
+                <td style="text-align: center;">
+                    @d.ct_deal.SoPhong
+                </td>
+                <td style="text-align: center;">
+                    @d.ct_deal.NgayNhan
+                </td>
+                <td style="text-align: center;">
+                    @d.ct_deal.NgayTra
+                </td>
+                @{
+               string tinh_trang = @d.ct_deal.TinhTrang;
+                }
+                @switch (tinh_trang)
+                {
+                    case "Unpaid":
+                    <td>
+                        <span class="label btn-primary">Unpaid</span>&nbsp;
+                    </td>
+                        break;
+                    case "Deleted":
+                    <td>
+                        <span class="label btn-danger">Deleted</span>&nbsp;
+                    </td>
+                        break;
+                    case "Paid":
+                    <td>
+                        <span class="label btn-primary">Paid</span>&nbsp;
+                    </td>
+                        break;
+                }
+                <td>
+                    @if (tinh_trang == "Unpaid")
+                    {
+                        @Html.ActionLink("Thanh toán", "ThanhToanDeal", "DealKS", new { MaCT = d.ct_deal.MaCT, MaDeal =(int) d.ct_deal.MaDeal }, new { @class = "btn btn-info payment" })
+                    }
+                    else
+                    {
+                        <button class="btn btn-info" disabled>
+                            Thanh toán</button>
+                    }
+                </td>
+                <td>
+                    @if (tinh_trang == "Unpaid")
+                    {
+                        @Html.ActionLink("Hủy", "HuyThanhToanDeal", "DealKS", new { MaCT = d.ct_deal.MaCT, MaDeal =(int) d.ct_deal.MaDeal }, new { @class = "btn btn-danger cancel-payment" })
+                    }
+                    else
+                    {
+                        <button class="btn btn-danger" disabled>
+                            Hủy</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,13 @@
+D:\Documents\IV\PTUDHTTTHD\TH\Implement\Source\V6.1\HomeForYou\HomeForYou\bin\HomeForYou.dll
+D:\Documents\IV\PTUDHTTTHD\TH\Implement\Source\V6.1\HomeForYou\HomeForYou\bin\HomeForYou.pdb
+D:\Documents\IV\PTUDHTTTHD\TH\Implement\Source\V6.1\HomeForYou\HomeForYou\bin\EntityFramework.xml
+D:\Documents\IV\PTUDHTTTHD\TH\Implement\Source\V6.1\HomeForYou\HomeForYou\obj\Debug\HomeForYou.csprojResolveAssemblyReference.cache
+D:\Documents\IV\PTUDHTTTHD\TH\Implement\Source\V6.1\HomeForYou\HomeForYou\obj\Debug\HomeForYou.dll
+D:\Documents\IV\PTUDHTTTHD\TH\Implement\Source\V6.1\HomeForYou\HomeForYou\obj\Debug\HomeForYou.pdb
+C:\Users\Thi-An\Documents\GitHub\Home4YouProject\Sources\HomeForYou\HomeForYou\bin\HomeForYou.dll.config
+C:\Users\Thi-An\Documents\GitHub\Home4YouProject\Sources\HomeForYou\HomeForYou\bin\HomeForYou.dll
+C:\Users\Thi-An\Documents\GitHub\Home4YouProject\Sources\HomeForYou\HomeForYou\bin\HomeForYou.pdb
+C:\Users\Thi-An\Documents\GitHub\Home4YouProject\Sources\HomeForYou\HomeForYou\bin\EntityFramework.xml
+C:\Users\Thi-An\Documents\GitHub\Home4YouProject\Sources\HomeForYou\HomeForYou\obj\Debug\HomeForYou.csprojResolveAssemblyReference.cache
+C:\Users\Thi-An\Documents\GitHub\Home4YouProject\Sources\HomeForYou\HomeForYou\obj\Debug\HomeForYou.dll
+C:\Users\Thi-An\Documents\GitHub\Home4YouProject\Sources\HomeForYou\HomeForYou\obj\Debug\HomeForYou.pdb

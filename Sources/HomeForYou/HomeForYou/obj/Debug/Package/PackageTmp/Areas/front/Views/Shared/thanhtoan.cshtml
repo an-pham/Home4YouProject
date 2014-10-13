@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<!-- start: law_lang_country_setvars.inc -->
+<!-- end: law_lang_country_setvars.inc -->
+<html xmlns:fb="http://www.facebook.com/2008/fbml" class="b_firefox_16 hasJS" lang="vi">
+<meta name="robots" content="noindex,follow">
+<!-- start calendar_year_format.inc -->
+<!-- end calendar_year_format.inc -->
+
+@RenderSection("scripts",false)
+<meta http-equiv="content-language" content="vi">
+<meta http-equiv="content-script-type" content="text/javascript">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="window-target" content="_top">
+<meta name="country" content="vn">
+<link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/main_book_book2.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/book_book2.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/popups_book2.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/addons_book2.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.9.1.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/app.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
+
+<style type="text/css">
+#mailafriend_shadow,
+#newletter_popup_shadow,
+#b_feedback_shadow {
+filter: alpha(opacity=40);
+}
+img { -ms-interpolation-mode: bicubic; }
+</style>
+<style>
+#basiclayout {
+margin: 0px 0 0 0;
+}
+.breadcrumb {
+padding-left:7px;
+}
+#special_actions {
+margin: 3px 15px 3px 0;
+}
+.ticker_space {
+margin-top: 3px !important;
+}
+body.header_reshuffle #top {
+min-height: 61px !important;
+}
+#logo_no_globe_new_logo {
+top: 14px;
+}
+#logo_no_globe {
+top: 17px;
+}
+.nobg {
+background-position:0px -20px;
+}
+.b_msie_6 #top,
+.b_msie_6 body.header_reshuffle #top {height:61px !important;}
+.b_msie_6 #special_actions {
+margin: 3px 15px 3px 0;
+overflow:visible;
+}
+</style>
+
+<script type="text/javascript">var _gaq = _gaq || [];</script>
+<!-- Start of breakfast_type.inc -->
+<!-- End of breakfast_type.inc -->
+<title>Home4U: Thanh toán</title>
+<!-- start header2 -->
+</head>
+<body id="b2bookPage" class="bookings2 b2 book  vi header_reshuffle nobg ">
+    <div id="TMAN_TOP_BODY"></div>
+    <div id="bodyconstraint">
+        <div id="bodyconstraint-inner">
+            <div id="top">
+                <!-- start header_main_logo -->
+                <a href="/" title="Home4U" style="text-decoration: none;">
+                    <img id="logo_no_globe_new_logo" src="/Content/img/Home4U_logo.png" alt="Home4ULogo"></a>
+                <!-- end header_main_logo -->
+                <!-- begin header_new_dropdowns.inc -->
+                <!-- begin user_menu.inc -->
+                <div id="personal_form" class="ticker_space" style="z-index: 1000;">
+                    <div class="top_select_wrap">
+                    <div class="select_box" id="current_currency" onclick="#">
+                        <a href = "/front/About/Index" style="font-size: smaller;">
+                        <span class="symbol" style="color: White;">Về Home4U</span></a>
+                        <span class="pointer"><img src="/Content/img/about.png" alt="" /></span>
+                    </div><p style="color: Lime;"></p>
+                    <div class="select_box">
+                        <a href = "/front/About/CauHoi" style="font-size: smaller;" >
+                        <span class="symbol" style="color:white;">Câu hỏi thường gặp</span></a>
+                        <span class="pointer"><img src="/Content/img/question-mark.png" alt=""/></span>
+                    </div>
+                    <iframe src="about:blank" name="log_tar" id="log_tar" width="1" height="1" style="height: 0px;
+                        width: 1px; overflow: hidden; visibility: hidden; position: absolute;" frameborder="0"
+                        border="0"></iframe>
+                        </div>
+                </div>
+                <!-- start user_menu_searches -->
+                <!-- end user_menu_searches -->
+                <!-- end user_menu.inc -->
+                <!-- end header_new_dropdowns.inc -->
+                <!-- start empty_in_defaults.inc -->
+                <!-- end empty_in_defaults.inc -->
+            </div>
+            <div id="subheader-wrap">
+                <div id="greybar" class="reshuffle" style="height: 5px;">
+                   @* @Html.ActionLink("Trang chủ", "Index", "Home", new { @style = "color: blue; background-color: transparent;" })*@
+                </div>
+                <br/>
+            </div>
+            <!-- end header2 -->
+            <!-- Start of if:bp_redesign -->
+               
+            <div id="calendar">
+            </div>
+            <div id="bookTmpl" class="">
+                @RenderBody()
+            </div>
+            <!-- End of if:bp_redesign -->
+        </div>
+    </div>
+     <div class="footerconstraint footer_no_lang_track">
+        <div class="newsletter_subscribe newsletter_subscribe_with_sprites" style="min-height:50px;">
+            <form action="#" method="post" name="newsletterform" class="signupForm footerForm">
+            <table class="newsletter_form_with_sprites" style="margin: 0 auto; min-height: 50px;">
+                <tr class="newsletter_form_fields">
+                </tr>
+            </table>
+            </form>
+        </div>
+        <div class="footerconstraint-inner">
+            <div id="lazy-loaded-target-footer">
+                <div id="footer" class="tracked" style="border-top: 0;">
+                    <div class="reqJS social_iconed footer_social_icons" id="new2footerbuttons">
+                    </div>
+                    <div id="general_links_load" class="general_footer_links_style" style="text-align: center;">
+                        <div id="footernav">
+                                <a href="/front/About/Index">Về Home4U</a>|
+                                <a href="http://www.google.com">Search</a>|
+                                <a href="/front/About/CauHoi">Các câu hỏi thường gặp</a>
+                        </div>
+                    </div>
+                    <div id="footernote" style="text-align: center;">
+                        <strong style="font-size:large;">Home4U luôn sẵn sàng đón tiếp bạn ở mọi nơi.</strong>
+                    </div>
+                    <div class="footercopyright" style="text-align:center;">
+                        <div class="whitebar" style="text-align:center;">
+                        </div>
+                    </div>
+                    <div class="copyright_text" style="text-align:center;">
+                          <small>Bản quyền &copy; 1996&ndash;2012 Booking.com&trade;. Bảo lưu mọi quyền.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- trivago tag -->
+    <!-- myThings tag -->
+    <!-- Google tag -->
+    <!-- Yieldivision tag -->
+    <!-- begin dapper.inc -->
+    <!-- Dapper tag -->
+    <!-- end dapper.inc -->
+    <span id="req_info" style="display: none;">12526,12786,12956,11999,12400,12798,12061,12758,13012,10631,12287</span>
+    <div id="TMAN_BOTTOM_BODY"></div>
+    </body>
+</html>

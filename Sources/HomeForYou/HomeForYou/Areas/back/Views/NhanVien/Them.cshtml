@@ -1,0 +1,81 @@
+﻿@model IEnumerable<HomeForYou.NhanVien>
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+        <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách nhân viên", "DanhSach", "NhanVien") <span class="divider">/</span>
+    </li>
+    <li class="active">Thêm mới</li>
+</ul>
+<legend>Thêm nhân viên</legend>
+@if (@ViewBag.Message != null)
+{
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4> Chúc mừng!</h4>
+    @ViewBag.Message
+</div>
+}
+<form class="form-horizontal" action="Them" method="post" enctype="multipart/form-data">
+<div class="control-group">
+    <label class="control-label">
+        Tên tài khoản</label>
+    <div class="controls">
+        <input type="text" name="username" value="">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Mật khẩu</label>
+    <div class="controls">
+        <input type="password" name="password" value="">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Họ và tên</label>
+    <div class="controls">
+        <input type="text" name="hoten" value="">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        CMND</label>
+    <div class="controls">
+        <input type="text" name="cmnd" value="">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Số điện thoại</label>
+    <div class="controls">
+        <input type="text" name="sodt" value="">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Lương cơ bản</label>
+    <div class="controls">
+        <input type="text" name="luong" value="">
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Chức vụ</label>
+    <div class="controls">
+        <select name="chucvu">
+            <option value="manager" selected>Manager</option>
+            <option value="admin">Admin</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary">
+        Thêm
+    </button>
+    @Html.ActionLink("Thoát", "DanhSach", "NhanVien", new { @class = "btn btn-inverse" })
+</div>
+</form>

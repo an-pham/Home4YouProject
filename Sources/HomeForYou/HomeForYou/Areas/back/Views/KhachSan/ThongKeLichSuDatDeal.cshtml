@@ -1,0 +1,80 @@
+﻿@using HomeForYou.Areas.back.Controllers;
+@{
+    ViewBag.Title = "ThongKeDoanhThu";
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Thống kê lịch sử đặt deal", "ThongKeLichSuDatDeal", "KhachSan") <span class="divider"></span>
+    </li>
+</ul>
+<h2>Thống kê lịch sử đật deal</h2>
+
+<p class="clearfix">
+    <div class="pull-left container">
+    <blockquote>
+        <form class="form-horizontal" method="get" enctype="multipart/form-data">
+            <div class="control-group">
+                <label class="control-label">
+                    Từ ngày: </label>
+                <div class="control">
+                    <input type="text" name="batdau" id="start_date" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    Đến ngày: </label>
+                <div class="control">
+                    <input type="text" name="ketthuc" id="end_date" />
+                    <button type="submit" class="btn">
+                    Tìm</button>
+                </div>
+            </div>
+        </form>
+    </blockquote>
+    </div>
+    <table class="table table-bordered table-striped table-center class">
+        <thead>
+            <tr>
+                <th width="20%">
+                    Tên Khách Sạn
+                </th>
+                <th width="10%">
+                    Số chi tiết deal
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@ViewBag.total_rows == 0)
+            {
+                <tr>
+                    <td colspan="5" class="align-center">
+                        Không có kết quả phù hợp
+                    </td>
+                </tr>
+            }
+            @foreach (var s in @ViewBag.result as List<LichSuDat>)
+            { 
+                <tr>
+                    <td style="text-align: left;">
+                        @s.tenks
+                    </td>
+                    <td>
+                        @s.sodeal
+                    </td>
+               </tr>
+            }
+        </tbody>
+    </table>
+@*    <div class="pagination clearfix">
+        @if ((string)ViewData["pageLinks"] != "")
+        {
+            <ul>
+                @Html.Raw(ViewBag.pageLinks)
+            </ul>
+            <br />
+            <br />
+        }
+    </div>*@

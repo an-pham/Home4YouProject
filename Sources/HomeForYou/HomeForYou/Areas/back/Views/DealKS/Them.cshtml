@@ -1,0 +1,109 @@
+﻿
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+        <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách deal", "DanhSach", "DealKS") <span class="divider">/</span>
+    </li>
+    <li class="active">Thêm mới</li>
+</ul>
+<legend>Thêm deal</legend>
+@if (@ViewBag.Message != null && ViewBag.Success==1)
+{
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4> Chúc mừng!</h4>
+    @ViewBag.Message
+</div>
+}
+@if (@ViewBag.Message != null&&ViewBag.Success==0)
+{
+<div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <h4> Không thành công!</h4>
+    @ViewBag.Message
+</div>
+}
+
+<form class="form-horizontal add-deal" action="Them" method="post" enctype="multipart/form-data">
+<div class="control-group">
+    <label class="control-label">
+        Giá (Đơn vị tính: VNĐ)</label>
+    <div class="controls">
+        <input type="text" name="Gia" value="0"/>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Tiền cộng thêm (Đơn vị tính: VNĐ)</label>
+    <div class="controls">
+        <input type="text" name="Tien_Cong_Them" value="0"/>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Khách sạn</label>
+    <div class="controls">
+        <select name="KhachSan" id="khachsan_list">
+          <option value="0">
+                ---------- Khách Sạn ----------</option>
+            @foreach (var p in ViewBag.KhachSan)
+            {
+                 <option value="@p.MaKS">
+                @p.TenKS</option>
+            }
+        </select><span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Phòng</label>
+    <div class="controls">
+        <select name="Phong" id="phong_list">
+        <option value="0">-------------Phòng---------------</option>
+        </select>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Ngày bắt đầu</label>
+    <div class="controls">
+        <input type="text" id="start_date" name="NgayBD"/>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Ngày kết thúc</label>
+    <div class="controls">
+        <input type="text" id="end_date" name="NgayKT"/>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Khuyến mãi</label>
+    <div class="controls">
+        <select name="KhuyenMai">
+             @foreach (var k in ViewBag.KhuyenMai)
+            {
+                 <option value="@k.MaKM">
+                @k.TenKhuyenMai</option>
+            }
+        </select>
+    </div>
+</div>
+<legend></legend>
+<p><strong style="color: Red;"> (*) </strong><strong style="font-style:italic;">: Thông tin bắt buộc</strong></p>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary">
+        Thêm
+    </button>
+    @Html.ActionLink("Thoát", "DanhSach", "DealKS", new { @class = "btn btn-inverse" })
+</div>
+</form>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<HomeForYou.BangCauHoi>
+@{
+    Layout = "~/Areas/front/Views/Shared/front_layout.cshtml";
+}
+@section scripts
+{
+    <style type="text/css">
+        body 
+        {
+            background-color:#F5F5F5;
+            }
+    </style>
+}
+<table id="basiclayout" cellspacing="0"> </table>
+<div class="breadcrumb">
+    <a href="/">Trang chủ</a> > <li class="active">Các câu hỏi thường gặp</li>
+</div>
+<div style="min-height: 20px;">
+</div>
+<div id="doc">
+    <div id="left">
+    <!-- start about_bookings_menu.inc -->
+        <div class="box">
+            <h3>Về Home4U&trade;</h3>
+            <ul class="staticmenustyle">
+                <li><a href="/front/About/Index">Tổng quan</a></li>
+                <li>Các câu hỏi thường gặp</li>
+            </ul>
+        </div>
+    <!-- end about_bookings_menu.inc -->
+    </div>
+    <div id="right">
+        <!-- start html_about.inc -->
+        <h1 style="padding-left:10px" class="specials">Các câu hỏi thường gặp</h1>
+        <div id="topten" class="" style="display: block">
+            @*Hien thi cau hoi*@
+            @{ int t = 1;}
+            @foreach (var s in Model)
+            {
+                <h2><span>Câu @t: </span></h2>
+                <p style="padding: 5px; padding-top: 10px;"><strong>Hỏi: @s.CauHoi</strong></p>
+                <p class="faqQ"></p>
+                <span class="faqA">
+                    <div style="border-bottom: 1px solid #003580; background-color: #f4f5f7; padding: 6px 2px 6px 6px; overflow:hidden">
+                        <img hspace="5" title="Trả lời" alt=" " src="/Content/img/faqA.png">@s.TraLoi
+                    </div>
+                </span>
+                t++;
+            }
+        </div>
+    </div> 
+</div>

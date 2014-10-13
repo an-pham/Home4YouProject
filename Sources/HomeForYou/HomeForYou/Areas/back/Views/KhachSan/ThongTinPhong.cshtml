@@ -1,0 +1,41 @@
+﻿<div id="@ViewBag.Phong.phong.MaPhong">
+    <form class="form-horizontal" method="post" enctype="multipart/form-data">
+    <div class="control-group">
+        <div class="controls">
+            <input type="hidden" name="ID" value="@ViewBag.Phong.phong.MaPhong"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Loại Phòng</label>
+        <div class="controls">
+            <input type="text" name="loaiphong" value="@ViewBag.Phong.phong.LoaiPhong"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Đơn Giá</label>
+        <div class="controls">
+            <input type="text" name="dongia" value="@ViewBag.Phong.phong.DonGia"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Tình Trạng</label>
+        <div class="controls">
+            <select name="tinhtrang">
+                <option value="Enabled" @if (ViewBag.Phong.phong.TinhTrang == "Enabled") { ViewContext.Writer.Write("selected");  }>Enabled</option>
+                <option value="Disabled" @if (ViewBag.Phong.phong.TinhTrang == "Enabled") { ViewContext.Writer.Write("selected");  }>Disabled</option>
+            </select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Số Lượng</label>
+        <div class="controls">
+            <input type="text" name = "soluong" value="@ViewBag.Phong.phong.SoLuong"/>
+        </div>
+    </div>
+    </form>
+</div>         
+

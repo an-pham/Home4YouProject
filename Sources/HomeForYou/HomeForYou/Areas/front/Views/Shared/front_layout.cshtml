@@ -1,0 +1,1065 @@
+﻿<!DOCTYPE html>
+<!-- start: law_lang_country_setvars.inc -->
+<!-- end: law_lang_country_setvars.inc -->
+<html lang="vi" class="b_firefox_16">
+<head>
+    <title>Home4U. Hãy đặt khách sạn ngay bây giờ!
+    </title>
+    <meta name="description" content="Tiết kiệm đến 75% giá phòng khách sạn tại  điểm đến trên toàn thế giới. Xem qua các đánh giá khách sạn và tìm giá được đảm bảo là tốt nhất tại các khách sạn thuộc đủ mọi hạng giá." />
+    <meta name="keywords" content="chỗ nghỉ, chỗ ở , Khách sạn, Khách sạn, các ưu đãi đặc biệt, các gói du lịch, đặc biệt, nghỉ cuối tuần, nghỉ thăm thành phố, giao dịch giảm giá, bình dân, rẻ, giảm giá, tiết kiệm" />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="" />
+    <link href="@Url.Content("~/Content/searchresults.css")" rel="stylesheet" type="text/css" />
+    <!-- start calendar_year_format.inc -->
+    <!-- end calendar_year_format.inc -->
+    @RenderSection("scripts",false)
+    <script data-do-not-relocate="true" type="text/javascript">
+        //An's func
+        function RedirectToGoogle() {
+            window.location('http://www.google.com');
+        }
+        function About() {
+            //alert("abc");
+            window.location.href = "/front/About/Index";
+        }
+        function XemCauHoi() {
+            window.location.href = "/front/About/CauHoi";
+        }
+        //end of An's func
+        (function (w) {
+            w.tm2BootPosition = 0;
+            w.tm2BootAsync = true;
+            w.tmPageId = '';
+            w.tmParam = { si: '', ui_f: '', ui_d: '', hotel_id: '', date_in: '', i1: '', i2: '', i3: '', ui_a: '', q1: '', date_out: '', ui_e: '', p1: '', ui_g: '', cr_widget: '', ui_b: '', ui_c: '', dd: '', dr: '', hotel_id_list: '', t: '', cont: '', nights: '', guests: '', rooms: '', user_type: '', user_location: 'vn', offer_value: '', label: '', ta: '', ai: '304142', cv: '', oid: '' };
+            var conf = { host: 'pfa.levexis.com',
+                account: 'bookingdotcom',
+                version: '3',
+                async: true,
+                cdn: (location.protocol === 'https:') ? 'sec.levexis.com' : 'res.levexis.com',
+                waitService: 'wt.tagman.com',
+                waitTest: false,
+                bootstrap: true,
+                param: w.tmParam || {}
+            };
+            // do not change values below this line
+            function ap(sr, ol) {
+                var e = document.createElement('script');
+                e.src = sr;
+                e.async = true;
+                if (ol) {
+                    e.onload = e.onerror = function () { if (!this.loaded) { ol(); this.loaded = true; } };
+                    e.onreadystatechange = function () { if (this.readyState === 'complete' || this.readyState === 'loaded') { this.onload(); } };
+                }
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(e, s);
+            }
+            w.TMAN = w.TMAN || {};
+            w.TMAN.startTime = +new Date();
+            w.TMAN.asyncLoader = function () {
+                TMAN.addContainer(new TMAN.Container(conf.account, w.tmPageId, conf));
+            };
+            var tm = '//' + conf.cdn + '/clientfiles/v' + conf.version + '/' + conf.account + '.js';
+            if (conf.waitService && conf.waitTest) ap('//' + conf.waitService + '/wait/0/' + Math.random(), function () { TMAN.waitLatency = new Date() - TMAN.startTime; });
+            if (conf.async) {
+                w.TMAN.position = {};
+                w.TMAN.doTags = function (p) { TMAN.currentPosition = p; };
+                w.TMAN.addParam = function (n, v) {
+                    w.tmParam[n] = v;
+                };
+                w.TMAN.addParams = function (c, p) {
+                    for (var n in p) {
+                        w.tmParam[n] = p[n];
+                    }
+                };
+                ap(tm);
+            } else {
+                //document.write('<script src="' + tm + '"><\/script>');
+            }
+        })(window);</script>
+    <script data-do-not-relocate="true">
+        TMAN.doTags(TMAN.position.TOP_HEAD);
+    </script>
+     <link href="@Url.Content("~/Content/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/front_style.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.8.2.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.9.1.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/app.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/modernizr-2.5.3.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")" type="text/javascript"></script>
+    <style type="text/css">
+        #mailafriend_shadow, #newletter_popup_shadow, #b_feedback_shadow
+        {
+            filter: alpha(opacity=40);
+        }
+        img
+        {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        #basiclayout
+        {
+            margin: 0px 0 0 0;
+        }
+        .breadcrumb
+        {
+            padding-left: 7px;
+        }
+        #special_actions
+        {
+            margin: 3px 15px 3px 0;
+        }
+        .ticker_space
+        {
+            margin-top: 3px !important;
+        }
+        body.header_reshuffle #top
+        {
+            min-height: 93px !important;
+        }
+        #logo_no_globe_new_logo
+        {
+            top: 8px;
+        }
+        #logo_no_globe
+        {
+            top: 17px;
+        }
+        .nobg
+        {
+            background-position: 0px -20px;
+        }
+        .b_msie_6 #top, .b_msie_6 body.header_reshuffle #top
+        {
+            height: 61px !important;
+        }
+        .b_msie_6 #special_actions
+        {
+            margin: 3px 15px 3px 0;
+            overflow: visible;
+        }
+    </style>
+    <!-- start: global js include -->
+   @* <script type="text/javascript">
+        var PageLoadTimer = {};
+        PageLoadTimer.start = (new Date()).getTime();
+        document.documentElement.className += ' hasJS';
+        var sNSExperiments = 'experiments';
+        var sNSStartup = 'startup';
+        var sNSExperimentsLoad = 'experiments_load';
+        var sNSStartupLoad = 'startup_load';
+        var b_experiments = {}, WIDTH, booking = {
+            env: {
+                'z_track_searchbox': 1,
+                "b_current_datetime": '2012-11-28 10:16:28',
+                "b_action": 'index',
+                "b_google_maps_key_params": 'key=ABQIAAAAEG168dBcRndNV70R9mDglhSZn_smZpFKc3SoS1v7FyDshy3QMxSgeH0qWTH24Gc7je-iJ9DSXiNmcA&amp;client=gme-booking&indexing=true',
+                "b_lang": 'vi',
+                "b_countrycode": '',
+                "b_locale": 'vi-vn',
+                "date_format_locale": 'DDD Ng D. MMMM, YYYY.',
+                "b_lang_for_url": 'vi',
+                "b_this_urchin": '/index.vi.html?dcid=1&amp;x12526=0&amp;x11999=1&amp;x13152=1&amp;x13158=1&amp;x12798=0&amp;x12758=2&amp;x13028=1&amp;x13068=0&amp;x12808=1&amp;x13153=0&amp;x12287=0&amp;x13195=1&amp;x13071=1&amp;x13049=0&amp;x12400=1&amp;x12428=0&amp;x13159=1&amp;x13101=1&amp;x12983=1&amp;x13221=1&amp;',
+                "b_flag_to_suggest": 'vn',
+                "b_fb_id": 'FB_text',
+                auth_level: "0",
+                locale_for_facebook: 'vi_VI',
+                b_domain_end: '.booking.com',
+                b_original_url: 'http://www.booking.com/',
+                b_this_url: '/index.vi.html?sid=35285d3a2aafb65870a466132c12fe6a;dcid=1',
+                b_referrer: '',
+                b_acc_type: '',
+                b_req_login: '',
+                keep_day_month: true,
+                b_timestamp: 1354094188,
+                scripts_tracking: {},
+                enable_scripts_tracking: 1,
+                "setvar_affiliate_is_bookings2": 1,
+                transl_close_x: 'đóng',
+                transl_close_calendar: "Đóng lịch",
+                browser_lang: 'vi',
+                b_aid: '304142',
+                b_sid: '35285d3a2aafb65870a466132c12fe6a',
+                ip_country: 'vn',
+                b_selected_currency: 'VND',
+                pageview_id: '116241364b330029',
+                aid: '304142',
+                b_browser: 'firefox',
+                b_browser_version: '16',
+                icons: 'http://r.bstatic.com/static/img',
+                b_weekdays: [
+{ "b_is_weekend": parseInt(''),
+    "b_number": parseInt('1'),
+    "name": 'Thứ 2',
+    "short": 'Thứ 2',
+    "shorter": 'Thứ 2',
+    "shortest": 'T2'
+},
+{ "b_is_weekend": parseInt(''),
+    "b_number": parseInt('2'),
+    "name": 'Thứ 3',
+    "short": 'Thứ 3',
+    "shorter": 'Thứ 3',
+    "shortest": 'T3'
+},
+{ "b_is_weekend": parseInt(''),
+    "b_number": parseInt('3'),
+    "name": 'Thứ 4',
+    "short": 'Thứ 4',
+    "shorter": 'Thứ 4',
+    "shortest": 'T4'
+},
+{ "b_is_weekend": parseInt(''),
+    "b_number": parseInt('4'),
+    "name": 'Thứ 5',
+    "short": 'Thứ 5',
+    "shorter": 'Thứ 5',
+    "shortest": 'T5'
+},
+{ "b_is_weekend": parseInt(''),
+    "b_number": parseInt('5'),
+    "name": 'Thứ 6',
+    "short": 'Thứ 6',
+    "shorter": 'Thứ 6',
+    "shortest": 'T6'
+},
+{ "b_is_weekend": parseInt('1'),
+    "b_number": parseInt('6'),
+    "name": 'Thứ 7',
+    "short": 'Thứ 7',
+    "shorter": 'Thứ 7',
+    "shortest": 'T7'
+},
+{ "b_is_weekend": parseInt('1'),
+    "b_number": parseInt('7'),
+    "name": 'Chủ Nhật',
+    "short": 'Chủ Nhật',
+    "shorter": 'Chủ Nhật',
+    "shortest": 'CN'
+},
+{}],
+                b_group: [],
+                bse_dirty_dates: 1,
+                b_simple_weekdays: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
+                b_simple_weekdays_for_js: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ Nhật'],
+                b_long_weekdays: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ Nhật'],
+                b_short_months: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                b_short_months_abbr: ['Th 1', 'Th 2', 'Th 3', 'Th 4', 'Th 5', 'Th 6', 'Th 7', 'Th 8', 'Th 9', 'Th 10', 'Th 11', 'Th 12'],
+                b_site_experiment_sr_filter_creditcards_accepted: 0,
+                new_av_calendar_can_be_tracked: true,
+                b_should_track_show_first_hotel_rates: true,
+                b_site_experiment_bed_setup_on_rt: 1,
+                b_site_experiment_sr_sort_by_distance_from: 2,
+
+                tooltip_hide_without_fadeout: 1,
+                tooltip_traversing: 1,
+                is_v1_of_store_guest_data: 1,
+                inandaround_more: "Xem thêm",
+                b_site_experiment_subscriber_reinforcement: 2,
+                b_site_experiment_hotel_photo_expose_throughout: 1,
+                view_prices_enter_dates: 'Để xem giá cả và tình trạng phòng trống, xin nhập ngày tháng bạn muốn.',
+                no_blinking: false,
+                sess_dest_type: "city",
+                sess_dest_id: "-782831",
+                sess_dest_fullname: "Dubai",
+                normalize_sbox_value: 1,
+                autocomplete_values: "full_on",
+                b_site_experiment_search_autocomplete: 1,
+                autocomplete_no_results: 'Nhấp vào \'Tìm\' để xem các kết quả trùng hợp',
+                b_site_experiment_search_autocomplete_partitions: 2,
+                autocomplete_categories: {
+                    city: 'Thành phố',
+                    region: 'Vùng',
+                    airport: 'Sân bay',
+                    hotel: 'Khách sạn',
+                    landmark: 'Địa danh',
+                    country: 'Quốc gia',
+                    district: 'Các quận'
+                },
+                b_site_experiment_search_autocomplete_no_auto_submit: 1,
+                b_site_experiment_search_autocomplete_skip_copy: 1,
+                autocomplete_skip_suggestions: 'Tìm thêm lựa chọn',
+                autocomplete: {
+                    hotel: 'Khách sạn',
+                    hotels: 'Khách sạn',
+                    hotels_nearby: 'Khách sạn xung quanh'
+                },
+                search_autocomplete_params: {
+                    lang: 'vi',
+                    pid: '116241364b330029',
+                    sid: '35285d3a2aafb65870a466132c12fe6a',
+                    aid: 304142
+, cities_first: 1
+, es: 1
+, should_split: 1
+, rg_fix: 1
+                },
+                touch_os: false,
+                b_site_variant_calendar_days_allowed_fix: 1,
+                calendar_days_allowed_number: 337,
+                b_site_experiment_clip_checkout_day_dropdown: 1,
+                b_password_strength_msg: ['Yếu', 'Bình thường', 'Tốt', 'Mạnh', 'Rất mạnh'],
+                b_show_passwd: 'Xem mật khẩu',
+                b_passwd_tooltip: 'Bao gồm các chữ hoa, ký tự đặc biệt và con số để tăng độ mạnh cho mật khẩu của bạn',
+                b_site_experiment_social_plugins_footer: 1,
+                // adding the show_social setting for affiliate partners
+                b_site_experiment_lazy_load_print_css: 1,
+                print_css_href: 'http://q.bstatic.com/static/css/print.2732.css',
+                b_site_experiment_signup_expand: "1",
+                b_hostname_signup: "www.booking.com",
+                b_nonsecure_hostname_signup: "http://www.booking.com",
+                b_fd_searchresults_url_signup: "",
+                newsletter_confirm_ok_title_signup: "Bạn đã được đăng ký!",
+                b_site_experiment_fix_timezone_error: 1,
+                detectKeypressRoomNameInputs: 1,
+                unread_messages: 0,
+                b_check_is_zinadev: 0,
+                stored_guest_names: [
+],
+                b_site_experiment_fb_likes: 1,
+                b_site_experiment_bp_remove_cancellation_survey_2: 1,
+                b_site_experiment_omni_search: 0,
+                b_omni_map_checkin: 'Nhận phòng',
+                b_omni_map_checkout: 'Trả phòng',
+                trackExperiment: function () { },
+                "error": {}
+            },
+            ensureNamespaceExists: function (namespaceString) {
+                if (!booking[namespaceString]) {
+                    booking[namespaceString] = {};
+                }
+            }, experiments: {}, startup: {}, experiments_load: {}, startup_load: {}, promotions: {}, timestamp: new Date()
+        };
+        function Tip() { };
+    </script>*@
+    <!--[if IE]> <script type="text/javascript"> document.createElement('time'); </script> <![endif]-->
+    <script type="text/javascript">
+        (function (booking) {
+            var dateFormats = { "short_date": "ngày {day_of_month} {short_month_name} năm {full_year}", "short_date_with_weekday": "{short_weekday} ngày {day_of_month} {short_month_name} năm {full_year}", "short_date_without_year": "ngày {day_of_month} {short_month_name}" },
+months = { "6": { "short_name": "Tháng 6", "name": "Tháng 6" }, "11": { "short_name": "Tháng 11", "name": "Tháng 11" }, "3": { "short_name": "Tháng 3", "name": "Tháng 3" }, "7": { "short_name": "Tháng 7", "name": "Tháng 7" }, "9": { "short_name": "Tháng 9", "name": "Tháng 9" }, "2": { "short_name": "Tháng 2", "name": "Tháng 2" }, "12": { "short_name": "Tháng 12", "name": "Tháng 12" }, "8": { "short_name": "Tháng 8", "name": "Tháng 8" }, "1": { "short_name": "Tháng 1", "name": "Tháng 1" }, "4": { "short_name": "Tháng 4", "name": "Tháng 4" }, "10": { "short_name": "Tháng 10", "name": "Tháng 10" }, "5": { "short_name": "Tháng 5", "name": "Tháng 5"} },
+weekDays = { "6": { "short": "Thứ 7", "name": "Thứ 7", "shortest": "T7" }, "4": { "short": "Thứ 5", "name": "Thứ 5", "shortest": "T5" }, "1": { "short": "Thứ 2", "name": "Thứ 2", "shortest": "T2" }, "3": { "short": "Thứ 4", "name": "Thứ 4", "shortest": "T4" }, "7": { "short": "Chủ Nhật", "name": "Chủ Nhật", "shortest": "CN" }, "2": { "short": "Thứ 3", "name": "Thứ 3", "shortest": "T3" }, "5": { "short": "Thứ 6", "name": "Thứ 6", "shortest": "T6"} };
+            if (booking.formatter) { return; }
+            weekDays['0'] = weekDays['7'];
+            booking.formatter = {
+                date: function (dateString, format) {
+                    var dateParts,
+dayIndex,
+weekDay,
+monthIndex,
+month,
+date = isNaN(Date.parse(dateString)) ? false : new Date(dateString),
+template = dateFormats[format || 'short_date'];
+                    if (!date) {
+                        dateString = dateString.replace(/-/g, '/');
+                        date = isNaN(Date.parse(dateString)) ? false : new Date(dateString);
+                    }
+                    if (!template || !date) { return false; }
+                    dayIndex = date.getDay();
+                    weekDay = weekDays[dayIndex];
+                    monthIndex = date.getMonth() + 1;
+                    month = months[monthIndex];
+                    dateParts = {
+                        day_of_month: date.getDate(),
+                        weekday: weekDay.name,
+                        short_weekday: weekDay.short,
+                        month: monthIndex,
+                        month_name: month.name,
+                        short_month_name: month.short_name,
+                        full_year: date.getFullYear()
+                    };
+                    return $.trim(template.replace(/{([^{}]*)}/g,
+function (a, b) {
+    var r = dateParts[b];
+    return typeof r === 'string' || typeof r === 'number' ? r : a;
+}
+));
+                }
+            };
+        })(window.booking || {});
+    </script>
+    <!-- end: global js include -->
+    <script type="text/javascript">        var _gaq = _gaq || [];</script>
+    <!-- start header2 -->
+    <script data-do-not-relocate="true">
+        TMAN.doTags(TMAN.position.BOTTOM_HEAD);
+    </script>
+</head>
+<body data-preload-assets='["https://secure.booking.com/static/css/main_book_book2.2732.css", "https://secure.booking.com/static/css/popups_book2.2732.css", "https://secure.booking.com/static/css/addons_book2.2732.css", "https://secure.booking.com/static/css/book_book2.2732.css", "https://secure.booking.com/static/css/print.2732.css", "https://secure.booking.com/static/js/error_catcher.2732.js", "https://secure.booking.com/static/js/jquery-1.4.4.min.js", "https://secure.booking.com/static/js/main_book2.2732.js", "https://secure.booking.com/static/js/autocomplete_book2.2732.js", "https://secure.booking.com/static/js/book_book2.2732.js", "https://ssl.google-analytics.com/ga.js", "https://r.bstatic.com/static/img/use_sprites_15_exp.png", "https://r.bstatic.com/static/img/book/thawte200x35_static.gif", "https://r.bstatic.com/static/img/re-tick.png"]'
+    data-preload-assets-onload="false" id="b2indexPage" class="bookings2 b2 index landing  vi header_reshuffle nobg ">
+    <div id="TMAN_TOP_BODY">
+    </div>
+    <script data-do-not-relocate="true">
+        TMAN.doTags(TMAN.position.TOP_BODY);
+    </script>
+    <div id="bp_cart" style="display: none;">
+    </div>
+    <div id="bodyconstraint">
+        <div id="bodyconstraint-inner">
+            <div id="top">
+                <!-- start header_main_logo -->
+                <a href="/"><img id="logo_no_globe_new_logo" src="/Content/img/logo_96.png"
+                    alt="Home4U dịch vụ đặt phòng trực tuyến" style="width:220px; height:80px;"/></a>
+                <!-- end header_main_logo -->
+                <!-- begin header_new_dropdowns.inc -->
+                <!-- begin user_menu.inc -->
+                <div id="personal_form" class="ticker_space" style="z-index: 1000;">
+                    <div class="top_select_wrap">
+                        <div class="select_box" id="current_currency" onclick="#" style="padding-bottom: 10px;
+                            font-size: 16px;">
+                            <span class="pointer" style="width:31px; heigh: 30px;">
+                                <img src="/Content/img/about.png" alt="" style="width:50px; height:40px;" /></span> <a href="/front/About/Index" style="font-size: smaller;">
+                                    <span class="symbol" style="color: White;">Về Home4U</span></a>
+                        </div>
+                        <p style="color: Lime;">
+                        </p>
+                        <div class="select_box" style="font-size: 16px;">
+                            <a href="/front/About/CauHoi" style="font-size: smaller;"><span class="pointer" style="width:31px; heigh: 30px;">
+                                <img src="/Content/img/question-mark.png" alt="" /></span> <span class="symbol" style="color: white;">
+                                    Câu hỏi thường gặp</span></a>
+                        </div>
+                        <iframe src="about:blank" name="log_tar" id="log_tar" width="1" height="1" style="height: 0px;
+                            width: 1px; overflow: hidden; visibility: hidden; position: absolute;" frameborder="0"
+                            border="0"></iframe>
+                    </div>
+                </div>
+
+                <!-- start user_menu_searches -->
+                <div id="user_searches_menu">
+                    <div id="search_foldout_viewed" class="search_foldout closed_content">
+                        <div class="foldout_content" id="search_tab_viewed_content">
+                            <span class="loading_content">Đang tải</span>
+                        </div>
+                    </div>
+                    <div id="search_foldout_searched" class="search_foldout closed_content">
+                        <div class="foldout_content" id="search_tab_searched_content">
+                            <span class="loading_content">Đang tải</span>
+                        </div>
+                    </div>
+                    <div id="search_foldout_favourite" class="search_foldout closed_content">
+                        <div class="foldout_content" id="search_tab_favourite_content">
+                            <span class="loading_content">Đang tải</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- end user_menu_searches -->
+                <div id="special_actions">
+                    <div class="sa_link welcome_login_link">
+                        <span><span class="signup_link_look" id="welcome_login" style="color: white;">Đăng nhập</span>
+                            để quản lý các đặt phòng của bạn. Bạn chưa có tài khoản? <span class="signup_link_look"
+                                id="welcome_signup" style="color: white;">Đăng ký!</span> </span>
+                    </div>
+                </div>
+                <!-- end user_menu.inc -->
+                <!-- end header_new_dropdowns.inc -->
+                <!-- start empty_in_defaults.inc -->
+                <!-- end empty_in_defaults.inc -->
+            </div>
+            <div id="subheader-wrap">
+                <div id="greybar" class="reshuffle" style="height: 5px;">
+                   @* @Html.ActionLink("Trang chủ", "Index", "Home", new { @style = "color: blue; background-color: transparent;" })*@
+                </div>
+                <br/>
+            </div>
+            <!-- end header2 -->
+            <!-- start of index.tmpl -->
+            <table id="basiclayout" cellspacing="0">
+                   @RenderBody()
+            </table>
+            <div id="calendar">
+            </div>
+            <!-- end of index.tmpl -->
+            <!-- begin footer.inc -->
+            <div id="subsciber_reinforcement_lightbox" style="display: none;">
+                <div class="sl_container">
+                    <h4>
+                        Hãy khám phá điều bí mật</h4>
+                    <!-- begin newsletterform_ajax.inc -->
+                    <div id="newsletterform_form_container" style="clear: both">
+                        <div id="" style="clear: both">
+                            <form action="" method="post" name="newsletterform" id="signupForm" class="signupForm bodyForm">
+                            <p class="feedback_msg feedback_msg_error newsletter_subscribe_error_invalid">
+                                Vui lòng nhập địa chỉ email còn sử dụng được</p>
+                            <p class="feedback_msg feedback_msg_error newsletter_subscribe_error_denied">
+                                Xin lỗi, có vẻ như bạn đã đăng ký rất nhiều lần. Đây có thể là một
+                                trục trặc, vui lòng thử lại sau.</p>
+                            <p class="feedback_msg feedback_msg_error newsletter_subscribe_error_bad_unknown">
+                                Rất tiếc, chúng tôi nhận ra lỗi báo. Vui lòng thử lại sau.</p>
+                            <p class="feedback_msg newsletter_sub_success newsletter_sub_success_account">
+                                Các Giao dịch Bí mật đã được mở khóa! Hãy kiểm tra email của bạn để nhận được đường
+                                dẫn.</p>
+                            <fieldset class="newsletter_form_fields" style="border: 0;">
+                                <input type="hidden" name="error_url" id="error_url" value="http://www.booking.com/index.vi.html?sid=35285d3a2aafb65870a466132c12fe6a;dcid=1;" />
+                                <input type="hidden" name="aid" id="aid" value="304142" />
+                                <input type="hidden" name="label" id="label" value="" />
+                                <input type="hidden" name="subscribe_source" value="landing_page_ajax_index" />
+                                <input type="text" name="mailto" class="newsletter_subscription_to newsletterform_email"
+                                    id="mailto" value="Địa chỉ e-mail của bạn" />
+                                <input id="newsletter_button" type="submit" value="Đăng ký" class="newsletter_button bigbluebutton"
+                                    style="margin-left: 5px; font-size: 20px;" />
+                            </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end newsletterform_ajax.inc -->
+                    <p class="sl_pt_01">
+                        <strong>Chúng tôi đã thương lượng với hàng nghìn khách sạn</strong> để nhận được
+                        các giao dịch tốt nhất. Những giao dịch này được chúng tôi gọi là Giao dịch Bí mật
+                        và chỉ kéo dài trong khoảng thời gian có hạn.</p>
+                    <p class="sl_pt_02">
+                        <strong>Bạn có thể nhận các giao dịch này miễn phí</strong> bằng cách đăng ký nhận
+                        bản tin của chúng tôi. Bạn còn có thể lựa chọn những điểm đến ưa thích để nhận được
+                        giao dịch theo đúng ý mình.</p>
+                    <p class="sl_pt_03">
+                        <strong>Bắt đầu ngay bằng cách nhập địa chỉ email của bạn.</strong> Chúng tôi sẽ
+                        ngay lập tức gửi bạn đường dẫn tới Trợ giúp Tìm Giao dịch!</p>
+                    <p class="sl_pt_04" style="padding-bottom: 30px; margin-bottom: 0;">
+                        <strong>Không phải lo lắng - địa chỉ email của bạn được chúng tôi giữ an toàn.</strong>
+                        Chúng tôi không bao giờ chia sẻ thông tin cá nhân của bạn, bạn cũng có thể ngừng
+                        nhận bản tin bất cứ lúc nào.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footerconstraint footer_no_lang_track">
+        <div class="newsletter_subscribe newsletter_subscribe_with_sprites">
+            <form action="#" method="post" name="newsletterform"
+            class="signupForm footerForm">
+            <input type="hidden" name="dcid" value="1" />
+            <input type="hidden" name="sid" value="35285d3a2aafb65870a466132c12fe6a" />
+            <input type="hidden" name="url" value="" />
+            <input type="hidden" name="hostname" value="www.booking.com" />
+            <input type="hidden" name="companyname" value="Booking.com" />
+            <input type="hidden" name="endpoint_url" value="" />
+            <input type="hidden" name="error_url" value="" />
+            <input type="hidden" name="aid" value="304142" />
+            <input type="hidden" name="label" value="" />
+            <input type="hidden" name="subscribe_source" value="footer_index" />
+            <table class="newsletter_form_with_sprites" style="margin: 0 auto">
+                <tr class="newsletter_form_fields">
+                    <td class="newsletter_label" style="font-size: 16px;" rowspan="2">
+                        <label id="signup_label" for="newsletter_to">
+                            <i class="icon_secretdeal"></i><b>Các khách sạn giảm nửa giá</b> <em>Tham gia nhận các
+                                Giao dịch Bí mật</em>
+                        </label>
+                    </td>
+                    <td class="newsletter_to" style="font-size: 16px; padding: 1em 0 0;">
+                    </td>
+                    <td style="font-size: 16px; padding: 1em 0 0; text-align: center;">
+                    </td>
+                </tr>
+            </table>
+            </form>
+        </div>
+        <div style="clear: both;">
+        </div>
+        <div class="footerconstraint-inner">
+            <div id="lazy-loaded-target-footer">
+                <div id="footer" class="tracked" style="border-top: 0;">
+                    <div class="reqJS social_iconed footer_social_icons" id="new2footerbuttons">
+                        <div class="button" id="footer_fb" class="footer_icon footer_social_link" rel="nofollow" href="#footer">
+                            <div class="footer_tooltip">
+                                <div class="marker">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button" id="footer_gp" class="footer_icon footer_social_link" rel="nofollow" href="#footer">
+                            <div class="footer_tooltip">
+                                <div class="g-plusone" data-size="small" data-annotation="bubble">
+                                </div>
+                                <div class="marker">
+                                </div>
+                            </div>
+                        </div>
+                         @*    <a class="footer_icon" id="print" rel="nofollow" href="#footer" title="In" onclick="window.print(); booking.google.trackEvent(booking.google.clickTracker, 'Print button', 1); return false;">
+                            </a>
+                            <a id="mailafriendImg" class="footer_icon socnet_mailafriend" rel="nofollow" title="Email" href="#">
+                            </a>*@
+                    </div>
+                    <div id="general_links_load" class="general_footer_links_style" style="text-align: center;">
+                        <div id="footernav">
+                            <form action="">
+                                <input type="button" value="Về Home4U" onclick="javascript: About();"/>
+                            </form>
+                            |
+                            <form action="#" method="get">
+                            <input type="button" value="Tìm kiếm" title="" onclick="javascript: window.location.href = 'http://www.google.com';"/>
+                            </form>
+                            |
+                            <form action="#" method="get">
+                                <input type="button" value="Các câu hỏi thường gặp" onclick="XemCauHoi();"/>
+                            </form>
+                            <form action="#" style="left: 200px;">
+                                    <a href="http://www.facebook.com/pages/Home4You/470153186368233?ref=ts&fref=ts">
+                                    <img src="../../../../Content/img/facebook.PNG" alt="facebook" /></a>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="footernote" style="text-align: center;">
+                        <strong style="font-size:large;">Home4U luôn sẵn sàng đón tiếp bạn ở mọi nơi.</strong>
+                    </div>
+                    <div class="footercopyright" style="text-align:center;">
+                        <div class="whitebar" style="text-align:center;">
+                        </div>
+                    </div>
+                    <div class="copyright_text" style="text-align:center;">
+                          <small>Bản quyền &copy; 1996&ndash;2012 Booking.com&trade;. Bảo lưu mọi quyền.</small>
+                    </div>
+                </div>
+            </div>
+            <div id="newslettersubscribe">
+                <div class="mapArea">
+                    <div class="closeMap">
+                    </div>
+                    <iframe id="newslettersubscribeFrame" style="background: center center no-repeat url('http://q.bstatic.com/static/img/icons/wait.gif');"
+                        scrolling="no" frameborder="0" marginheight="0" marginwidth="0" src="about:blank">
+                    </iframe>
+                </div>
+                <div id="newletter_popup_shadow">
+                </div>
+            </div>
+            <div style="clear: both;">
+                &#160;</div>
+        </div>
+    </div>
+    <div id="calendar_popup" class="newcalendar singleCalendar" style="display: none;">
+        <div class="browseCalendar">
+            <a href="#" class="prevmonth disabled" onclick="booking.env.trackExperiment('stopped,stopped');">
+                <span>&laquo;</span></a>
+            <select>
+                <option class="b_months" value="2012-11">Tháng 11 &#39;12 </option>
+                <option class="b_months" value="2012-12">Tháng 12 &#39;12 </option>
+                <option class="b_months" value="2013-1">Tháng 1 &#39;13 </option>
+                <option class="b_months" value="2013-2">Tháng 2 &#39;13 </option>
+                <option class="b_months" value="2013-3">Tháng 3 &#39;13 </option>
+                <option class="b_months" value="2013-4">Tháng 4 &#39;13 </option>
+                <option class="b_months" value="2013-5">Tháng 5 &#39;13 </option>
+                <option class="b_months" value="2013-6">Tháng 6 &#39;13 </option>
+                <option class="b_months" value="2013-7">Tháng 7 &#39;13 </option>
+                <option class="b_months" value="2013-8">Tháng 8 &#39;13 </option>
+                <option class="b_months" value="2013-9">Tháng 9 &#39;13 </option>
+                <option class="b_months" value="2013-10">Tháng 10 &#39;13 </option>
+            </select>
+            <a href="#" class="nextmonth"><span>&raquo;</span></a>
+        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>
+                        T2
+                    </th>
+                    <th>
+                        T3
+                    </th>
+                    <th>
+                        T4
+                    </th>
+                    <th>
+                        T5
+                    </th>
+                    <th>
+                        T6
+                    </th>
+                    <th>
+                        T7
+                    </th>
+                    <th>
+                        CN
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td class="wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td class="wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td class="wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td class="wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td class="wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                    <td class="wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk wk_ar">
+                        &nbsp;
+                    </td>
+                    <td class="wk">
+                        &nbsp;
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <span class="calendar_close">Đóng lịch</span>
+    </div>
+    <div id="click_current_currency_foldout" class="click_on_currency">
+        <span class="remove_click_currency_dropdown use_sprites icon_remove"></span>
+        <ul>
+        </ul>
+    </div>
+
+    <!-- scripts_global.inc -->
+    <script type="text/javascript">
+        function blocktoggle(sToggle) {
+            var sToggleId = '#blocktoggle' + sToggle;
+            $(sToggleId).toggle();
+        }
+        function blockdisplay(i) {
+            if (document.getElementById("blockdisplay" + i)) {
+                for (var j = 1; j <= 4; j++) {
+                    if (document.getElementById('blockdisplay' + j)) {
+                        document.getElementById('blockdisplay' + j).style.display = (j === i) ? 'block' : 'none';
+                    }
+                }
+                $(document.body).trigger((i == 4) ? 'ReviewsTab_onOpen' : 'ReviewsTab_onClose');
+                if (i === 1 && typeof bMovableBookNowButton != "undefined") {
+                    bMovableBookNowButton.init();
+                }
+                if (booking.env.b_action == 'hotel' && booking.env.b_site_experiment_event_tracking && (typeof pageTracker != "undefined" || typeof _gaq != "undefined")) {
+                    if (booking && booking.google) {
+                        booking.google.trackEvent(booking.google.viewTracker, 'Tab ' + i, booking.env.b_lang_for_url);
+                    }
+                }
+                if (i == 4) {
+                    $(".toggle_overview").show();
+                    $(".toggle_review").hide();
+                } else {
+                    $(".toggle_review").show();
+                    $(".toggle_overview").hide();
+                }
+            }
+        }
+        function popup(url, w, h) {
+            newWindow = window.open(url, 'popupWindow', 'width=' + w + ',height=' + h + ',menubar=no,toolbar=no,location=no,bookmarks=no,status=no,scrollbars=yes,resizable=yes');
+            if (window.focus) {
+                newWindow.focus();
+            }
+        }
+        booking.ensureNamespaceExists('env');
+        booking.env.b_checkin_date = '';
+        booking.env.b_checkout_date = '';
+        booking.env.b_months = [{ "b_number": 11, "name": 'Tháng 11' }, { "b_number": 12, "name": 'Tháng 12' }, { "b_number": 1, "name": 'Tháng 1' }, { "b_number": 2, "name": 'Tháng 2' }, { "b_number": 3, "name": 'Tháng 3' }, { "b_number": 4, "name": 'Tháng 4' }, { "b_number": 5, "name": 'Tháng 5' }, { "b_number": 6, "name": 'Tháng 6' }, { "b_number": 7, "name": 'Tháng 7' }, { "b_number": 8, "name": 'Tháng 8' }, { "b_number": 9, "name": 'Tháng 9' }, { "b_number": 10, "name": 'Tháng 10'}];
+        booking.env.b_this_year4 = 2012;
+        booking.env.b_this_month = 11;
+        booking.env.b_this_day = 28;
+        booking.env.date_format_acronym = "Năm-Tháng-Ngày";
+        booking.env.day = "ngày";
+        booking.env.error.checkin_date_in_the_past = {
+            "name": "Ngày đăng kí nhận phòng của bạn đã qua. Vui lòng kiểm tra ngày tháng và chọn lại lần nữa."
+        };
+        booking.env.error.checkin_date_invalid = {
+            "name": "Ngày nhận phòng bạn chọn không tồn tại."
+        };
+        booking.env.error.checkin_date_to_far_in_the_future = {
+            "name": "Ngày nhận phòng của bạn quá xa trong tương lai. Vui lòng chọn lại lần nữa."
+        };
+        booking.env.error.checkout_date_invalid = {
+            "name": "Ngày khởi hành bạn chọn không tồn tại."
+        };
+        booking.env.error.checkout_date_more_than_30_days_after_checkin = {
+            "name": "Ngày trả phòng quá 30 ngày tính từ ngày nhận phòng. Phòng chỉ được đặt tối đa 30 ngày từ ngày nhận phòng. Vui lòng chọn lại ngày tháng và thử lần nữa."
+        };
+        booking.env.error.checkout_date_not_after_checkin_date = {
+            "name": "Ngày trả phòng của bạn trước ngày nhận phòng. Vui lòng kiểm tra ngày tháng và thử lại lần nữa."
+        };
+        booking.env.error.not_specific_enough = {
+            "name": "Xin lỗi, chúng tôi cần ít nhất một phần của tên để bắt đầu tìm kiếm."
+        };
+        booking.env.month = "Tháng";
+        booking.env.please_enter_your_check_in_date = "Vui lòng nhập vào ngày nhận phòng của bạn.";
+        booking.env.please_enter_your_check_out_date = "Vui lòng nhập vào ngày trả phòng của bạn.";
+        booking.env.s_value_checkin_year_month = '';
+        booking.env.s_value_checkout_year_month = '';
+        booking.env.to_check_availability_please_enter_your_dates_of_stay = "Xin lỗi, bạn cần có ngày để kiểm tra tình trạng phòng trống.";
+        booking.env.checkout_date_not_after_checkin_date = "Hãy kiểm tra ngày của bạn, ngày trả phòng của bạn hiện đang sớm hơn ngày nhận phòng.";
+        booking.env.b_room_groups = [];
+        booking.env.b_room_extrabeds = [];
+        booking.env.b_canonical_url = 'http://www.booking.com/index.vi.html';
+        booking.env.b_canonical_url_delimiter = '?';
+        booking.env.b_query_params_delimiter = ';';
+        booking.env.group_room = 'Phòng';
+        booking.env.group_remove = 'Xóa bỏ';
+        booking.env.close_button = "ĐÓNG ";
+        booking.env.next_button = "Tiếp theo";
+        booking.env.prev_button = "Trước";
+        booking.env.book_button = "Đặt ngay";
+        booking.env.date_format_acronym = "Năm-Tháng-Ngày";
+        booking.env.width_of_tfoot = 4;
+        booking.env.experiment_popups_close = 'Đóng ';
+        booking.env.experiment_popups_mail = 'Gửi trang này cho bạn bè';
+        //translations here!
+        transl_favourite_destinations_2_03 = 'Thêm vào danh sách ưa thích';
+        transl_favourite_destinations_2_04 = 'Xóa thành phố này';
+        booking.env.number_of_hotels_in_history = '2';
+        transl_recently_viewed = 'Thông tin khách sạn trước đây của tôi (<span class=\"num_hotels\">2</span>)';
+        booking.env.city_name_en = '';
+        booking.env.b_urlcity = '';
+        booking.env.compare_my_viewed_hotels_link = "/hotelcomparison.vi.html?sid=35285d3a2aafb65870a466132c12fe6a;dcid=1;";
+        booking.env.b_site_experiment_predefined_group_selection = 1;
+        $("#new2footerbuttons div, #new2footerbuttons a").click(function () { booking.google.trackEvent(booking.google.clickTracker, 'Footer icons', 'var-,' + $(this).attr('id')); });
+        booking.env.b_site_variant_localize_price_number_format = 1;
+    </script>
+    <!-- /scripts_global.inc -->
+    <div id="logo-not-document-write">
+    </div>
+    <script type="text/javascript">
+        (document.getElementById('logo-not-document-write') || {}).innerHTML = '<img style="display:none;" src="">';
+    </script>
+    <noscript>
+        <img style="display: none" src="" />
+    </noscript>
+    <noscript>
+        <iframe height="1" width="1" frameborder="0" style="height: 1px; width: 1px; overflow: hidden;
+            border: 0;" src="">
+        </iframe>
+    </noscript>
+    <!-- myThings tag -->
+    <!-- begin dapper.inc -->
+    <!-- Dapper tag -->
+    <!-- end dapper.inc -->
+    <!-- Google tag -->
+    <!-- Yieldivision tag -->
+    <script>
+        if (!('pageLoadTimesAlreadySent' in booking)) {
+            booking.pageLoadTimesAlreadySent = true;
+            $(document).ready(function () {
+                PageLoadTimer.document_ready = (new Date()).getTime();
+            });
+            $(window).load(function () {
+                PageLoadTimer.window_load = (new Date()).getTime();
+                var domReady = PageLoadTimer.document_ready - PageLoadTimer.start;
+                var wLoad = PageLoadTimer.window_load - PageLoadTimer.start;
+                if (domReady > 0 && wLoad > 0 && domReady < 150000 && wLoad < 150000) {
+                    if (booking.loadTimesPrevent) {
+                        return false;
+                    }
+                    booking.loadTimesPrevent = true;
+                    if ($.ajax) {
+                        $.ajax({
+                            url: '/load_times',
+                            type: 'GET',
+                            data: {
+                                jquery_ready: domReady,
+                                window_onload: wLoad,
+                                sid: '35285d3a2aafb65870a466132c12fe6a',
+                                pid: booking.env.pageview_id,
+                                first: '',
+                                info: $('#req_info') ? $('#req_info').html() : ''
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        var b_first_seen = '13227=1,13229=0';
+    </script>
+    <script type="text/javascript">
+        booking.ensureNamespaceExists('env');
+        booking.env.google_analytics_tracking_enabled = 1;
+        booking.env.b_aid = '304142';
+        booking.env.b_label = '';
+        booking.env.b_availability_checked = '';
+        booking.env.b_search_category = '';
+        booking.env.b_countrycode = '';
+        booking.env.b_experiment_group = '';
+        booking.env.b_first_time_in_confirmation_page = '';
+        booking.env.b_guest_country = 'vn';
+        booking.env.b_multiple_destinations_found = '';
+        // Record Yahoo! search parameters if present
+        booking.env.b_yahoo_param_keyword = '';
+        booking.env.b_yahoo_param_advert = '';
+        booking.env.b_yahoo_param_campaign = '';
+        if (typeof _gaq == 'object') {
+            booking.ensureNamespaceExists('google');
+            if (typeof booking.google.returnAnalyticsTrackingString != 'undefined') {
+                booking.google.analyticsTrackingString = booking.google.returnAnalyticsTrackingString();
+            }
+            try {
+                _gaq.push(['_setAccount', 'UA-116109-1']);
+                _gaq.push(['_setDomainName', '.booking.com']);
+                _gaq.push(['_setAllowLinker', true]);
+                _gaq.push(['_setAllowHash', false]);
+                _gaq.push(['_setCustomVar', 4, 'auth_level', booking.env.auth_level, 2]);
+                _gaq.push(['_setCustomVar', 5, 'aid', '304142', 2]);
+                (function () {
+                    var group = booking.env.b_group,
+i, length = group.length,
+totalGuests = 0,
+isGroupPresent = length > 1 || (length === 1 && (group[0].guests === 1 || group[0].guests > 2 || group[0].children > 0));
+                    for (i = 0; i < length; i += 1) {
+                        totalGuests += group[i].guests + group[i].children;
+                    }
+                    _gaq.push(['_setCustomVar', 6, isGroupPresent ? 'Group Present' : 'No Group Present', isGroupPresent ? totalGuests : -1, 2]);
+                })();
+                _gaq.push(['_trackPageview', booking.google.analyticsTrackingString]);
+                _gaq.push(['_trackPageLoadTime']);
+                (function () {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(ga, s);
+                } ());
+            } catch (err) { }
+        } else {
+            pageTracker = {
+                _initData: function () { },
+                _trackPageview: function () { },
+                _setDomainName: function () { },
+                _setAllowLinker: function () { },
+                _link: function () { },
+                _linkByPost: function () { },
+                _addTrans: function () { },
+                _addItem: function () { },
+                _trackTrans: function () { },
+                _addOrganic: function () { },
+                _setVar: function () { },
+                _setCookiePath: function () { },
+                _setClientInfo: function () { },
+                _setAllowHash: function () { },
+                _setDetectFlash: function () { },
+                _setDetectTitle: function () { },
+                _setSessionTimeout: function () { },
+                _setCookieTimeout: function () { },
+                _setCampNameKey: function () { },
+                _setCampMediumKey: function () { },
+                _setCampSourceKey: function () { },
+                _setCampTermKey: function () { },
+                _setCampContentKey: function () { },
+                _setCampIdKey: function () { },
+                _setCampNOKey: function () { },
+                _setAllowAnchor: function () { },
+                _addIgnoredOrganic: function () { },
+                _addIgnoredRef: function () { },
+                _setSampleRate: function () { },
+                _setLocalRemoteServerMode: function () { }
+            };
+        }
+    </script>
+    <span id="req_info" style="display: none;">12526,13068,13195,13071,12983,11999,12400,13049,13221,13158,13153,12798,12287,12758,13159</span>
+    <!-- with love from bc44app-02! -->
+    <div id="TMAN_BOTTOM_BODY">
+    </div>
+    <script data-do-not-relocate="true">
+        TMAN.doTags(TMAN.position.BOTTOM_BODY);
+    </script>
+</body>
+</html>
+<!-- end footer.inc -->

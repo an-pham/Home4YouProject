@@ -1,0 +1,170 @@
+﻿@model HomeForYou.KhachSan
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+@section scripts
+{
+    <script type="text/javascript">
+        function LoadImages(href) {
+            searchPic = new Image();
+            searchPic.src = href; // This is correct and the path is correct
+            searchPic.onload = function () {
+                document["pic1"].src = searchPic.src;
+            }
+        }
+        $(document).ready(function () {
+            $('#hinhbtn').click(function () {
+                LoadImages($('#hinhdaidien').val());
+            });
+        });
+    </script>
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách khách sạn", "DanhSach", "Khách Sạn") <span class="divider">/</span>
+    </li>
+    <li class="active"> Thêm mới <span class="divider">/</span> </li>
+    <li class="active"></li>
+</ul>
+<legend>Thêm mới khách sạn: </legend>
+@if (@ViewBag.Message != null && ViewBag.Success==1)
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">
+            ×</button>
+        <h4>
+            Chúc mừng!</h4>
+        @ViewBag.Message
+    </div>
+}
+@if (@ViewBag.Message != null && ViewBag.Success==0)
+{
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">
+            ×</button>
+        <h4>
+            Không thành công!</h4>
+        @ViewBag.Message
+    </div>
+}
+<form class="form-horizontal" method="post" enctype="multipart/form-data">
+<div class="control-group">
+    <label class="control-label">
+        Tên Khách sạn</label>
+    <div class="controls">
+        <input type="text" name = "tenks" value="">
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Địa chỉ</label>
+    <div class="controls">
+        <input type="text" name="diachi" value=""/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Tên Đường</label>
+    <div class="controls">
+        <input type="text" name="tenduong" value=""/>
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+
+<div class="control-group">
+    <label class="control-label">
+        Số ĐT</label>
+    <div class="controls">
+        <input type="text" name = "sodt" value=""/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Vùng</label>
+    <div class="controls">
+        @Html.DropDownList("vung", (SelectList) ViewBag.vungs, "Vùng")
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Nhà Cung Cấp</label>
+    <div class="controls">
+        @Html.DropDownList("nhacungcap", (SelectList) ViewBag.nhacungcaps, "Nhà Cung Cấp")
+        <span class="help-inline" style="color: red;">(*)</span>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Mô Tả</label>
+    <div class="controls">
+        <textarea name = "mota" rows="10"></textarea>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-lable">
+		Tổng quát
+	</label>
+	<div class="controls">
+		<textarea name="tongquat" rows="10"></textarea>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-lable">
+		Dịch Vụ
+	</label>
+	<div class="controls">
+		<textarea name="dichvu" rows="10"></textarea>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-lable">
+		Internet
+	</label>
+	<div class="controls">
+		<textarea name="internet" rows="10"></textarea>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-lable">
+		Bãi đậu xe
+	</label>
+	<div class="controls">
+		<textarea name="baidauxe" rows="10"></textarea>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-lable">
+		Thời gian nhận
+	</label>
+	<div class="controls">
+		<input type="text" value="" name="nhanphong" />
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-lable">
+		Thời gian trả
+	</label>
+	<div class="controls">
+		<input type="text" value="" name="traphong" />
+	</div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Link download hình đại diện</label>
+    <div class="controls">
+        <input type="text" value="" name="hinhdaidien" id="hinhdaidien" />
+        <button id="hinhbtn" name="hinhbtn" class="btn btn-inverse">Xem trước<br /></button>
+        <img src="" id="pic1" name="pic1" alt="" align="middle" style="padding-top: 10px;" class="img-rounded"/>
+    </div>
+</div>
+<legend></legend>
+<p><strong style="color: Red;"> (*) </strong><strong style="font-style:italic;">: Thông tin bắt buộc</strong></p>
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary" style="width: 80px;"> Thêm</button>
+    @Html.ActionLink("Thoát", "DanhSach", "KhachSan", new { @class = "btn btn-inverse" })
+</div>
+ 
+</form>

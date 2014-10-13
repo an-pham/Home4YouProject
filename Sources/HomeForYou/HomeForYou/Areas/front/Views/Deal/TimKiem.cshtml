@@ -1,0 +1,630 @@
+﻿@model List<HomeForYou.KhachSan>  
+@{
+    Layout = "~/Areas/front/Views/Shared/front_layout.cshtml";
+}
+@section scripts
+{
+    <style type="text/css">
+        #preview
+        {
+            background: none repeat scroll 0 0 #333333;
+            border: 3px solid #CCCCCC;
+            box-shadow: 4px 4px 3px #677382;
+            color: #FFFFFF;
+            text-align: center;
+            display: none;
+            padding: 5px;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        // Kick off the jQuery with the document ready function on page load
+        function Disable1() {
+            document.getElementById("btndiemden").style.display = "none";
+            document.getElementById("btnquocgia").style.display = "inline";
+            document.getElementById("diemden").disabled = "disabled";
+            document.getElementById("country_list").disabled = "";
+            document.getElementById("city_list").disabled = "";
+            document.getElementById("area_list").disabled = "";
+        }
+        function Disable2() {
+            document.getElementById("btndiemden").style.display = "inline";
+            document.getElementById("btnquocgia").style.display = "none";
+            document.getElementById("diemden").disabled = "";
+            document.getElementById("country_list").disabled = "disabled";
+            document.getElementById("city_list").disabled = "disabled";
+            document.getElementById("area_list").disabled = "disabled";
+        }
+        function ThayDoi() {
+            document.getElementById("searchboxInc1").style.display = "none";
+            document.getElementById("searchboxInc").style.display = "inline";
+        }
+        function KiemTra() {
+            var diemden = document.getElementById("diemden").value;
+            var quocgia = document.getElementById("country_list").value;
+            var thanhpho = document.getElementById("city_list").value;
+            var vung = document.getElementById("area_list").value;
+            if (diemden == "" && quocgia == 0 && thanhpho == 0 && vung == 0) {
+                alert("Vui lòng chọn nơi muốn đến!");
+            }
+            else
+                $("#frm").submit();
+        }
+
+        function SapXepSao() {
+            var sao = document.getElementById("selectsao").value;
+            document.getElementById("hdsao").value = sao;
+            document.getElementById("hdgia").value = document.getElementById("selectgia").value;
+            $("#frm").submit();
+        }
+        function SapXepGia() {
+            var gia = document.getElementById("selectgia").value;
+            document.getElementById("hdsao").value = document.getElementById("selectsao").value;
+            document.getElementById("hdgia").value = gia;
+            $("#frm").submit();
+        }
+    </script>
+}
+<div class="breadcrumb">
+    <a href="/">Trang chủ</a> >
+    <li class="active">Tìm kiếm</li>
+</div>
+<table id="basiclayout" cellspacing="0">
+    <tbody>
+        <tr>
+            <td id="left" class="leftsmall">
+                <!-- start: searchresults_left_column -->
+                <!-- start filterbox.inc -->
+                <!-- start searchbox.inc -->
+                <div id="searchboxInc" style="display: none;">
+                    <form id="frm" class="form-search" name="frm" action="TimKiem" method="post" style="padding-bottom: 13px;
+                    width: auto;" autocomplete="off">
+                    <h3 class="searchtitle">
+                        Tìm khách sạn</h3>
+                    <input type="hidden" id="hdsao" name="hdsao" value="" />
+                    <input type="hidden" id="hdgia" name="hdgia" value="" />
+                    <fieldset>
+                        <div id="destinationSearch">
+                            <div class="container" style="width: auto;">
+                                <div class="controls">
+                                    <label class="radio inline" for="diemden">
+                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked
+                                            onfocus="Disable2();" />
+                                    </label>
+                                    <input aria-haspopup="true" aria-autocomplete="list" role="textbox" class="text ui-autocomplete-input" 
+                                results="9" placeholder="Nhập tên khách sạn hoặc tên thành phố muốn đến" data-clicktale-show="true" id="diemden"
+                                name="diemden" autocomplete="off" value="@ViewBag.Diemden" type="text" style="width: 120px;"/>
+                                    <button class="btn btn-primary" type="button" name="btndiemden" id="btndiemden" onclick="KiemTra();">
+                                        <strong>Tìm</strong></button>
+                                </div>
+                                <div class="controls">
+                                    <ul class="nav filter" style="margin-top: 5px;">
+                                        <li>
+                                            <label class="radio inline">
+                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick="Disable1();" />
+                                            </label>
+                                        </li>
+                                        <li class="country-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                            <select class="btn dropdown-toggle" id="country_list" name="quocgia" style="width: 120px;
+                                                text-align: left; color: Blue;" disabled="disabled">
+                                                <option value="0">Quốc gia</option>
+                                                @foreach (var q in @ViewBag.quocgias)
+                                                {
+                                                    <option value="@q.MaQG">@q.TenQG</option>
+                                                }
+                                            </select>
+                                        </li>
+                                        <li class="city-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                            <select class="btn dropdown-toggle" id="city_list" name="thanhpho" style="width: 120px;
+                                                text-align: left; color: Blue;" disabled="disabled">
+                                                <option value="0">Thành phố</option>
+                                            </select>
+                                        </li>
+                                        <li class="area-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                            <select class="btn dropdown-toggle" id="area_list" name="vung" style="width: 120px;
+                                                text-align: left; color: Blue;" disabled="disabled">
+                                                <option value="0">Vùng</option>
+                                            </select>
+                                        </li>
+                                        <li style="margin-right: 5px;" class="pull-right">
+                                            <button class="btn btn-primary" type="button" onclick="KiemTra();" name="btnquocgia"
+                                                id="btnquocgia" style="display: none;">
+                                                <strong>Tìm</strong></button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- start datebox.inc -->
+                        <div id="inout" style="padding-bottom: 0;" class="">
+                            <div class="dateerrors">
+                            </div>
+                            <div id="homein" style="white-space: nowrap;">
+                                <img src="/Content/img/transparent.png" class="placeholder" alt="" />
+                                <strong>Ngày nhận phòng: </strong>
+                                <br />
+                                <input type="text" id="start_date" name="start_date" style="width: 120px; margin-left: 25px;" />
+                                <input type="hidden" id="start_datealt" name="start_datealt">
+                            </div>
+                            <div id="homeout" style="white-space: nowrap;">
+                                <img src="/Content/img/transparent.png" class="placeholder" alt="" />
+                                <strong>Ngày trả phòng: </strong>
+                                <br />
+                                <input type="text" id="end_date" name="end_date" style="width: 120px; margin-left: 25px;" />
+                                <input type="hidden" id="end_datealt" name="end_datealt">
+                            </div>
+                        </div>
+                        <!-- end datebox.inc -->
+                        <div id="define_group" style="padding: 0;">
+                            <p style="padding-top: 20px;">
+                                <strong>Giá tối đa mỗi đêm:</strong></p>
+                            <select style="width: auto; text-align: justify;" class="btn btn-toggle" name="giatoida">
+                                <option value="0">Không giới hạn</option>
+                                <option value="300">300.000</option>
+                                <option value="500">300.000 - 500.000</option>
+                                <option value="1000">500.000 - 1.000.000</option>
+                                <option value="1500">1.000.000 - 1.500.000</option>
+                                <option value="2000">1.500.000 - 2.000.000</option>
+                                <option value="20000">>2.000.000</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    </form>
+                </div>
+                <!-- end searchbox.inc -->
+                <!--start searchresult box-->
+                <div id="searchboxInc1" style="background: none repeat scroll 0 0 #FEBA02; display: block;
+                    border-radius: 1em; margin-bottom: 10px; padding: 5px; padding-left: 20px;">
+                    <!-- begin sr_hp_sb_placeholder.inc -->
+                    <!-- end sr_hp_sb_placeholder.inc -->
+                    <form id="frm1" class="form-search" name="frm1" action="" method="post" style="padding-bottom: 13px;
+                    width: auto;" autocomplete="off">
+                    <h3 class="searchtitle">
+                        Tìm khách sạn</h3>
+                    <fieldset>
+                        <div id="destinationSearch">
+                            <div class="container" style="width: auto;">
+                                <div class="controls">
+                                    @if (ViewBag.Diemden != "")
+                                    {
+                                        <p>
+                                            Điểm đến: <strong>@ViewBag.Diemden</strong></p>
+                                    }
+                                    <p>
+                                        Tìm thấy <strong>@ViewBag.Count</strong> khách sạn.</p>
+                                </div>
+                                <div class="controls">
+                                    <ul class="nav filter" style="margin-top: 5px;">
+                                        <li class="country-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                            @if (ViewBag.Quocgia != "")
+                                            {
+                                                <p>
+                                                    Quốc gia: <strong>@ViewBag.Quocgia</strong></p>
+                                            }
+                                        </li>
+                                        <li class="city-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                            @if (ViewBag.Thanhpho != "")
+                                            {
+                                                <p>
+                                                    Thành phố: <strong>@ViewBag.Thanhpho</strong></p>
+                                            }
+                                        </li>
+                                        <li class="area-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                            @if (ViewBag.Vung != "")
+                                            {
+                                                <p>
+                                                    Vùng: <strong>@ViewBag.Vung</strong></p>
+                                            }
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- start datebox.inc -->
+                        <div id="inout" style="padding-bottom: 0;" class="">
+                            <div class="dateerrors">
+                            </div>
+                            <ul class="pull-right">
+                                <button class="btn btn-primary" type="button" name="btnthaydoi" id="btnthaydoi" onclick="ThayDoi();">
+                                    <strong>Tìm kiếm</strong></button></ul>
+                        </div>
+                        <!-- end datebox.inc -->
+                        <div id="define_group" style="padding: 0;">
+                        </div>
+                    </fieldset>
+                    </form>
+                </div>
+                <!--end searchresult box-->
+                <div id="GoogleMap" class="sidebox box sr_sidebar_map_redesign">
+                    <noscript>
+                        <p class="alert dialog">
+                            Một bản đồ sẽ được hiển thị tại đây nếu bạn sử dụng JavaScript.</p>
+                    </noscript>
+                    <h2 class="b_defaults">
+                        Bản đồ</h2>
+                    <div id="b_google_map_table">
+                    </div>
+                    <p id="showMap">
+                    </p>
+                </div>
+                <form action="" data-ga-track="sr_filter_chains_third_for_us[#filter_chains],price_filter_slider[#filter_price],sr_filter_creditcards_accepted[#filter_payment_options]"
+                id="filterbox_wrap" class="cleanupborder">
+                <fieldset>
+                    <!-- begin filterbox_options.inc -->
+                    <div id="filterbox_overlay" style="z-index: 5; background: none repeat scroll 0 0 #444444;
+                        opacity: 0.4; filter: alpha(opacity=40); zoom: 1; display: none; position: absolute;
+                        margin-left: 6px; width: 100%">
+                        <div id="filterbox_overlay_image_container" style="height: 100px; width: 100px; text-align: center;
+                            position: relative; opacity: 1; filter: alpha(opacity=70); background-color: transparent;
+                            left: 50%; margin-left: -50px; zoom: 1">
+                            <div id="filterbox_overlay_animation">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <div id="filterbox_options" class="advcontainer" style="padding: 0">
+                        <h3 class="filter_by">
+                            Chọn lọc theo:</h3>
+                        <div class="filterbox" id="filter_price">
+                            <div class="filtercategory toggla_hide icon_filtercategory_container">
+                                <i class="use_sprites icon_filter_arrow"></i>
+                                <h3>
+                                    Giá <span style="font-weight: normal; font-size: 80%; text-transform: none;">(một đêm)</span></h3>
+                            </div>
+                            <div class="filteroptions">
+                                <a data-id="pricerange_1" data-param="pr=0,1400000" class="filterelement" href="#">
+                                    <div class="filter_meta">
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>0 VNĐ - 300,000 VNĐ</span>
+                                    </div>
+                                </a><a data-id="pricerange_2" data-param="pr=1400000,2700000" class="filterelement"
+                                    href="#">
+                                    <div class="filter_meta">
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>300,000 VNĐ - 500,000 VNĐ</span>
+                                    </div>
+                                </a><a data-id="pricerange_3" data-param="pr=2700000,4100000" class="filterelement"
+                                    href="#">
+                                    <div class="filter_meta">
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>500,000 VNĐ - 1000,000 VNĐ</span>
+                                    </div>
+                                </a><a data-id="pricerange_4" data-param="pr=4100000,5400000" class="filterelement"
+                                    href="#">
+                                    <div class="filter_meta">
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>1,000,000 VNĐ - 1,500,000 VNĐ</span>
+                                    </div>
+                                </a><a data-id="pricerange_4" data-param="pr=4100000,5400000" class="filterelement"
+                                    href="#">
+                                    <div class="filter_meta">
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>1,500,000 VNĐ - 2,000,000 VNĐ</span>
+                                    </div>
+                                </a><a data-id="pricerange_5" data-param="pr=5400000,-1" class="filterelement" href="#">
+                                    <div class="filter_meta">
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>2,000,000+ VNĐ</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="filterbox" id="filter_class">
+                            <div class="filtercategory toggla_hide icon_filtercategory_container">
+                                <i class="use_sprites icon_filter_arrow"></i>
+                                <h3>
+                                    Xếp hạng sao</h3>
+                            </div>
+                            <div class="filteroptions">
+                                <a data-id="class-1" class="filterelement" href="">
+                                    <div class="filter_meta">@ViewBag.count1 Khách sạn</div>
+                                    <div class="filter_item">
+                                        <span>1 sao</span>
+                                    </div>
+                                </a><a data-id="class-2" class="filterelement" href="">
+                                    <div class="filter_meta">
+                                        @ViewBag.count2 Khách sạn</div>
+                                    <div class="filter_item">
+                                        <span>2 sao</span>
+                                    </div>
+                                </a><a data-id="class-3" class="filterelement" href="">
+                                    <div class="filter_meta">
+                                        @ViewBag.count3 Khách sạn
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>3 sao</span>
+                                    </div>
+                                </a><a data-id="class-4" class="filterelement" href="">
+                                    <div class="filter_meta">
+                                        @ViewBag.count4 Khách sạn
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>4 sao</span>
+                                    </div>
+                                </a><a data-id="class-5" class="filterelement" href="">
+                                    <div class="filter_meta">
+                                        @ViewBag.count5 Khách sạn
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>5 sao</span>
+                                    </div>
+                                </a><a data-id="class-0" class="filterelement" href="">
+                                    <div class="filter_meta">
+                                        @ViewBag.count0 Khách sạn
+                                    </div>
+                                    <div class="filter_item">
+                                        <span>Không xếp hạng</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="filterbox" id="filter_facilities">
+                            <div class="filtercategory toggla_hide icon_filtercategory_container">
+                                <i class="use_sprites icon_filter_arrow"></i>
+                                <h3>
+                                    Tiện nghi</h3>
+                            </div>
+                            <div class="filteroptions">
+                                <a data-id="hotelfacility-96" class="filterelement" href="#">
+                                    <div class="filter_item">
+                                        <span>Wi-Fi </span>
+                                    </div>
+                                </a><a data-id="hotelfacility-96" class="filterelement" href="#">
+                                    <div class="filter_item">
+                                        <span>Ti-vi </span>
+                                    </div>
+                                </a><a data-id="hotelfacility-96" class="filterelement" href="#">
+                                    <div class="filter_item">
+                                        <span>Máy lạnh</span>
+                                    </div>
+                                </a><a data-id="hotelfacility-96" class="filterelement" href="#">
+                                    <div class="filter_item">
+                                        <span>Tủ lạnh</span>
+                                    </div>
+                                </a><a data-id="hotelfacility-96" class="filterelement" href="#">
+                                    <div class="filter_item">
+                                        <span>... </span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- end filterbox_options.inc -->
+                </fieldset>
+                </form>
+            </td>
+            <td id="right">
+                <h1 class="sorth1 " style="padding-right: 150px">
+                    <!-- begin searchresults_h1.inc -->
+                    <strong>@ViewBag.Count</strong> Khách sạn được tìm thấy<span class="availability_nr"></span>
+                    <!-- end searchresults_h1.inc -->
+                </h1>
+                <div class="image-an" style="float: right; position: absolute; right: 200px; top: 100px;
+                    width: 100px; height: 200px;">
+                    @if (ViewBag.KhuyenMai != null)
+                    {
+                        <img alt="" src="/Content/img/sale-price-tag-vector9.png" style="height: 200px;" />
+                        <div class="text" style="top: 145px; width: 70px; text-align: center; padding: 0px;">
+                            <b><i>@ViewBag.KhuyenMai.TenKhuyenMai</i></b></div>
+                    }
+                </div>
+                <div id="ajaxsrwrap">
+                    <!-- begin searchresults_hotellist.inc -->
+                    <!-- begin searchresults_sort_bar.inc -->
+                    <div id="sort_by" class="hilite">
+                        <ul class="bar">
+                            <li style="background-color: #feba02; cursor: default;"><strong>Phân loại theo:</strong></li>
+                            <li class="selected"><span class="desc icon_desc_container"><i class="use_sprites icon_arrow">
+                            </i>Được giới thiệu</span></li>
+                            <li class="sort_stars with_dd" style="padding-top: 0px;">
+                                <select style="width: 100px; color: Blue; font-weight: bold; height: auto; margin-top: 0px;
+                                    background-color: transparent; padding: 10px; border-style: none;" id="selectsao"
+                                    name="selectsao" onchange="SapXepSao();">
+                                    <option value="0" @if (@ViewBag.sao == 0) { Write("selected"); }>Sao</option>
+                                    <option value="1" @if (@ViewBag.sao == 1) { Write("selected"); }>Sao [5..1]</option>
+                                    <option value="2" @if (@ViewBag.sao == 2) { Write("selected"); }>Sao [1..5]</option>
+                                </select>
+                            </li>
+                            <li class="sort_price with_dd" style="padding-top: 0px;">
+                                <select style="width: 100px; color: Blue; font-weight: bold; height: auto; margin-top: 0px;
+                                    background-color: transparent; padding: 10px; border-style: none;" id="selectgia"
+                                    name="selectgia" onchange="SapXepGia();">
+                                    <option value="0" @if (@ViewBag.gia == 0) { Write("selected"); }>Giá</option>
+                                    <option value="1" @if (@ViewBag.gia == 1) { Write("selected"); }>Cao..Thấp</option>
+                                    <option value="2" @if (@ViewBag.gia == 2) { Write("selected"); }>Thấp..Cao</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- end searchresults_sort_bar.inc -->
+                    <!-- begin searchresults_hotellist.inc -->
+                    <div class="hotellist_wrap tracked" id="search_results_table">
+                        <table class="hotellist" cellspacing="0">
+                            <tbody>
+                                @foreach (var ks in Model)
+                                {
+                                    <tr class="removeFirstBorder flash_deal_soldout">
+                                        <td id="">
+                                            <a class="hotel jq_tooltippex sr_hotel_preview_track preview" href="@ks.HinhDaiDien" title="@ks.TenKS">
+                                                <img src="@ks.HinhDaiDien" alt="@ks.TenKS" width="128" height="128" class="hotel round8"/>
+                                            </a>
+                                            <div class="image-an" style="bottom:130px;">
+                                                @if (ViewBag.KhuyenMai != null)
+                                                {
+                                                    <img alt="" src="/Content/img/sale-price-tag-vector9.png" style="height: 100px;" />
+                                                    <div class="text" style="text-align: center; padding: 0px; font-size: 10px; width: 30px; top: 66px;">
+                                                        <b><i>@ViewBag.KhuyenMai.TenKhuyenMai</i></b></div>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="reviewFloater">
+                                                <!-- begin hotel_review_score_detailed.inc -->
+                                                @if (@ks.Diem >= 8)
+                                                {
+                                                    <a class="big_review_score_detailed ind_rev_total" style="" href="#"><span class="rating">
+                                                        <span class="average">Rất tốt, @ks.Diem Điểm</span> </span></a>
+                                                }
+                                                else if (@ks.Diem >= 5)
+                                                {
+                                                    <a class="big_review_score_detailed ind_rev_total" style="" href=""><span class="rating">
+                                                        <span class="average">Tốt, @ks.Diem Điểm</span> </span></a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="big_review_score_detailed ind_rev_total" style="" href=""><span class="rating">
+                                                        <span class="average">Khá tốt, @ks.Diem Điểm</span> </span></a>
+                                                }
+                                                <!-- end hotel_review_score_detailed.inc -->
+                                            </div>
+                                            <!-- BEGIN searchresults_hotelname.inc -->
+                                            <h3>
+                                                <a title="@ks.TenKS" class="hotel_name_link url " href="/front/deal/chitiet/?slug=@ks.Slug">@ks.TenKS</a>
+                                                <span class="nowrap">
+                                                    @{string star = "use_sprites stars4 stars4i" + ks.Loai;}
+                                                    <input type="hidden" id="ma_ks" value="@ks.MaKS"/>
+                                                    <span class="@star" title="khách sạn @ks.Loai sao">&nbsp;</span>
+                                            </h3>
+                                            <div class="address">
+                                                <p>@ks.DiaChi , Đường @ks.TenDuong, Thành phố @ks.Vung1.ThanhPho1.TenTP, @ks.Vung1.ThanhPho1.QuocGia1.TenQG</p>
+                                                @*• <a href="#" id="show_id393104" class="show_map " data-coords="106.70535027980804,10.777409194102281" rel="14" onclick="return false;" title="">Hiển thị bản đồ</a>*@
+                                            </div>
+                                            <br />
+                                            <!-- END searchresults_hotelname.inc -->
+                                            <p class="hotel_desc">
+                                                @ks.MoTa
+                                                <!-- usersOnPage.inc -->
+                                                <!-- end usersOnPage.inc -->
+                                            </p>
+                                            <div class="lbsr ">
+                                                <!-- begin feature_last_booking_complete.inc -->
+                                                <!-- end feature_last_booking_complete.inc -->
+                                            </div>
+                                            <a href="/front/deal/chitiet/?slug=@ks.Slug" class="small_cta loading_after_submit">
+                                                Đặt ngay</a>
+                                            <form action="" class="improved_group_booking_block2" style="clear: both;">
+                                            <table class="featuredRooms sr_table_undesign" cellspacing="0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="firstThFeatRms">
+                                                            <span>Các loại phòng còn trống </span>
+                                                        </th>
+                                                        <th class="maxPersons">
+                                                            <span>người</span>
+                                                        </th>
+                                                        <th class="roomAvailability">
+                                                            <span>Phòng trống</span>
+                                                        </th>
+                                                        <th class="roomPrice">
+                                                            <span class="price_for_x_nights_format">Giá cho 1 đêm</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- begin searchresults_hotel-room.inc -->
+                                                    @foreach (var p in @ViewBag.Phongs)
+                                                    {
+                                                        if (p.KhachSan == ks.MaKS)
+                                                        {
+                                                        <tr class="roomrow">
+                                                            <td class="roomName">
+                                                                <div>
+                                                                    <a title="@p.LoaiPhong" class="room_link " href="#"><strong>@p.LoaiPhong</strong></a>
+                                                                    <div class="clear">
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="maxPersons">
+                                                                <div style="white-space: nowrap">
+                                                                    <div class="jq_tooltip" style="display: block; cursor: help">
+                                                                        <img src="/Content/img/transparent.png" class="occsprite max2" alt="" height="10" />
+                                                                        <span style="line-height: 16px; margin-right: 2px; font-size: 1.1em;">+</span>
+                                                                        <img src="/Content/img/transparent.png" class="occsprite maxkids1" alt="" height="10" />
+                                                                    </div>
+                                                                    <span class="hideme">2</span>
+                                                                </div>
+                                                            </td>
+                                                            <td class="roomAvailability" style="text-align: center;">
+                                                                <!-- begin scarcity.inc -->
+                                                                <div>
+                                                                    <a id="urgSpan39310405" class="jq_tooltip urgency_link" rel="240" style="color: #900;
+                                                                        font-weight: bold;" href="">Còn trống <span class="only_x_left">@p.SoLuong</span>
+                                                                        chỗ </a>
+                                                                </div>
+                                                                <!-- end scarcity.inc -->
+                                                            </td>
+                                                            @{ string gia = String.Format("{0:n0}", p.DonGia);}
+                                                            <td class="roomPrice">
+                                                                <div>
+                                                                    <strong class="price  click_change_currency jq_tooltip toggle_price_per_night_or_stay"
+                                                                        onclick="booking.env.trackExperiment('full_on');">
+                                                                        @gia VNĐ </strong>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        }
+                                                    }
+                                                    <!-- end searchresults_hotel-room.inc -->
+                                                    <!-- begin searchresults_hotel-room.inc -->
+                                                    <!-- end searchresults_hotel-room.inc -->
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr class="lastTrFeatRms">
+                                                        <td colspan="4" style="padding-left: 8px; border: none;" class="begone">
+                                                        </td>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end searchresults_hotellist.inc -->
+                    <!-- begin searchresults_prevnext.inc -->
+                    @*<div class="pagination clearfix">
+                        <label>
+                            Tổng số khác: @ViewBag.total_rows
+                            @if ((string)ViewData["pageLinks"] != "")
+                            {
+                                <ul>
+                                    @Html.Raw(ViewBag.pageLinks)
+                                </ul>
+                                <br />
+                                <br />
+                            }
+                        </label>
+                    </div>*@
+                    <table class="prevnextbar tracked" id="next_pref_bar" data-param="1-17-20-20-0" cellspacing="0">
+                        <tbody>
+                            <tr>
+                                <div class="pagination clearfix">
+                                    <label>
+                                        @if ((string)ViewData["pageLinks"] != "")
+                                        {
+                                            <ul>
+                                                @Html.Raw(ViewBag.pageLinks)
+                                            </ul>
+                                            <br />
+                                            <br />
+                                        }
+                                    </label>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <!-- end searchresults_prevnext.inc -->
+                </div>
+                <!-- /ajaxsrwrap -->
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!--#TT:t=searchresults:ah=325:th=334:-->

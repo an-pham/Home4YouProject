@@ -1,0 +1,146 @@
+﻿@model HomeForYou.KhachHang
+       
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Trang chủ", "Index", "Admin")<span class="divider">/</span>
+    </li>
+    <li>@Html.ActionLink("Danh sách khách hàng", "DanhSach", "KhachHang") <span class="divider">/</span>
+    </li>
+    <li class="active">Lịch sử đặt hàng<span class="divider"></span>
+    </li>
+</ul>
+@if (@ViewBag.Message != null)
+{
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert">
+            ×</button>
+        <h4>
+            Chúc mừng!</h4>
+        @ViewBag.Message
+    </div>
+}
+<p class="clearfix">
+    <div class="pull-left">
+    
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="sothe">Số thẻ KH</label>
+                <div class="controls">
+                    <input type="text" id="sothe" disabled value="@Model.SoTheKH"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="sothe">Họ tên KH</label>
+                <div class="controls">
+                    <input type="text" id="hoten" disabled value="@Model.Ho @Model.Ten"/>
+                </div>
+            </div>
+        </form>
+        <h3 align="center" style="text-align:center; color: blueviolet;">Lịch sử đặt hàng của khách hàng</h3>
+    </div>
+    <table class="table table-bordered table-striped table-center class">
+        <thead>
+            <tr>
+                <th width="30%">
+                    Mã Deal
+                </th>
+                <th width="12%">
+                    Số phòng
+                </th>
+                <th width="12%">
+                    Ngày nhận
+                </th>
+                <th width="12%">
+                    Ngày trả
+                </th>
+                <th width="12%">
+                    Tình trạng
+                </th>
+                <th width="10%">
+                </th>
+                <th width="10%">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@ViewBag.total_rows == 0)
+            {
+                <tr>
+                    <td colspan="5" class="align-center">
+                        Không có kết quả phù hợp
+                    </td>
+                </tr>
+            }
+            @foreach (var ct in ViewBag.ChiTiet)
+            {
+                <tr>
+                    <td style="text-align: center;">
+                        <a href="">@ct.MaDeal</a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="">@ct.SoPhong</a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="">@ct.NgayNhan</a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="">@ct.NgayTra</a>
+                    </td>
+
+                    @switch ((string)ct.TinhTrang)
+                    {
+                        case "Deleted":
+                        <td>
+                            <span class="label btn-danger">Deleted</span>&nbsp;
+                        </td>
+                            break;
+                        case "Paid":
+                        <td>
+                            <span class="label btn-primary">Paid</span>&nbsp;
+                        </td>
+                            break;
+                        default:
+                        <td>
+                            <span class="label btn-primary">Unpaid</span>&nbsp;
+                        </td>
+                            break;
+                    }
+                    <td>
+                        @if ((string)ct.TinhTrang != "Deleted")
+                        {
+                          @Html.ActionLink("Hủy", "Huy", "KhachHang", new { MaCT = ct.MaCT, MaKH = ct.KhachHang.ID }, new { @class = "btn btn-small btn-danger" })
+                        }
+                        @if ((string)ct.TinhTrang == "Deleted")
+                        {
+                          <input type = "button" disabled value ="Hủy" class = "btn btn-small btn-danger" />
+                        }
+                    </td>
+                    <td>
+                        @if ((string)ct.TinhTrang == "Unpaid")
+                        {
+                            @Html.ActionLink("Thanh toán", "ThanhToan", "KhachHang", new {MaCT = ct.MaCT, MaKH = ct.KhachHang.ID}, new { @class = "btn btn-small btn-info" })
+                        }
+                        @if ((string)ct.TinhTrang != "Unpaid")
+                        {
+                            <input type = "button" disabled value ="Thanh toán" class = "btn btn-small btn-info" />
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</p>
+    
+    <div class="pagination clearfix">
+        @if ((string)ViewData["pageLinks"] != "")
+        {
+            <ul>
+                @Html.Raw(ViewBag.pageLinks)
+            </ul>
+            <br />
+            <br />
+        }
+    </div>
+

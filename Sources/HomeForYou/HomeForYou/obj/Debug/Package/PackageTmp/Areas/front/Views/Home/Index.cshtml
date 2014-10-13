@@ -1,0 +1,484 @@
+﻿@model IEnumerable<HomeForYou.QuocGia>    
+@{
+    Layout = "~/Areas/front/Views/Shared/front_layout.cshtml";
+}
+@using HomeForYou.Areas.front.Controllers
+@section scripts
+{
+    <script type="text/javascript">
+
+        function Disable1() {
+            document.getElementById("btndiemden").style.display = "none";
+            document.getElementById("btnquocgia").style.display = "inline";
+            document.getElementById("diemden").disabled = "disabled";
+            document.getElementById("country_list").disabled = "";
+            document.getElementById("city_list").disabled = "";
+            document.getElementById("area_list").disabled = "";
+        }
+        function Disable2() {
+            document.getElementById("btndiemden").style.display = "inline";
+            document.getElementById("btnquocgia").style.display = "none";
+            document.getElementById("diemden").disabled = "";
+            document.getElementById("country_list").disabled = "disabled";
+            document.getElementById("city_list").disabled = "disabled";
+            document.getElementById("area_list").disabled = "disabled";
+        }
+        function KiemTra() {
+            var diemden = document.getElementById("diemden").value;
+            var quocgia = document.getElementById("country_list").value;
+            var thanhpho = document.getElementById("city_list").value;
+            var vung = document.getElementById("area_list").value;
+            if (diemden == "" && quocgia == 0 && thanhpho == 0 && vung == 0) {
+                alert("Vui lòng chọn nơi muốn đến!");
+            }
+            else
+                $("#frm").submit();
+        }
+    </script>
+}
+<div style="min-height: 194px;">
+    <object width="877" height="212" align="middle" id="home" name="home" codebase="/Content/banner/swflash.cab"
+        classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000">
+        <param value="sameDohome" name="allowScriptAccess">
+        <param value="/Content/banner/home.swf?msg=Ê mọi người ơi!|Biết tin gì chưa ???|Có chuyện gì nói nghe xem ?|Tui nghe nói Home4U hoạt động rồi á|Thật á???|Uh! đẹp quá :X. Code pro ghê. Hí hí|Thế thì để mình rủ đông đông bạn bè vào đặt deal cho vui nha:x))"
+            name="movie">
+        <param value="false" name="loop">
+        <param value="false" name="menu">
+        <param value="best" name="quality">
+        <param value="noscale" name="scale">
+        <param value="transparent" name="wmode">
+        <param value="#cccccc" name="bgcolor">
+        <embed width="877" height="212" align="middle" style="margin-left: 35px; margin-bottom: 10px;
+            top: 0px; position: absolute; width: 1000px; height: 300px;" src="/Content/banner/home.swf?msg=Ê mọi người ơi!|Biết tin gì chưa ???|Có chuyện gì nói nghe xem ?|Tui nghe nói Home4U hoạt động rồi á|Thật á???|Uh! đẹp quá :X. Code pro ghê. Hí hí|Thế thì để mình rủ đông đông bạn bè vào đặt deal cho vui nha:x"
+            loop="false" menu="false" quality="best" scale="noscale" wmode="transparent"
+            bgcolor="#CCCCCC" swliveconnect="true" id="home" name="home" allowscriptaccess="sameDomain"
+            type="application/x-shockwave-flash">
+    </object>
+</div>
+<div id="subheader-wrap">
+
+
+    <div style="min-height: 10px;">
+    </div>
+</div>
+<table>
+    <tr class="homepage">
+        <td id="left" class="leftwide">
+            <!-- start searchbox.inc -->
+            <div id="searchboxInc">
+                <!-- begin sr_hp_sb_placeholder.inc -->
+                <!-- end sr_hp_sb_placeholder.inc -->
+                <form id="frm" class="form-search" name="frm" action="front/Deal/TimKiem" method="get"
+                style="padding-bottom: 13px; width: auto;" autocomplete="off">
+                <h3 class="searchtitle">
+                    Tìm khách sạn</h3>
+                <fieldset>
+                    <div id="destinationSearch" style="padding-bottom: 0px;">
+                        <div class="container" style="width: auto;">
+                            <div class="controls">
+                                <label class="radio inline" for="diemden">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked
+                                        onfocus="Disable2();" />
+                                </label>
+                                <input aria-haspopup="true" aria-autocomplete="list" role="textbox" class="text ui-autocomplete-input"
+                                    results="9" placeholder="Nhập tên khách sạn hoặc tên thành phố muốn đến" data-clicktale-show="true"
+                                    id="diemden" name="diemden" autocomplete="off" value="" type="search" />
+                                <button class="btn btn-primary" type="button" name="btndiemden" id="btndiemden" onclick="KiemTra();"
+                                    style="margin-left: 11px;">
+                                    <strong>Tìm</strong></button>
+                            </div>
+                            <div class="controls">
+                                <ul class="nav nav-pills filter pull-left" style="margin-top: 10px; width: 545px;">
+                                    <li>
+                                        <label class="radio inline">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick="Disable1();" />
+                                        </label>
+                                    </li>
+                                    <li class="country-list" style="margin-right: 9px; margin-left: 3px;">
+                                        <select class="btn dropdown-toggle" id="country_list" name="quocgia" style="width: 130px;
+                                            padding-left: 0px; text-align: left; color: Blue;" disabled="disabled">
+                                            <option value="0">Quốc gia</option>
+                                            @foreach (var q in @Model)
+                                            {
+                                                <option value="@q.MaQG">@q.TenQG</option>
+                                            }
+                                        </select>
+                                    </li>
+                                    <li class="city-list" style="margin-right: 10px;">
+                                        <select class="btn dropdown-toggle" id="city_list" name="thanhpho" style="width: 140px;
+                                            padding-left: 0px; text-align: left; color: Blue;" disabled="disabled">
+                                            <option value="0">Thành phố</option>
+                                        </select>
+                                    </li>
+                                    <li class="area-list" style="margin-right: 14px;">
+                                        <select class="btn dropdown-toggle" id="area_list" name="vung" style="width: 160px;
+                                            padding-left: 0px; text-align: left; color: Blue;" disabled="disabled">
+                                            <option value="0">Vùng</option>
+                                        </select>
+                                    </li>
+                                    <li style="margin-right: 9px;">
+                                        <button class="btn btn-primary" type="button" name="btnquocgia" id="btnquocgia" style="display: none;"
+                                            onclick="KiemTra();">
+                                            <strong>Tìm</strong></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- start datebox.inc -->
+                    <div id="inout" style="padding-bottom: 0;" class="">
+                        <div id="homein" style="white-space: nowrap;">
+                            @*<img src="/Content/img/transparent.png" class="placeholder" alt=""/>*@ <strong>Ngày
+                                nhận phòng</strong>
+                            <input type="text" id="start_date" name="start_date" style="width: 100px;" />
+                            <input type="hidden" id="start_datealt" name="start_datealt">
+                        </div>
+                        <div id="homeout" style="white-space: nowrap;">
+                            <img src="/Content/img/transparent.png" class="placeholder" alt="" />
+                            <strong style="margin-left: 20px;">Ngày trả phòng</strong>
+                            <input type="text" id="end_date" name="end_date" style="width: 100px;" />
+                            <input type="hidden" id="end_datealt" name="end_datealt">
+                        </div>
+                    </div>
+                    <!-- end datebox.inc -->
+                    <div id="define_group" style="padding: 0;">
+                        <strong>Giá tối đa mỗi đêm: (VNĐ)</strong>
+                        <select style="width: auto; text-align: justify; color: Blue;" class="btn btn-toggle"
+                            name="giatoida">
+                            <option value="0">Không giới hạn</option>
+                            <option value="300">300.000</option>
+                            <option value="500">300.000 - 500.000</option>
+                            <option value="1000">500.000 - 1.000.000</option>
+                            <option value="1500">1.000.000 - 1.500.000</option>
+                            <option value="2000">1.500.000 - 2.000.000</option>
+                            <option value="20000">>2.000.000</option>
+                        </select>
+                    </div>
+                </fieldset>
+                </form>
+            </div>
+            <!-- end searchbox.inc -->
+            <!-- begin one_usp.inc -->
+            <div class="oneusp usp_tick2 top">
+                <h3>
+                    Các khuyến mãi</h3>
+            </div>
+            <!--Start slide Khuyến mãi-->
+            <div id="myCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    @{
+                        var groupKM = ViewBag.groupKM as List<List<HomeForYou.KhuyenMai>>;
+                        int count = 0;
+                        foreach (var s in groupKM)
+                        {
+                            if (count == 0)
+                            {
+                                count++;
+                        <div class="active item">
+                            <ul style="width: 275px; margin-left: 5px;">
+                                @foreach (var x in s)
+                                {
+                                    if (x != null)
+                                    {
+                                        if (x.TenHinh != null)
+                                        {
+                                    <li class="span4">
+                                        <div class="thumbnail">
+                                            <a href="/front/Deal/TimKiem?makm=@x.MaKM">
+                                                <img src="../Content/img/khuyenmai/@x.TenHinh" alt="null" title="@x.TenKhuyenMai" style= "height:200px; width:275px;"/>
+                                            </a>
+                                        </div>
+                                    </li>
+                                        }
+                                        else
+                                        {
+                                    <li class="span4">
+                                        <div class="thumbnail">
+                                            <a href="/front/Deal/TimKiem?makm=@x.MaKM">
+                                                <img src="../Content/img/null.jpg" alt="null" title="@x.TenKhuyenMai" style= "height:200px; width:275px;"/>
+                                            </a>
+                                        </div>
+                                    </li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                            }
+                            else
+                            {
+                        <div class="item">
+                            <ul style="width: 275px; margin-left: 5px;">
+                                @foreach (var x in s)
+                                {
+                                    if (x != null)
+                                    {
+                                        if (x.TenHinh != null)
+                                        {
+                                    <li class="span4">
+                                        <div class="thumbnail">
+                                            <a href="/front/Deal/TimKiem?makm=@x.MaKM">
+                                                <img src="../Content/img/khuyenmai/@x.TenHinh" alt="null" title="@x.TenKhuyenMai" style= "height:200px; width:275px;" />
+                                            </a>
+                                        </div>
+                                    </li>
+                                        }
+                                        else
+                                        {
+                                    <li class="span4">
+                                        <div class="thumbnail">
+                                            <a href="/front/Deal/TimKiem?makm=@x.MaKM">
+                                                <img src="../Content/img/null.jpg" alt="null" title="@x.TenKhuyenMai" style= "height:200px; width:275px;"/>
+                                            </a>
+                                        </div>
+                                    </li>
+                                        }
+                                    }
+                                }
+                            </ul>
+                        </div>
+                            }
+                        }
+                    }
+                </div>
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                <a class="carousel-control right" href="#myCarousel" data-slide="next" style="right: 5px;">
+                    &rsaquo;</a>
+            </div>
+            <!--End slide Khuyến mãi-->
+            <!--Start khach san ua chuong-->
+            <!-- start popular_destinations_accommodations.inc -->
+            <div id="popularDestinations" class="b-popular tracked clearbox">
+                <h2>
+                    Các khách sạn được ưa chuộng
+                </h2>
+                @if (ViewBag.dsks == null)
+                {
+                    <div class="alert alert-block alert-error fade in">
+                        <button class="close" data-dismiss="alert" type="button">
+                            ×</button>
+                        <h4 class="alert-heading">@ViewBag.Message</h4>
+                    </div>
+                }
+                @foreach (var ks in ViewBag.dsks as List<KhachSanUaChuong>)
+                {
+                    <ul class="b-popular_list">
+                        <li class="b-popular_item"><a class="b-popular_bullet" href="">khách sạn</a> <a href="/front/deal/chitiet/?slug=@ks.slug">
+                            @if (@ks.images.Count != 0)
+                            {
+                                <a href="/front/deal/chitiet/?slug=@ks.slug">
+                                    <img src="../Content/img/@ks.images.Find(x => x != null)" alt="" 
+                                    title="Các hình về khách sạn @ks.tenKS" style="width:150px; height:120px; border-radius:1em;"/>
+                                </a>
+                            }
+                            else
+                            {
+                                <img src="../Content/img/null.jpg" alt="" title="Các hình về khách sạn @ks.tenKS" width="100" height="100" />
+                            }
+                        </a>
+                            <h3 class="b-popular_title">
+                                <a href="/front/deal/chitiet/?slug=@ks.slug">@ks.tenKS</a>
+                            </h3>
+                            <p>
+                                @{string star = "use_sprites stars4 stars4i" + @ks.loai;}
+                                <span class="@star" title="Khách sạn @ks.loai sao">&nbsp;</span> &nbsp;&nbsp;<span>Điểm:
+                                    @ks.diem</span>
+                            </p>
+                            <p class="b-popular_country">
+                                <a href="">@ks.tenQG</a>
+                            </p>
+                            <p class="b-popular_booking">
+                                <!-- begin feature_last_booking_complete.inc -->
+                                <span rel="300" class="lastbooking jq_tooltip" title="@ks.moTaDayDu" style="width:350px;">
+                                    @ks.moTaNganGon
+                                </span>
+                                <!-- end feature_last_booking_complete.inc -->
+                            </p>
+                            <p class="b_popular_acc_types">
+                                @if (@ks.loaiPhong.Count != 0)
+                                {
+                                    int i = 0;
+                                    foreach (var soPhong in @ks.soPhong)
+                                    {
+                                    <p style="padding-left: 20px;">
+                                        • @soPhong phòng @ks.loaiPhong.ElementAt(i)</p>
+                                        i++;
+                                    }
+                                }
+                                else
+                                {
+                                    <p style="padding-left: 20px;">
+                                        • <i>Chưa có thông tin phòng</i></p>
+                                }
+                            </p>
+                        </li>
+                    </ul>
+                }
+                <div class="pagination clearfix" style="height: 20px;">
+                    @if ((string)ViewData["pageLinks"] != "")
+                    {
+                        <ul>
+                            @Html.Raw(ViewBag.pageLinks)
+                        </ul>
+                        <br />
+                        <br />
+                    }
+                </div>
+            </div>
+            <!-- end popular_destinations_accommodations.inc (2) -->
+            <!--End khachsanuachuong-->
+            <!-- end searchbox.inc -->
+            <!-- start popular_destinations_accommodations.inc -->
+            <!-- end popular_destinations_accommodations.inc (2) -->
+            <!-- begin worldMapV2.inc -->
+            @* <div id="worldmap_box3" class="box tracked v2_worldmap">
+            <div id="continent_list_wrapper">
+                <ul id="continent_list" class="contlist_v2">
+                    <li><a id="list_continent_8" class="selected" href="#continent_8">Châu Á</a> </li>
+                    </li>
+                </ul>
+            </div>
+            <div id="map_holder_wrapper">
+                <div id="map_holder_v2">
+                    <img id="trans_map_v2" src="/Content/img/trans30.gif" alt="worldmap" usemap="#world_map"
+                        width="492" height="198" />
+                    <h3 class="activelabels link_continent " id="link_continent_6">
+                        <a href="">Châu Âu</a>
+                    </h3>
+                    <h3 class="activelabels link_continent " id="link_continent_1">
+                        <a href="">Bắc Mỹ</a>
+                    </h3>
+                    <h3 class="activelabels link_continent " id="link_continent_3">
+                        <a href="">Nam Mỹ</a>
+                    </h3>
+                    <h3 class="activelabels link_continent  selected" id="link_continent_8" style="display: block;">
+                        <a href="">Châu Á</a>
+                    </h3>
+                    <h3 class="activelabels link_continent " id="link_continent_9">
+                        <a href="">Châu Đại Dương</a>
+                    </h3>
+                    <h3 class="activelabels link_continent " id="link_continent_5">
+                        <a href="">Châu Phi</a>
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+            <!-- end worldMapV2.inc -->
+            <!-- start uspsbox.inc -->
+            <!-- start: law_lang_country_setvars.inc -->
+            <!-- end: law_lang_country_setvars.inc -->
+            <!-- end uspsbox.inc -->
+        </td>
+        <td id="right">
+            <div id="place_plus_one_button">
+                <div class="plus_one_lps">
+                    <div class="g-plusone" data-href="" data-size="standard" data-annotation="bubble">
+                    </div>
+                </div>
+            </div>
+            <!-- begin iphone_banner.inc -->
+            <!-- begin cuca_promo_block.inc -->
+            <!-- end cuca_promo_block.inc -->
+            <!-- begin subscription_banner.inc -->
+            <a id="weeklyEmailLink" class="subscriptionbox banner_promo xxxlarge" rel="nofollow"
+                style="cursor: pointer; clear: both;"><strong class="smallbg_www" style="">Điểm đến
+                    được ưa thích <span class="banner_promo_languages_base" style="display: block !important;">
+                        Giao dịch nhanh chóng</span> </strong></a>
+            <!-- begin subscription_banner.inc -->
+            <!-- end iphone_banner.inc -->
+            <div class="specialsblock tracked" id="home_featured_destinations">
+                <!-- start destination_postcard_content.inc -->
+                <div class="tracked">
+                    @{int temp = 0;}
+                    @foreach (var qg in @Model)
+                    {
+                        temp = 0;
+                        <input type="hidden" name="maqg" value="@qg.MaQG" />
+                        <a href="/front/Deal/TimKiem?quocgia=@qg.MaQG"
+                        class="populardest postcard cityname city_nr2" style="background-image: url(../Content/img/@qg.HinhDaiDien);"
+                        title="Các khách sạn ở @qg.TenQG">
+                            <div class="pr2_bg">
+                                <p>
+                                    @qg.TenQG&nbsp;<img src="" alt="" valign="middle" />
+                                </p>
+                                <div class="pc_count">
+                                </div>
+                            </div>
+                        </a>
+                        <div class="postcardCaption" id="postcardCaption1">
+                            <table cellspacing="0" class="promos" width="100%" style="margin-top: .8em; font-size: smaller;">
+                                @foreach (var ks in @ViewBag.khachsan)
+                                {
+                                    if (ks.Vung1.ThanhPho1.QuocGia1.MaQG == qg.MaQG && temp < 3)
+                                    {
+                                        temp++;
+                                    <tr class="dotter promo_even" onmouseover="this.className='dotter promo_even_on';"
+                                        onmouseout="this.className='dotter promo_even';" onclick="">
+                                        <td class="c1thumb">
+                                            <a href="/front/deal/chitiet/?slug=@ks.Slug">
+                                                <img width="80" height="80" src="@ks.HinhDaiDien" alt="" class="jq_tooltippex round4" style="height: 40px; width: 60px;"/></a>
+                                        </td>
+                                        <td class="c2name">
+                                            <a class="populardest hotelname hotel_nr1_of_2" href="/front/deal/chitiet/?slug=@ks.Slug" title="@ks.TenKS" id="tenks" name="tenks">@ks.TenKS</a>
+                                            <br />
+                                            @{string star = "use_sprites stars4 stars4i" + ks.Loai;}
+                                            <span class="@star" title="Khách sạn @ks.Loai sao">&nbsp;</span> <span class="nowrap">
+                                                <span title="" rel="300" class="jq_tooltip use_sprites icon_thumbyellow ">&nbsp;</span>
+                                            </span>
+                                            <div class="feature_wrapper" style="margin-top: 3px;">
+                                                <!-- begin feature_cheapest_roomtype_fix.inc -->
+                                                <!-- end feature_cheapest_roomtype_fix.inc -->
+                                                <!-- begin hotel_review_score_detailed.inc -->
+                                                <span class="littlescore">Điểm đánh giá: <em>
+                                                    @if (@ks.Diem >= 8)
+                                                    {
+                                                        <strong>Rất tốt <span class="rating"><span class="average">(@ks.Diem Điểm)</span> <span
+                                                            class="best" style="position: absolute; left: -9999px"></span></span></strong>
+                                                    }
+                                                    else
+                                                        if (@ks.Diem >= 6)
+                                                        {
+                                                        <strong>Tốt <span class="rating"><span class="average">(@ks.Diem Điểm)</span> <span
+                                                            class="best" style="position: absolute; left: -9999px"></span></span></strong>
+                                                        }
+                                                        else
+                                                        {
+                                                        <strong>Khá <span class="rating"><span class="average">(@ks.Diem Điểm)</span> <span
+                                                            class="best" style="position: absolute; left: -9999px"></span></span></strong>
+                                                        }
+                                                </em></span>
+                                                <p>
+                                                    Top 5 khách sạn được yêu thích nhất</p>
+                                                <span class="jq_tooltip use_sprites icon_minibubble" rel="300" style="cursor: help;
+                                                    display: inline-block;"></span>
+                                            </div>
+                                        </td>
+                                        <td class="fromprice">
+                                            @foreach (var p in ViewBag.phong as List<kstemp>)
+                                            {
+                                                if (p.KhachSan == ks.MaKS)
+                                                {
+                                                <span>Giá từ</span><br />
+                                                    float gia = @p.GiaReNhat;
+                                                    string giamoi = String.Format("{0:n0}", gia);
+                                                <p>@giamoi VNĐ</p>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                    }
+                                    <!-- start promotion_shortlist.inc -->
+                                }
+                                <!-- end promotion_shortlist.inc -->
+                            </table>
+                        </div>
+                    }
+                </div>
+                <!-- end destination_postcard_content.inc -->
+                <hr style="visibility: hidden" />
+                <!-- end destination_postcard.inc -->
+            </div>
+        </td>
+    </tr>
+</table>

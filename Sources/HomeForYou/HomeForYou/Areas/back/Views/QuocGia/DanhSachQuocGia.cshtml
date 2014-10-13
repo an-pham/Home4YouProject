@@ -1,0 +1,75 @@
+﻿@model IEnumerable<HomeForYou.QuocGia>
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+
+<p class="clearfix">
+ @Html.ActionLink("Thêm mới", "ThemQuocGia", "QuocGia", new { @class = "btn btn-primary pull-right" })
+</p>
+<div class="pull-left">
+        <form class="form-search" method="get">
+        <input type="text" class="input-medium search-query" name="title" placeholder="Từ khóa"
+            value="" />
+        <button type="submit" class="btn btn-success">
+            Tìm</button>
+        </form>
+    </div>
+<table class="table table-bordered table-striped table-center class">
+    <thead>
+        <tr>
+            <th width="15%">Mã Quốc Gia
+            </th>
+            <th width="25%">Tên Quốc Gia
+            </th>
+            <th width="20%">Vùng
+            </th>
+            <th width="20%">Tình trạng
+            </th>
+            <th width="10%"></th>
+            <th width="10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var s in Model)
+        { 
+            <tr>
+                <td style="text-align: center;">
+                    @s.MaQG
+                </td>
+                <td style="text-align: center;">
+                    @s.TenQG
+                </td>
+                <td style="text-align: center;">
+                    @s.Vung
+                </td>
+                <td style="text-align: center;">
+                    @s.TinhTrang
+                </td>
+                <td>
+                        @if (s.Sua == true)
+                        {
+                            @Html.ActionLink("Sửa", "SuaQuocGia", "QuocGia", new {MaQG = s.MaQG }, new { @class = "btn btn-small" })
+                        }
+                        else
+                        {
+                            <button class="btn btn-small" disabled>
+                                Sửa</button>
+                        }
+                    </td>
+                    <td>
+                        @if (s.Xoa == true && s.TinhTrang!="Deleted")
+                        {
+                            @Html.ActionLink("Xóa", "XoaQuocGia", "QuocGia", new { MaQG = s.MaQG }, new { @class = "btn btn-small btn-danger delete-row" })
+                        }
+                        else
+                        {
+                            <button class="btn btn-small btn-danger delete-row" disabled>
+                                Xóa</button>
+                        }
+                    </td>
+            </tr>
+            }
+    </tbody>
+</table>
+

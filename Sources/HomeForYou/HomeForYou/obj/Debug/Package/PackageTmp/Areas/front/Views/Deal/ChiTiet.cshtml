@@ -1,0 +1,636 @@
+﻿@model HomeForYou.KhachSan
+@{
+    Layout = "~/Areas/front/Views/Shared/front_layout.cshtml";
+}
+@section scripts
+{
+    <style type="text/css">
+        #preview1
+        {
+            background: none repeat scroll 0 0 #333333;
+            border: 3px solid #CCCCCC;
+            box-shadow: 4px 4px 3px #677382;
+            color: #FFFFFF;
+            text-align: center;
+            display: none;
+            padding: 5px;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript" language="javascript">
+        function Disable1() {
+            document.getElementById("btndiemden").style.display = "none";
+            document.getElementById("btnquocgia").style.display = "inline";
+            document.getElementById("diemden").disabled = "disabled";
+            document.getElementById("country_list").disabled = "";
+            document.getElementById("city_list").disabled = "";
+            document.getElementById("area_list").disabled = "";
+        }
+        function Disable2() {
+            document.getElementById("btndiemden").style.display = "inline";
+            document.getElementById("btnquocgia").style.display = "none";
+            document.getElementById("diemden").disabled = "";
+            document.getElementById("country_list").disabled = "disabled";
+            document.getElementById("city_list").disabled = "disabled";
+            document.getElementById("area_list").disabled = "disabled";
+        }
+        function KiemTra() {
+            var diemden = document.getElementById("diemden").value;
+            var quocgia = document.getElementById("country_list").value;
+            var thanhpho = document.getElementById("city_list").value;
+            var vung = document.getElementById("area_list").value;
+            if (diemden == "" && quocgia == 0 && thanhpho == 0 && vung == 0) {
+                alert("Vui lòng chọn nơi muốn đến!");
+            }
+            else
+                $("#frm").submit();
+        }
+    </script>
+}
+<div class="breadcrumb">
+    <a href="/">Trang chủ</a> > <a href="/front/deal/timkiem?quocgia=0">Tìm kiếm</a>
+    >
+    <li class="active">Chi tiết khách sạn</li>
+</div>
+<table>
+    <tr class="deal">
+        <td class="leftsmall" id="left">
+            <!-- start hotelbox.inc -->
+            <div id="searchboxInc">
+                <form id="frm" class="form-search" name="frm" action="../TimKiem" method="post" style="padding-bottom: 13px;
+                width: auto;" autocomplete="off">
+                <h3 class="searchtitle">
+                    Tìm khách sạn</h3>
+                <fieldset>
+                    <div id="destinationSearch">
+                        <div class="container" style="width: auto;">
+                            <div class="controls">
+                                <label class="radio inline" for="diemden">
+                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked
+                                        onfocus="Disable2();" />
+                                </label>
+                                <input aria-haspopup="true" aria-autocomplete="list" role="textbox" class="text ui-autocomplete-input" 
+                                results="9" placeholder="Nhập tên khách sạn hoặc tên thành phố muốn đến" data-clicktale-show="true" id="diemden"
+                                name="diemden" autocomplete="off" value="@ViewBag.Diemden" type="text" style="width: 110px;"/>
+                                <button class="btn btn-primary" type="button" name="btndiemden" id="btndiemden" onclick="KiemTra();">
+                                    <strong>Tìm</strong></button>
+                            </div>
+                            <div class="controls">
+                                <ul class="nav filter" style="margin-top: 5px;">
+                                    <li>
+                                        <label class="radio inline">
+                                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onclick="Disable1();" />
+                                        </label>
+                                    </li>
+                                    <li class="country-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                        <select class="btn dropdown-toggle" id="country_list" name="quocgia" style="width: 120px;
+                                            text-align: left; color: Blue;" disabled="disabled">
+                                            <option value="0">Quốc gia</option>
+                                            @foreach (var q in @ViewBag.quocgias)
+                                            {
+                                                <option value="@q.MaQG">@q.TenQG</option>
+                                            }
+                                        </select>
+                                    </li>
+                                    <li class="city-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                        <select class="btn dropdown-toggle" id="city_list" name="thanhpho" style="width: 120px;
+                                            text-align: left; color: Blue;" disabled="disabled">
+                                            <option value="0">Thành phố</option>
+                                        </select>
+                                    </li>
+                                    <li class="area-list" style="margin-right: 5px; margin-left: 20px; margin-bottom: 5px;">
+                                        <select class="btn dropdown-toggle" id="area_list" name="vung" style="width: 120px;
+                                            text-align: left; color: Blue;" disabled="disabled">
+                                            <option value="0">Vùng</option>
+                                        </select>
+                                    </li>
+                                    <li style="margin-right: 5px;" class="pull-right">
+                                        <button class="btn btn-primary" type="button" onclick="KiemTra();" name="btnquocgia"
+                                            id="btnquocgia" style="display: none;">
+                                            <strong>Tìm</strong></button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- start datebox.inc -->
+                    <div id="inout" style="padding-bottom: 0;" class="">
+                        <div class="dateerrors">
+                        </div>
+                        <div id="homein" style="white-space: nowrap;">
+                            <img src="/Content/img/transparent.png" class="placeholder" alt="" />
+                            <strong>Ngày nhận phòng: </strong>
+                            <br />
+                            <input type="text" id="start_date" name="start_date" style="width: 120px; margin-left: 25px;" />
+                        </div>
+                        <div id="homeout" style="white-space: nowrap;">
+                            <img src="/Content/img/transparent.png" class="placeholder" alt="" />
+                            <strong>Ngày trả phòng: </strong>
+                            <br />
+                            <input type="text" id="end_date" name="end_date" style="width: 120px; margin-left: 25px;" />
+                        </div>
+                    </div>
+                    <!-- end datebox.inc -->
+                    <div id="define_group" style="padding: 0;">
+                        <p style="padding-top: 20px;">
+                            <strong>Giá tối đa mỗi đêm:</strong></p>
+                        <select style="width: auto; text-align: justify;" class="btn btn-toggle" name="giatoida">
+                            <option value="0">Không giới hạn</option>
+                            <option value="300">300.000</option>
+                            <option value="500">300.000 - 500.000</option>
+                            <option value="1000">500.000 - 1.000.000</option>
+                            <option value="1500">1.000.000 - 1.500.000</option>
+                            <option value="2000">1.500.000 - 2.000.000</option>
+                            <option value="20000">>2.000.000</option>
+                        </select>
+                    </div>
+                </fieldset>
+                </form>
+            </div>
+            <!-- end hotelbox.inc -->
+        </td>
+        <td id="right">
+            <div id="wrap-hotelpage-top">
+                <h1 class="item">
+                    <span id="hp_hotel_name" class="fn">@Model.TenKS
+                        @{
+                            string sao = "use_sprites stars4 stars4i" + Model.Loai.ToString();
+                        }
+                    </span><span class="nowrap"><input type="hidden" id="ma_ks" value="@Model.MaKS"/><span title="khách sạn 4 sao" class="@sao">&nbsp;</span>
+
+                        <button class="icon_thumb_up_btn" title="Tôi thích khách sạn này" style="border: medium none; border-radius: 4px 4px 4px 4px;; opacity: 1.5; padding: 3px 10px 3px 7px; width: 50px; ">
+                            @*<span class="jq_tooltip  icon_thumb_up" rel="300"></span>*@
+                            <img src="/Content/img/thumb_up.png" style="width:30px; height:30px;"/>
+                            </button>
+                        <button class="icon_thumb_down_btn" title="Tôi không thích khách sạn này" style="border: medium none; border-radius: 4px 4px 4px 4px; opacity: 1.5; padding: 3px 10px 3px 7px; width: 50px;">
+                        <img src="/Content/img/thumb_down.png" style="width:30px; height:30px;"/></button>
+                        <span class="alert alert-success thumb-up-message" style="display:none; padding-right:18px;">+1</span>
+                        <span class="alert alert-error thumb-down-message"style="display:none; padding-right:18px;">-1</span>
+                    </span>
+                </h1>
+                <p id="showMap2" class="address" style="width: 75%;">
+                    <span rel="300" class="jq_tooltip">@Model.DiaChi, @Model.TenDuong, @Model.Vung1.TenVung,
+                        @Model.Vung1.ThanhPho1.TenTP, @Model.Vung1.ThanhPho1.QuocGia1.TenQG</span>
+                </p>
+                <div style="display: inline-block; float: right; height: 30px; line-height: 30px !important;
+                    border: 1px solid #779BCA; border-bottom-color: #fff; padding: 0 20px; position: relative;
+                    top: 1px; margin-top: -25px; margin-right: 2px; background-color: #fff; z-index: 2;"
+                    class="review_overview_switch">
+					 @if (@Model.Diem <= 5)
+                        {
+                           <strong>Khá tốt, @Model.Diem</strong>
+                        }
+                        else if (@Model.Diem > 5 && @Model.Diem < 8)
+                        {
+                             <strong>Tốt, @Model.Diem</strong>
+                        }
+                        else
+                        {
+                             <strong>Rất tốt, @Model.Diem</strong>
+                        }
+                </div>
+                <div style="clear: both; font-size: 0; overflow: hidden; height: 0;">
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgb(119, 155, 202); padding-top: 5px; display: block;"
+                id="blockdisplay1" class="hotelchars blockdisplay fbblock pretty_headers">
+                <!-- begin hotel_block1.inc -->
+                <!-- begin flash_deals.inc -->
+                <!-- end flash_deals.inc -->
+                <div id="hotel_main_content">
+                    <!-- begin hotel_meta.inc -->
+                    <!-- end hotel_meta.inc -->
+                    <div class="photo_collage base_collage">
+                        <div class="slideshow" style="margin-left: 65px;">
+                            <div index="0" style="position: relative; border: none !important;" id="photo_wrapper">
+                                <div id="photo_container">
+                                    <div id="myCarousel" class="carousel slide">
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner" style="width: 650px;">
+                                            <div class="active item" style="width: 650px;">
+                                                <ul>
+                                                    <li class="span2">
+                                                        <div class="thumbnail">
+                                                            <img src="../../../../Content/img/@ViewBag.hinhks[0].TenHinh" style="width: 300px;height:250px;" alt=""/></div>
+                                                    </li>
+                                                    <li class="span2">
+                                                        <div class="thumbnail">
+                                                            <img src="../../../../Content/img/@ViewBag.hinhks[1].TenHinh" style="width: 300px;height:250px;" alt=""/></div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            @{
+                                                int t = 2;
+                                                int temp = @ViewBag.count;
+                                            }
+                                            @if (@ViewBag.count > 2)
+                                            {
+                                                if (@ViewBag.count % 2 != 0)
+                                                {
+                                                    temp = @ViewBag.count + 1;
+                                                }
+                                                for (int i = 1; i < temp / 2; i++)
+                                                {
+                                                <div class="item">
+                                                    <ul>
+                                                        @{
+                                                    for (int j = 0; j < 2 && t < @ViewBag.count; j++)
+                                                    {   
+                                                            <li class="span2">
+                                                                <div class="thumbnail">
+                                                                    <img src="../../../../Content/img/@ViewBag.hinhks[t].TenHinh" 
+																		                style="width: 300px;height:250px;" 
+																			                alt="<img src='../../../../Content/img/null.jpg'/>" /></div>
+                                                            </li>
+                                                        if (@ViewBag.count % 2 != 0 && t == @ViewBag.count - 1)
+                                                        {
+                                                            <li class="span2">
+                                                                <div class="thumbnail">
+                                                                    <img src="../../../../Content/img/@ViewBag.hinhks[1].TenHinh" 
+																			                style="width: 300px;height:250px;" 
+																				                alt="<img src='../../../../Content/img/null.jpg'/>" /></div>
+                                                            </li>
+                                                        }
+                                                        t++;
+                                                    }   
+                                                        }
+                                                    </ul>
+                                                </div>
+                                                }
+                                            }
+                                        </div>
+                                        <!-- Carousel nav -->
+                                        <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+                                        <a class="carousel-control right" href="#myCarousel" data-slide="next" style="right: -28px;">
+                                            &rsaquo;</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="photo_collage_addons" style="min-height: 50px;">
+                            <div class="photo_collage_addons_content">
+                                <div style="width: 100%;">
+                                    <div id="photo_container1" style="text-align: center; margin-bottom: 10px; padding-bottom: 10px;">
+                                        <div id="myCarousel1" class="carousel slide">
+                                            <!-- Carousel items -->
+                                            <div class="carousel-inner">
+                                                @{
+                                                    int t1 = 0;
+                                                }
+                                                <div class="active item" style="width: 750px; height: 80px;">
+                                                    <ul>
+                                                        @{
+                                                            for (int j = 0; t1 < @ViewBag.count && j < 10; j++)
+                                                            {   
+                                                            <li class="span2" style="width: 70px;">
+                                                                <div class="thumbnail" style="border-radius: 6px 6px 6px 6px; margin: 5px; padding: 0px;">
+                                                                    <a class="preview1" href="../../../../Content/img/@ViewBag.hinhks[t1].TenHinh" title="@Model.TenKS">
+                                                                        <img src="../../../../Content/img/@ViewBag.hinhks[t1].TenHinh"
+                                                                        style="padding-right: 0px; margin-right: 0px; border-radius: 6px 6px 6px 6px; width: 70px; height: 60px;"
+                                                                        alt="@Model.TenKS" @* class="hotel round8"*@/>
+                                                                    </a>
+                                                                </div>
+                                                                @* <img src="../../../../Content/img/@ViewBag.hinhks[t1].TenHinh" 
+                                                                    style="max-width: 60px; height: 50px;"
+                                                                        alt="<img src='../../../../Content/img/null.jpg'/>" /></div>*@ </li>
+                                                                t1++;
+                                                            }
+                                                        }
+                                                    </ul>
+                                                </div>
+                                                @if (@ViewBag.count > 10)
+                                                {
+                                                    for (int i = 1; i <= temp / 10; i++)
+                                                    {
+                                                    <div class="active item" style="width: 750px; min-height: 80px;">
+                                                        <ul>
+                                                            @{
+                                                        for (int j = 0; j < 10 && t1 < @ViewBag.count; j++)
+                                                        {
+                                                                <li class="span2" style="width: 70px;">
+                                                                    <div class="thumbnail" style="border-radius: 6px 6px 6px 6px; margin: 5px; padding: 0px;">
+                                                                        <a class="preview1" href="../../../../Content/img/@ViewBag.hinhks[t1].TenHinh" title="@Model.TenKS">
+                                                                            <img src="../../../../Content/img/@ViewBag.hinhks[t1].TenHinh"
+																			            style="padding-right: 0px; margin-right: 0px; border-radius: 6px 6px 6px 6px; width: 70px; height: 60px;"
+																			            alt="@Model.TenKS"/>
+                                                                        </a>
+                                                                    </div>
+                                                                </li>
+                                                            t1++;
+                                                        }
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear: left; font-size: 0; overflow: hidden;">
+                        </div>
+                    </div>
+                    <div class="" id="summary">
+                        <p>
+                            @Model.MoTa</p>
+                    </div>
+                    <!-- begin hotel_reinforcements.inc -->
+                    <style media="screen" type="text/css">
+.hp_reinforcements {
+margin: 0 0 10px;
+display: block;
+clear: both;
+}
+.hp_reinforcements .reinforcement {
+border-radius: 4px;
+border-width: 1px;
+border-style: solid;
+background-clip: padding-box;
+padding: 8px 12px 8px 34px;
+display: inline-block;
+margin-right: 4px;
+background: #fff url(http://r.bstatic.com/static/img/hotel_reinforcements/gift.png) no-repeat 12px 8px;
+/* inline-block fix for IE */
+zoom:1; *display: inline; _height: 12px;
+}
+.hp_reinforcements .reinforcement h6,
+.hp_reinforcements .reinforcement h6 a:link,
+.hp_reinforcements .reinforcement h6 a:visited {
+font: normal normal bold 10px 'Helvetica Neue', Helvetica, Sans-Serif !important;
+font-size: 12px !important;
+font-weight: bold !important;
+padding: 0;
+margin: 0;
+text-decoration: none;
+color: inherit;
+}
+.hp_reinforcements .positive_reinforcement {
+border-color: #188000;
+color: #188000;
+}
+.hp_reinforcements .urgency_reinforcement {
+background: #fff url(http://r.bstatic.com/static/img/hotel_reinforcements/clock.png) no-repeat 12px 8px;
+border-color: #99200b;
+color: #99200b;
+}
+.hp_reinforcements .ratings_reinforcement {
+background: #fff url(http://r.bstatic.com/static/img/hotel_reinforcements/chart_bar.png) no-repeat 9px 8px;
+border-color: #779BCA;
+color: #003580;
+}
+.hp_reinforcements .no_cc {background: #fff url(http://r.bstatic.com/static/img/hotel_reinforcements/card.png) no-repeat 12px 10px;}
+.hp_reinforcements .flash_deal_reinforcement {background: #fff url(http://r.bstatic.com/static/img/icons/fd_rocket_white_bg_small.jpg) no-repeat 5px 4px;}
+.hp_reinforcements .ski_to_door {background: #fff url(http://q.bstatic.com/static/img/hotel_reinforcements/ski.png) no-repeat 10px 8px;}
+http://r.bstatic.com/static/img/
+</style>
+                    <div class="hp_reinforcements hp_reinforcements_nobg">
+                    </div>
+                    <!-- end hotel_reinforcements.inc -->
+                </div>
+                <div style="margin-top: 0;" class="description urt">
+                    <!-- begin availability.inc -->
+                    <div id="av-calendar-tracking-position">
+                    </div>
+                    <div style="display: block; margin-bottom: 20px;" id="editDates" class="destination">
+                        <a id="edit_dates"></a>
+                        <div onclick="booking.env.trackExperiment('13152');" style="border-top: none;" class="editDatesForm">
+                            <div class="deal-search-form">
+                                <div class="row">
+                                    <div class="span2">
+                                        <input type="hidden" value="@Model.MaKS" name="idks" id="idks"/>
+                                        <input type="hidden" value="@Model.Slug" name="slug"/>
+                                    </div>
+                                    <div class="span4">
+                                        <h4>
+                                            Ngày nhận phòng</h4>
+                                        <input type="text" id="from_date" />
+                                        <input type="hidden" name="tungay" id="from_datealt" />
+                                    </div>
+                                    <div class="span3">
+                                        <h4>
+                                            Ngày trả phòng</h4>
+                                        <input type="text" id="to_date" />
+                                        <input type="hidden" name="denngay" id="to_datealt" />
+                                    </div>
+                                    <div class="span3" style="width: 250px; padding-top: 25px; vertical-align: middle;">
+                                        <span class="help-inline" style="color: red; display: none; width: auto; font-style: italic;"
+                                            id="date_loi">
+                                            <img src="/Content/img/symbol-error.png" alt="" style="width: 20px; height: 20px;" />
+                                            [Chọn ngày nhận và ngày trả phòng]</span></div>
+                                </div>
+                                <div style="width: 100%; position: relative;" class="but">
+                                    <div style="position: relative; background-image: none; display: inline; text-align: left;
+                                        padding: 3px 5px 3px 2em;" id="rate_guarantee">
+                                        <i class="use_sprites icon_tick"></i><a class="jq_tooltip" rel="400" href="#">Đảm bảo
+                                            Giá Tốt nhất</a>
+                                    </div>
+                                    <button id="find_deal" class="btn btn-primary">
+                                        Kiểm tra phòng trống
+                                    </button>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear: both; font-size: 0; overflow: hidden;">
+                    </div>
+                    <!-- begin feature_last_booking_complete.inc -->
+                    <!-- end feature_last_booking_complete.inc -->
+                    <div id="roomsForm">
+                        <div class="roomArea" id="maxotelRoomArea" style="display: none;">
+                            <div id="individualrooms" class="rtshown">
+                                <table class="roomstable group_room_types" id="maxotel_rooms" border="2" cellspacing="0">
+                                    <thead>
+                                        <tr id="maxotel_table_header">
+                                            <th class="canwrap" style="text-align: center;">
+                                                Loại phòng
+                                            </th>
+                                            <th class="figure" style="text-align: center;">
+                                                Tối đa
+                                            </th>
+                                            <th class="figure price_figure" style="text-align: center;">
+                                                Giá
+                                            </th>
+                                            <th id="nr_rooms_header" style="text-align: center;">
+                                                Số lượng phòng
+                                            </th>
+                                            <th>
+                                                Đặt phòng
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="room_availability_container" data-ratr="{&quot;hid&quot;:&quot;33876&quot;,&quot;nr&quot;:&quot;3&quot;,&quot;nc&quot;:&quot;6&quot;}">
+                                    </tbody>
+                                </table>
+                                <table style="width: 832px; margin-left: 0px; display: none; margin-top: -1000px;"
+                                    id="maxotel_table_header_scroll" class="generaltable" style="display: none;">
+                                    <tbody>
+                                        <tr>
+                                            <th style="width: 319px;" class="canwrap">
+                                                Loại phòng
+                                            </th>
+                                            <th style="width: 60px;">
+                                                Điều kiện
+                                                <div id="conditions_info" style="display: none">
+                                                    Xem chi tiết biểu tượng</div>
+                                            </th>
+                                            <th style="width: 40px;" class="figure">
+                                                Tối đa
+                                            </th>
+                                            <th style="width: 95px;" class="figure price_figure">
+                                                Giá
+                                            </th>
+                                            <th style="width: 153px;" id="nr_rooms_header">
+                                                Phòng
+                                            </th>
+                                            <th style="width: 65px;">
+                                                Đặt phòng
+                                            </th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p id="rates_feedback_invite" class="ratefeedback_block call2action ppp">
+                                <a style="float: right;" href="" rel="400" class="jq_tooltip">Giá tốt nhất. Chúng
+                                    tôi cam đoan.</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- end availability.inc -->
+                    <div id="noroom" style="display: none; text-align: center;">
+                        <strong>Không có phòng trống trong thời gian này.</strong></div>
+                </div>
+                <div id="hp_district_description_target">
+                </div>
+                <div id="hide_ski_info_target">
+                </div>
+                <style type="text/css">
+                    div#blockdisplay1 div.containh2 h2
+                    {
+                        max-width: none !important;
+                    }
+                </style>
+                <div class="containh2">
+                    <h2>
+                        <p>
+                            <strong>Các tiện nghi</strong> của @Model.TenKS
+                        </p>
+                    </h2>
+                </div>
+                <div class="descriptionsContainer">
+                    <div class="description
+">
+                        <h3>
+                            <span>Tổng quát </span>
+                        </h3>
+                        <p class="firstpar">
+                            @Model.TongQuat
+                        </p>
+                    </div>
+                    <div class="description
+">
+                        <h3>
+                            <span>Dịch vụ </span>
+                        </h3>
+                        <p class="firstpar">
+                            @Model.DichVu
+                        </p>
+                    </div>
+                    <!-- BEGIN hotelFacilityPolicies.inc -->
+                    <div class="description
+">
+                        <h3>
+                            <span>Internet </span>
+                        </h3>
+                        <p class="firstpar">
+                            @Model.Internet
+                        </p>
+                    </div>
+                    <div class="description
+">
+                        <h3>
+                            <span>Chỗ đậu xe </span>
+                        </h3>
+                        <p class="firstpar">
+                            @Model.BaiDauXe
+                        </p>
+                    </div>
+                    <!-- END hotelFacilityPolicies.inc -->
+                </div>
+                <!-- BEGIN hotelPolicies.inc -->
+                <div class="containh2">
+                    <h2>
+                        <strong>Các chính sách</strong> của @Model.TenKS
+                    </h2>
+                </div>
+                <div id="hotelPoliciesInc" class="descriptionsContainer">
+                    <div class="description">
+                        <h3>
+                            <span>Nhận phòng</span></h3>
+                        <p>
+                            @Model.NhanPhong
+                        </p>
+                        <div style="clear: both">
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h3>
+                            <span>Trả phòng</span></h3>
+                        <p>
+                            @Model.TraPhong
+                        </p>
+                        <div style="clear: both">
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h3>
+                            <span>Chấp nhận thẻ tín dụng</span></h3>
+                        <p>
+                            American Express, Visa, Euro/Mastercard</p>
+                        <p>
+                            Khách sạn có quyền ủy quyền trước việc sử dụng thẻ tín dụng trước khi ngày nhận
+                            phòng.</p>
+                        <div style="clear: both">
+                        </div>
+                    </div>
+                </div>
+                <!-- END hotelPolicies.inc -->
+                <div class="containh2">
+                    <img src="/Content/img/important_hotel_info.gif">
+                    <h2 class="important">
+                        <a id="b7">Thông tin quan trọng</a></h2>
+                </div>
+                <div class="description">
+                    Vui lòng kiểm tra yêu cầu về Visa trước khi đăng kí.</div>
+                <!-- start shortTC.inc -->
+                <div class="containh2">
+                    <h2 id="promise_to_you_on_hotelpage_tracking_position">
+                        Chúng tôi cam đoan
+                    </h2>
+                </div>
+                <div class="description" id="shortTCInc">
+                    <ul>
+                        <li><strong>Đặt phòng của bạn được an toàn.</strong> Khi đặt phòng với chúng tôi các
+                            thông tin chi tiết của bạn được bảo vệ bằng kết nối an toàn.</li>
+                        <li><strong>Sự riêng tư của bạn cũng được bảo mật.</strong> Các thông tin chi tiết của
+                            bạn sẽ chỉ được dùng để đảm bảo yêu cầu đặt phòng.</li>
+                        <li><strong>Không mất phí đặt phòng.</strong> Bạn chỉ phải trả tiền khách sạn. Booking.com
+                            sẽ không bao giờ trừ tiền trong thẻ tín dụng của bạn.</li>
+                        <li><strong>Đảm bảo Giá Tốt nhất.</strong> Bạn tìm thấy phòng đã đặt trực tuyến với
+                            giá thấp hơn? Chúng tôi sẽ tính bạn cùng giá đó.</li>
+                    </ul>
+                </div>
+                <!-- end shortTC.inc -->
+                <!-- end hotel_block1.inc -->
+            </div>
+            <!-- end guestreviews.tmpl-->
+            <div class="clearBoth">
+            </div>
+            <!-- end hotel_block4.inc -->
+            <!-- begin alternativeHotels.inc -->
+            <!-- end alternativeHotels.inc -->
+        </td>
+    </tr>
+</table>

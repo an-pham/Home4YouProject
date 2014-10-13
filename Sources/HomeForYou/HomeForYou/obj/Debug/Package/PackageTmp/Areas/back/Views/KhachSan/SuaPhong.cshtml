@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "SuaPhong";
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+@section scripts
+{
+    <script type="text/javascript">
+        function onclick_CheckAll() {
+            var list = document.getElementsByName("check[]");
+            var v = document.getElementById("idCheclAll").checked;
+            for (var i = 0; i < list.length; i++) {
+                list[i].checked = v;
+                updateList();
+            }
+        }
+
+        function updateList() {
+            var list = document.getElementsByName("check[]");
+            //alert(list.length);
+            var i;
+            var s = "";
+            for (i = 0; i < list.length; i++) {
+                if (list[i].checked)
+                    s = s + list[i].value + ",";
+            }
+            document.getElementById("txtCheckList").value = s;
+        }   
+    </script>
+}
+
+<h2>@ViewBag.Phong.phong.KhachSan1.TenKS</h2>
+<legend>Cập nhật khách sạn: </legend>
+<form class="form-horizontal" method="post" enctype="multipart/form-data">
+<div class="control-group">
+    <div class="controls">
+        <input type="hidden" name="id" value="@ViewBag.Phong.phong.MaPhong"/>
+    </div>
+    <div class="controls">
+        <input type="hidden" name="idks" value="@ViewBag.Phong.phong.KhachSan"/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Loại Phòng</label>
+    <div class="controls">
+        <input type="text" name="loaiphong" value="@ViewBag.Phong.phong.LoaiPhong"/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Đơn Giá</label>
+    <div class="controls">
+        <input type="text" name="dongia" value="@ViewBag.Phong.phong.DonGia"/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Số lượng</label>
+    <div class="controls">
+        <input type="text" name="soluong" value="@ViewBag.Phong.phong.SoLuong"/>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Tình trạng</label>
+    <div class="controls">
+        <select name="tinhtrang">
+        <option value="Enabled" @if (@ViewBag.Phong.phong.TinhTrang == "Enabled") { ViewContext.Writer.Write("selected"); }>Enabled</option>
+        <option value="Deleted" @if (@ViewBag.Phong.phong.TinhTrang == "Deleted") { ViewContext.Writer.Write("selected"); }>Deleted</option>
+        <option value="Disabled" @if (@ViewBag.Phong.phong.TinhTrang == "Disabled") { ViewContext.Writer.Write("selected"); }>Disabled</option>
+        </select>
+    </div>
+</div>
+<div class="control-group">
+    <label class="control-label">
+        Thông tin chi tiết phòng</label>
+    <div class="controls">
+        <ul class="nav pull-left">      
+            @{
+                    int flag = 0;
+                    //int flag_all = 0;
+                    foreach (var s in @ViewBag.TienNghi)
+                    {
+                        foreach(var tn in @ViewBag.Phong.tiennghi)
+                        {
+                            if (tn.ID == s.ID)
+                            {
+                                <li class="span2">
+                                    <label class="checkbox">
+                                        <input type="checkbox" value = "@s.ID" checked="checked" name="check[]" onclick='return updateList();'><p style="padding-top: 8px;">@s.TienNghi</p>
+                                    </label>
+                                </li>
+                                flag = 1;
+                                break;
+                            }
+                        }
+                            if (flag == 0)
+                            {
+                            <li class="span2">
+                            <label class="checkbox">
+                                        <input type="checkbox" value = "@s.ID" name="check[]" onclick='return updateList();'><p style="padding-top: 8px;">@s.TienNghi</p>
+                                    </label>
+                                    </li>
+                            }
+                            flag = 0; 
+                    }
+                    }
+               </ul>
+                        <ul class="nav pull-left">
+                        <li class="span2">
+                        <label class="checkbox">
+                            <input type='checkbox' id='idCheclAll' value='Button' onclick='return onclick_CheckAll();'/><b><p style="padding-top: 8px;">Chọn tất cả</p></b>
+                        </label>
+                        </li>
+                        </ul>
+                        <input type="hidden" id="txtCheckList" name="txtCheckList" value=""/>  
+
+    </div>
+    
+</div>
+<div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            Cập nhật</button>
+        @Html.ActionLink("Thoát", "DanhSach", "KhachSan", new { @class = "btn btn-inverse" })
+    </div>
+</form>
+
+
+

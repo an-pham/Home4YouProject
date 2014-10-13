@@ -1,0 +1,77 @@
+﻿@model IEnumerable<HomeForYou.Vung>
+@{
+    Layout = "~/Areas/back/Views/Shared/back_layout.cshtml";
+}
+
+<p class="clearfix">
+ @Html.ActionLink("Thêm mới", "ThemVung", "Vung", new { @class = "btn btn-primary pull-right" })
+</p>
+<div class="pull-left">
+        <form class="form-search" method="get">
+        <input type="text" class="input-medium search-query" name="title" placeholder="Từ khóa"
+            value="" />
+        <button type="submit" class="btn btn-success">
+            Tìm</button>
+        </form>
+    </div>
+ 
+<table class="table table-bordered table-striped table-center class">
+    <thead>
+        <tr>
+            <th width="15%">Mã Vùng
+            </th>
+            <th width="25%">Tên Vùng
+            </th>
+            <th width="20%">Thành Phố
+            </th>
+            <th width="20%">Tình trạng
+            </th>
+            <th width="10%"></th>
+            <th width="10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var s in Model)
+        { 
+            <tr>
+                <td style="text-align: center;">
+                    @s.MaVung
+                </td>
+                <td style="text-align: center;">
+                    @s.TenVung
+                </td>
+                <td style="text-align: center;">
+                    @s.ThanhPho1.TenTP
+                </td>
+                <td style="text-align: center;">
+                    @s.TinhTrang
+                </td>
+
+                <td>
+                        @if (s.Sua == true)
+                        {
+                            @Html.ActionLink("Sửa", "SuaVung", "Vung", new {MaVung = s.MaVung }, new { @class = "btn btn-small" })
+                        }
+                        else
+                        {
+                            <button class="btn btn-small" disabled>
+                                Sửa</button>
+                        }
+                    </td>
+                    <td>
+                        @if (s.Xoa == true && s.TinhTrang!="Deleted")
+                        {
+                            @Html.ActionLink("Xóa", "XoaVung", "Vung", new { MaVung = s.MaVung }, new { @class = "btn btn-small btn-danger delete-row" })
+                        }
+                        else
+                        {
+                            <button class="btn btn-small btn-danger delete-row" disabled>
+                                Xóa</button>
+                        }
+                    </td>
+            </tr>
+            }
+    </tbody>
+</table>
+
